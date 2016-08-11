@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Arquivos: 2014/7 | A Developer in Limbo</title>
+  <title>Archives: 2014/7 | A Developer in Limbo</title>
   <meta name="author" content="Abner Chou">
   
   <meta name="description" content="Developer, Blog, English">
@@ -148,9 +148,6 @@
 		</ul>
 		</div>
 
-		<!-- pagination for tags/category-->
-        
-
 </div> <!-- col-md-9/col-md-12 -->
 
 
@@ -160,7 +157,7 @@
 			
   <div id="site_search">
    <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Busca" class="st-search-input st-default-search-input form-control"/>
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
    </div>  
   <div id="local-search-result"></div>
   </div>
@@ -169,7 +166,7 @@
 		
 			
 	<div class="widget">
-		<h4>Categorias</h4>
+		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
 			<li><a href="/categories/General/Octopress/Blog/">Blog<span>1</span></a></li>
@@ -211,7 +208,7 @@
 		
 			
 <div class="widget">
-  <h4>Posts recentes</h4>
+  <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
     
       <li>
@@ -285,6 +282,15 @@
 </script>
 
 
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
 
 </body>
    </html>

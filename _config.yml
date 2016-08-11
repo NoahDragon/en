@@ -7,7 +7,7 @@ title: A Developer in Limbo
 subtitle:
 description: Developer, Blog, English
 author: Abner Chou
-language: en
+language: 
 timezone:
 
 # URL
@@ -71,3 +71,11 @@ deploy:
   type: git
   repo: https://github.com/NoahDragon/en.git
   branch: gh-pages
+
+# Disqus
+disqus_shortname: abnerchou
+
+# Search
+search:
+  path: search.xml
+  field: post
