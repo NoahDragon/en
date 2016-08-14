@@ -1,9 +1,13 @@
 ---
 layout: post
-title: "Why Sun is the center of our solar system"
-date: 2014-07-02 22:44:44 -0400
+title: Why Sun is the center of our solar system
+date: '2014-07-02 22:44:44 -0400'
 comments: true
-categories: [Solar System, Javascript, Simulation]
+categories:
+  - Solar System
+  - Javascript
+  - Simulation
+abbrlink: e0efd72f
 ---
 
 Because our Earth is in a system called Solar System.

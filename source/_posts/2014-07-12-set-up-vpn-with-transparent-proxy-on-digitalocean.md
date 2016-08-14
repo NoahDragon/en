@@ -1,9 +1,17 @@
 ---
 layout: post
-title: "Set up VPN with transparent proxy on DigitalOcean"
-date: 2014-07-12 20:43:47 -0400
+title: Set up VPN with transparent proxy on DigitalOcean
+date: '2014-07-12 20:43:47 -0400'
 comments: true
-categories: [VPN, pptp, Squid, Transparent Proxy, Proxy, DigitalOcean, VPS]
+categories:
+  - VPN
+  - pptp
+  - Squid
+  - Transparent Proxy
+  - Proxy
+  - DigitalOcean
+  - VPS
+abbrlink: 2b608f65
 ---
 
 Recently I just rent a VPS on [Digital Ocean](https://www.digitalocean.com),

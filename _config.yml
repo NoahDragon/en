@@ -14,7 +14,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://en.abnerchou.me
 root: /
-permalink: Blog/:title/
+permalink: Blog/:abbrlink/
 permalink_defaults:
 
 # Directory
@@ -79,3 +79,31 @@ disqus_shortname: abnerchou
 search:
   path: search.xml
   field: post
+
+# abbrlink plugin config
+abbrlink:
+  alg: crc32
+  rep: hex
+
+# all-minifier
+html_minifier:
+  enable: true
+  exclude:
+css_minifier:
+  enable: true
+  exclude:
+    - '*.min.css'
+js_minifier:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
+image_minifier:
+  enable: true
+  interlaced: false
+  multipass: false
+  optimizationLevel: 2
+  pngquant: false
+  progressive: false

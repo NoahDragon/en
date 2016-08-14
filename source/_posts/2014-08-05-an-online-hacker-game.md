@@ -1,9 +1,12 @@
 ---
 layout: post
-title: "An Online Hacker Game"
-date: 2014-08-05 18:22:48 -0400
+title: An Online Hacker Game
+date: '2014-08-05 18:22:48 -0400'
 comments: true
-categories: [Hacker game, Programming]
+categories:
+  - Hacker game
+  - Programming
+abbrlink: e4c9ee8f
 ---
 
 You could start the game from [here](http://fun.coolshell.cn), hosted by [coolshell.cn](http://coolshell.cn).

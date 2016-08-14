@@ -1,9 +1,13 @@
 ---
 layout: post
-title: "My First Blog Here"
-date: 2014-03-11 22:52:09 -0400
+title: My First Blog Here
+date: '2014-03-11 22:52:09 -0400'
 comments: true
-categories: [General, Octopress, Blog]
+categories:
+  - General
+  - Octopress
+  - Blog
+abbrlink: 90d363bc
 ---
 
 Well, this is my first blog here (right now on github).
