@@ -17,6 +17,6 @@ I have posted hints and solutions on [my github](https://github.com/NoahDragon/f
 
 Enjoy :)
 
-<img src="{{ root_url }}/images/pics/online_hacker_game.PNG" alt="Rank 49"/>
+![](/img/online_hacker_game.PNG)
 
 A little bit show off and keep a record.

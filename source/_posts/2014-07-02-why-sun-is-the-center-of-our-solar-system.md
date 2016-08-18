@@ -28,7 +28,7 @@ The heliocentric system shows perfect concentric circles of planets path, in con
 Untile we draw their path, only the Sun's orbit is circle, the other planet tracks are like spiral.
 After long enough years, the orbit will look like below picture:
 
-<img src="{{ root_url }}/images/pics/geocentric.jpg" alt="Geocentric system orbits"/>
+![](/img/geocentric.jpg)
 
 It's totally mess!
 

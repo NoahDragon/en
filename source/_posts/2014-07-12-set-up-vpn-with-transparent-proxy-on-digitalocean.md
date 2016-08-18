@@ -60,7 +60,7 @@ To restrict user access your VPN server, you also need to add users and password
 In the client column is user's name, the secret column is for passwords.
 I masked mine for privacy.
 
-<img src="{{ root_url }}/images/pics/user_password.jpg" alt="Set user and password"/>
+![](/img/user_password.jpg)
 
 Add the following DNS to `/etc/ppp/pptpd-options`:
 ```
