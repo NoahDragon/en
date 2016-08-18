@@ -49,8 +49,8 @@ duoshuo_shortname:
 
 # Analytics
 google_analytics:
-  enable: false
-  siteid:
+  enable: true 
+  siteid: UA-48498357-2
 baidu_tongji:
   enable: false
   siteid:
