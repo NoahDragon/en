@@ -8,6 +8,7 @@ categories:
   - Javascript
   - Simulation
 abbrlink: e0efd72f
+showAd: true
 ---
 
 Because our Earth is in a system called Solar System.

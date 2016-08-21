@@ -7,6 +7,7 @@ categories:
   - Hacker game
   - Programming
 abbrlink: e4c9ee8f
+showAd: true
 ---
 
 You could start the game from [here](http://fun.coolshell.cn), hosted by [coolshell.cn](http://coolshell.cn).

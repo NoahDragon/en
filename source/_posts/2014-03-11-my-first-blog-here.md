@@ -8,6 +8,7 @@ categories:
   - Octopress
   - Blog
 abbrlink: 90d363bc
+showAd: true
 ---
 
 Well, this is my first blog here (right now on github).

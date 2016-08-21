@@ -30,13 +30,16 @@
 
 	  <%- item.content %>	  
 	</div>
-
 	<div>
   	<center>
 	<%- partial('post/pagination', {page: item}) %>
     </center>
 	</div>
 
+	<!-- google Ad -->
+	<div>
+	<%- partial('post/googleAd', {page: item}) %>
+	</div>
     <!-- share -->
     <% if (post) { %>
         <%- partial('post/bdshare', {page: item}) %>

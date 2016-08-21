@@ -12,6 +12,7 @@ categories:
   - DigitalOcean
   - VPS
 abbrlink: 2b608f65
+showAd: true
 ---
 
 Recently I just rent a VPS on [Digital Ocean](https://www.digitalocean.com),
