@@ -3,7 +3,7 @@
 
     <sitemap>
         <loc>http://en.abnerchou.me/post-sitemap.xml</loc>
-        <lastmod>2016-08-21T02:07:39.000Z</lastmod>
+        <lastmod>2016-09-04T03:13:00.000Z</lastmod>
     </sitemap>
 
     <sitemap>
@@ -14,6 +14,11 @@
     <sitemap>
         <loc>http://en.abnerchou.me/category-sitemap.xml</loc>
         <lastmod>2016-08-21T02:03:02.000Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>http://en.abnerchou.me/tag-sitemap.xml</loc>
+        <lastmod>2016-09-04T03:13:00.000Z</lastmod>
     </sitemap>
 
 </sitemapindex>
