@@ -2,22 +2,22 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>http://en.abnerchou.me/post-sitemap.xml</loc>
+        <loc>https://en.abnerchou.me/post-sitemap.xml</loc>
         <lastmod>2016-09-04T03:13:00.000Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://en.abnerchou.me/page-sitemap.xml</loc>
+        <loc>https://en.abnerchou.me/page-sitemap.xml</loc>
         <lastmod>2016-09-04T03:25:32.000Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://en.abnerchou.me/category-sitemap.xml</loc>
+        <loc>https://en.abnerchou.me/category-sitemap.xml</loc>
         <lastmod>2016-08-21T02:03:02.000Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://en.abnerchou.me/tag-sitemap.xml</loc>
+        <loc>https://en.abnerchou.me/tag-sitemap.xml</loc>
         <lastmod>2016-09-04T03:13:00.000Z</lastmod>
     </sitemap>
 
