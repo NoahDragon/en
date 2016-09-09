@@ -23,11 +23,11 @@ menu:
 
 links:
   - title: A Developer in Limbo
-    url: http://en.abnerchou.me
+    url: https://en.abnerchou.me
     intro: "Abner Chou's Blog."
     icon: "fa fa-hashtag"
   - title: My Github
-    url: http://www.github.com/NoahDragon
+    url: https://www.github.com/NoahDragon
     intro: "My Github account."
     icon: "fa fa-github"
 #  - title: "My LinkedIn"

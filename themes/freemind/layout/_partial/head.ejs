@@ -55,6 +55,9 @@
 
   <script src="<%- config.root %>js/jquery-2.0.3.min.js"></script>
 
+  <!-- canonical link for SEO -->
+  <%- autoCanonical(config, page) %>
+
   <!-- analytics -->
   <%- partial('post/analytics') %>
 
