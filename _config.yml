@@ -87,25 +87,3 @@ abbrlink:
   alg: crc32
   rep: hex
 
-# all-minifier
-html_minifier:
-  enable: true
-  exclude:
-css_minifier:
-  enable: true
-  exclude:
-    - '*.min.css'
-js_minifier:
-  enable: true
-  mangle: true
-  output:
-  compress:
-  exclude:
-    - '*.min.js'
-image_minifier:
-  enable: false
-  interlaced: false
-  multipass: false
-  optimizationLevel: 2
-  pngquant: false
-  progressive: false
