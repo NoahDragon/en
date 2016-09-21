@@ -49,7 +49,7 @@ duoshuo_shortname:
 
 # Analytics
 google_analytics:
-  enable: true 
+  enable: false 
   siteid: UA-48498357-2
 baidu_tongji:
   enable: false
@@ -59,6 +59,6 @@ baidu_tongji:
 # swiftype_key: ZP2ZSuHgipSZfRyU8uTR
 
 # share widgets
-bdshare: true
+bdshare: false
 jiathis: false
 
