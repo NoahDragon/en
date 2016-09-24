@@ -3,7 +3,7 @@ layout: post
 title: An Online Hacker Game
 date: '2014-08-05 18:22:48 -0400'
 comments: true
-categories:
+tags:
   - Hacker game
   - Programming
 abbrlink: e4c9ee8f

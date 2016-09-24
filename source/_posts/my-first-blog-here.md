@@ -3,7 +3,7 @@ layout: post
 title: My First Blog Here
 date: '2014-03-11 22:52:09 -0400'
 comments: true
-categories:
+tags:
   - General
   - Octopress
   - Blog

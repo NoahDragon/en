@@ -3,7 +3,7 @@ layout: post
 title: Why Sun is the center of our solar system
 date: '2014-07-02 22:44:44 -0400'
 comments: true
-categories:
+tags:
   - Solar System
   - Javascript
   - Simulation

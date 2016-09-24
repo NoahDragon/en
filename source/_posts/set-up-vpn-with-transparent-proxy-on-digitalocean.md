@@ -3,7 +3,7 @@ layout: post
 title: Set up VPN with transparent proxy on DigitalOcean
 date: '2014-07-12 20:43:47 -0400'
 comments: true
-categories:
+tags:
   - VPN
   - pptp
   - Squid

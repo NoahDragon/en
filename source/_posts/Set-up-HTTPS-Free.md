@@ -12,19 +12,19 @@ date: 2016-09-22 21:52:47
 
 ![](\img\https_5.png)
 
-Nowadays, it is easy to get an certificate to create HTTPS website ([Ref](https://letsencrypt.org/)), but it requires the full control of server. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. If I would like to break those limits on server side, the Cloudflare is the best tool.
+Nowadays, it is easy to get an TLS certificate to create HTTPS website ([Ref](https://letsencrypt.org/)), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.
 
 <!-- More -->
 
-## Background
+## Backgrounds
 
-[Github](https://github.com/) provide a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins.
+[Github](https://github.com/) provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.
 
 [Cloudflare](https://www.cloudflare.com/) is a DNS and CDN provider. All the basic services are free of charge, and they are already good enough for a static website.
 
-[HTTPS](https://en.wikipedia.org/wiki/HTTPS) is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (not cheap), and set up it for your domain. One important reason to use HTTPS is that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see [http vs https](https://www.httpvshttps.com/)).
+[HTTPS](https://en.wikipedia.org/wiki/HTTPS) is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (**not cheap**), and set up it for your domain (**not easy**). One important reason to use HTTPS other than security is speed, that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see [http vs https](https://www.httpvshttps.com/)).
 
-[HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) helps your website more secure, better to turn it on.
+[HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) helps your website more secure. It strictly forbids the HTTP connection on your website, if your website displays a content from a HTTP link, the browser will refuse to load. So before set your site up and run with HTTPS and eliminate mix contents, do not turn it on.
 
 ## Prerequisites
 
@@ -80,6 +80,10 @@ As we have one more page rule left, you could leave it as blank. But as stated a
 
 Moreover, there is another setting that could power up the static website. It is the edge cache TTL, which set the time length that Cloudflare will hold your content caches. For example, if we set it to 2 hours, which means every 2 hours Cloudflare has to fetch data from origin server. Since our static websites do not change a lot, we could set to one month.
 
-# Conclusion
+## Conclusion
+
+The settings for Cloudflare is generic, that means you can use it to set up HTTPS on any kind of server free.
 
 Cloudflare has plenty powerful services, if using them wisely, can save your life for managing a website.
+
+Enjoy your secure and faster website!
