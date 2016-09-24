@@ -52,7 +52,7 @@ If the return shows something like CF-Cache-Status: HIT, that means your pages h
 
 To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.
 
-![](\img\https_1.png)
+![](/img/https_1.png)
 
 To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we'd better set up the page rules before turn it on.
 
@@ -64,11 +64,11 @@ There are three basic checks (at least) to turn on the HSTS:
 
 To pass those checks, we only need two page rules (Cloudflare free plan can set maximum three page rules). The first it always using HTTPS, and the second is forwarding URL. Note, the order matters.
 
-![](\img\https_2.png)
+![](/img/https_2.png)
 
 Now enable the HSTS, and then open the [Chrome preload list](https://hstspreload.appspot.com/), and submit your domain. It should succeed, and shows the following message.
 
-![](\img\https_3.png)
+![](/img/https_3.png)
 
 Everything is set and your website will always be connected through the secure protocol.
 
@@ -76,7 +76,7 @@ Everything is set and your website will always be connected through the secure p
 
 As we have one more page rule left, you could leave it as blank. But as stated above, the github pages set the Cache-Control: max-age=600, which is 10 mins. That means every 10 mins the user has to fetch data through github page, no matter it changed or not. This is really inefficiency. To overwrite this setting, we could set the browser cache TTL. I set it to one year, because my assets would rarely be modified.
 
-![](\img\https_4.png)
+![](/img/https_4.png)
 
 Moreover, there is another setting that could power up the static website. It is the edge cache TTL, which set the time length that Cloudflare will hold your content caches. For example, if we set it to 2 hours, which means every 2 hours Cloudflare has to fetch data from origin server. Since our static websites do not change a lot, we could set to one month.
 
