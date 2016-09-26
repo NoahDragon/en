@@ -23,6 +23,7 @@ addons:
 
 script:
   - npm run build
+  - chmod u+x .travis/deploy.sh
 
 deploy:
   provider: script
