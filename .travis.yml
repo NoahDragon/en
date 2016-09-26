@@ -1,0 +1,23 @@
+branches:
+  only:
+  - master
+
+language: node_js
+
+sudo: false
+
+node_js:
+    - 'stable'
+
+before_install:
+- git config --global user.name "Abner"
+- git config --global user.email contact@abnerchou.me
+
+install:
+- npm install hexo-cli -g
+- npm install
+
+script:
+- hexo clean
+- hexo g
+- hexo d
