@@ -44,4 +44,7 @@ Here are several sites that allow you to using coding to play.
 
 [Scratch](https://scratch.mit.edu/) Visually coding.
 
+[LightBot](https://lightbot.com/) Simple game which teachs the basic function and loop concepts.
+
 Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.
+
