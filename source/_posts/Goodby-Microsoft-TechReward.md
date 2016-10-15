@@ -2,10 +2,11 @@
 title: Goodby Microsoft TechReward
 showAd: true
 comments: true
-date: 2016-10-06 17:31:44
 tags:
-	- Microsoft
-	- TechReward
+  - Microsoft
+  - TechReward
+abbrlink: 8aae6eef
+date: 2016-10-06 17:31:44
 ---
 
 ![](\img\ms_tech_reward.jpg)
