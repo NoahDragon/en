@@ -5,7 +5,7 @@
 # Site
 title: Hard Code
 subtitle:
-description: Developer, Blog, English
+description: A Developer in Limbo
 author: Abner Chou
 language: en
 timezone:
@@ -86,3 +86,10 @@ search:
 abbrlink:
   alg: crc32
   rep: hex
+
+# RSS
+feed:
+  type: atom
+  path: atom.xml
+  limit: 10
+  hub:
