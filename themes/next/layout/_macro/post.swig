@@ -99,7 +99,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="{{ url_for(post.path) }}#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="{{ post.path }}" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="{{ post.abbrlink }}" itemprop="commentsCount"></span>
                 </a>
               </span>
             {% endif %}

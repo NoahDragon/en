@@ -56,7 +56,7 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #responsive  #three_column  #clean  #flat  #light
 
-## 7. Apollo
+## Apollo
 
 {% githubCard pinggod hexo-theme-apollo %}
 
