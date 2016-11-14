@@ -48,5 +48,7 @@ Here are several sites that allow you to using coding to play.
 
 [FlexBox Froggy](http://flexboxfroggy.com/) Learn CSS FlexBox through games.
 
+[Halite](https://halite.io/) Artificial Intelligence chanllenge game. 
+
 Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.
 
