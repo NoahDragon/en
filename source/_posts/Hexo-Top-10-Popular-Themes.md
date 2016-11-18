@@ -16,7 +16,7 @@ date: 2016-10-16 19:41:21
 
 [Hexojs](https://hexo.io/) is one of the most popular static site generator based on [nodejs](https://nodejs.org/en/) [[ref](https://www.staticgen.com/)].
 
-There are around 75 themes list on the [website](https://hexo.io/themes/), here is the top 10 popular ones.
+There are around 75 themes list on the [website](https://hexo.io/themes/), here is the top 10 popular ones. 
 
 <!-- more -->
 
@@ -26,58 +26,62 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #responsive  #one_column  #clean  #white
 
-## <img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Tranquilpeak
+## <img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia (*New*) <img class="nofancybox" src="/img/new.png" style="display: inline; border-style: none;">
+
+{% githubCard litten hexo-theme-yilia 400 medium %}
+
+#responsive  #elegant  #sidebar  #two_column  #one_column
+
+## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Tranquilpeak (*2 -> 3*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
 
 {% githubCard LouisBarranqueiro tranquilpeak-hexo-theme 400 medium %}
 
 #responsive  #gorgeous  #sidebar  #two_column  #one_column  #tag_plugins
 
-## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Jacman
-
-{% githubCard wuchong jacman 400 medium %}
-
-#responsive  #two_column  #blue  #elegant
-
-## Yelee
+## Yelee 
 
 {% githubCard MOxFIVE hexo-theme-yelee %}
 
 #responsive  #two_column  #toc  #elegant  #simple  #background_image
 
-## Maupassant
+## Jacman (*3 -> 5*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+
+{% githubCard wuchong jacman%} 
+
+#responsive  #two_column  #blue  #elegant
+
+## Maupassant (*5 -> 6*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
 
 {% githubCard tufu9441 maupassant-hexo %}
 
 #simple  #responsive  #two_column  #white  #jade  #scss
 
-## Icarus
-
-{% githubCard ppoffice hexo-theme-icarus %}
-
-#responsive  #three_column  #clean  #flat  #light
-
-## Apollo
+## Apollo 
 
 {% githubCard pinggod hexo-theme-apollo %}
 
 #chinese  #light
 
-## Hueman
+## Icarus (*6 -> 8*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
 
-{% githubCard ppoffice hexo-theme-hueman %}
+{% githubCard ppoffice hexo-theme-icarus %}
 
-#responsive  #two_column  #wordpress  #elegant
+#responsive  #three_column  #clean  #flat  #light
 
-## spfk
+## Fexo (*New*) <img class="nofancybox" src="/img/new.png" style="display: inline; border-style: none;">
 
-{% githubCard luuman hexo-theme-spfk %}
+{% githubCard forsigner fexo %}
 
-#black  #responsive  #two_column  #personality
+#responsive #simple #elegant
 
-## indigo
+## Material (*New*) <img class="nofancybox" src="/img/new.png" style="display: inline; border-style: none;">
 
-{% githubCard yscoder hexo-theme-indigo %}
+{% githubCard viosey hexo-theme-material %}
 
-#responsive  #chinese  #material  #less
+#responsive #material #flat #light
 
 ~ EOF ~
+
+Updated: 2016-Nov-18
+
+For real time rank please visit the following link: [Github Search](https://github.com/search?o=desc&q=hexo-theme&s=stars&type=Repositories&utf8=%E2%9C%93)
