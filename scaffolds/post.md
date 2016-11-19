@@ -2,6 +2,6 @@
 title: {{ title }}
 date: {{ date }}
 tags:
-showAd: true
+categories:
 comments: true
 ---
