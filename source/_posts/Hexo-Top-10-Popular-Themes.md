@@ -26,13 +26,13 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #responsive  #one_column  #clean  #white
 
-## <img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia (*New*) <img class="nofancybox" src="/img/new.png" style="display: inline; border-style: none;">
+## <img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia 
 
 {% githubCard litten hexo-theme-yilia 400 medium %}
 
 #responsive  #elegant  #sidebar  #two_column  #one_column
 
-## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Tranquilpeak (*2 -> 3*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Tranquilpeak 
 
 {% githubCard LouisBarranqueiro tranquilpeak-hexo-theme 400 medium %}
 
@@ -44,13 +44,13 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #responsive  #two_column  #toc  #elegant  #simple  #background_image
 
-## Jacman (*3 -> 5*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+## Jacman
 
 {% githubCard wuchong jacman%} 
 
 #responsive  #two_column  #blue  #elegant
 
-## Maupassant (*5 -> 6*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+## Maupassant
 
 {% githubCard tufu9441 maupassant-hexo %}
 
@@ -62,26 +62,26 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #chinese  #light
 
-## Icarus (*6 -> 8*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+## Icarus 
 
 {% githubCard ppoffice hexo-theme-icarus %}
 
 #responsive  #three_column  #clean  #flat  #light
 
-## Fexo (*New*) <img class="nofancybox" src="/img/new.png" style="display: inline; border-style: none;">
-
-{% githubCard forsigner fexo %}
-
-#responsive #simple #elegant
-
-## Material (*New*) <img class="nofancybox" src="/img/new.png" style="display: inline; border-style: none;">
+## Material (*10 -> 9*) <img class="nofancybox" src="/img/up.png" style="display: inline; border-style: none;">
 
 {% githubCard viosey hexo-theme-material %}
 
 #responsive #material #flat #light
 
+## Fexo (*10 <- 9*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+
+{% githubCard forsigner fexo %}
+
+#responsive #simple #elegant
+
 ~ EOF ~
 
-Updated: 2016-Nov-18
+Updated: 2016-Dec-06
 
 For real time rank please visit the following link: [Github Search](https://github.com/search?o=desc&q=hexo-theme&s=stars&type=Repositories&utf8=%E2%9C%93)
