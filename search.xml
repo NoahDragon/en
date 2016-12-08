@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[Build SSL HTTPS Website Using Docker]]></title>
+      <url>https://en.abnerchou.me/Blog/75027340/</url>
+      <content type="html"><![CDATA[<p><img src="\img\https.png" alt="https"></p>
+<p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
+<p>The purpose of this post is to help people to avoid the pitfalls that I encountered, and severs as a note for future reference.</p>
+<a id="more"></a>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li><p>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</p>
+</li>
+<li><p><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</p>
+</li>
+<li><p><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</p>
+</li>
+<li><p>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</p>
+</li>
+<li><p>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</p>
+</li>
+<li><p>Git is also an option, unless you would like to build the image on your own.</p>
+</li>
+</ul>
+<h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><p>Only two docker images are used:</p>
+<ul>
+<li><a href="https://github.com/bringnow/docker-letsencrypt-manager" target="_blank" rel="external">Docker-letsencrypt-manager</a></li>
+<li><a href="https://github.com/bringnow/docker-nginx-letsencrypt" target="_blank" rel="external">Docker-nginx-letsencrypt</a></li>
+</ul>
+<p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
+<h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">nginx:</span></div><div class="line"><span class="attr">  image:</span> bringnow/nginx-letsencrypt</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> ./nginx.conf:/etc/nginx/nginx.conf</div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"><span class="bullet">    -</span> /srv/docker/nginx/dhparam:/etc/nginx/dhparam</div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:80"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"443:443"</span></div><div class="line"><span class="attr">  net:</span> <span class="string">"host"</span></div><div class="line"><span class="attr">  dns_search:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"example.com"</span></div></pre></td></tr></table></figure>
+<p>Modify it accordingly to fit your environment.</p>
+<h4 id="Generate-dhparam"><a href="#Generate-dhparam" class="headerlink" title="Generate dhparam"></a>Generate dhparam</h4><p>Although the nginx docker will create DH parameters on initial start up, it is time comsuming to generate the 4096 bit DH parameters (more than an hour on my VPS). Run the following command and copy the generated file to the <code>/srv/docker/nginx/dhparam</code> folder (set in docker-compose.yml).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl dhparam -out RSA4096.pem -5 4096</div></pre></td></tr></table></figure>
+<h4 id="Create-Nginx-Config-file"><a href="#Create-Nginx-Config-file" class="headerlink" title="Create Nginx Config file"></a>Create Nginx Config file</h4><p>In order to complete the letsencrypt challenge, the server has to open the 80 port. The nginx-letsencrypt image already come with the setting snippets: <code>snippets/letsencryptauth.conf</code> and <code>snippets/sslconfig.conf</code>.</p>
+<p>Here is the sample config file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">events &#123;</div><div class="line">  worker_connections 1024;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">  include snippets/letsencryptauth.conf;</div><div class="line">  include snippets/sslconfig.conf;</div><div class="line"></div><div class="line">  server &#123;</div><div class="line">    listen 443 ssl default_server;</div><div class="line">    server_name example.com www.example.com</div><div class="line"></div><div class="line">    ssl_certificate /etc/letsencrypt/live/www.example.com/fullchain.pem;</div><div class="line">    ssl_certificate_key /etc/letsencrypt/live/www.example.com/privkey.pem;</div><div class="line"></div><div class="line">    add_header Strict-Transport-Security &quot;max-age=31536000; includeSubdomains&quot; always;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">      # Just return a blank response</div><div class="line">      return 200;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>NOTE</strong>: Please comment out those two lines start up ssl_certificate before the certificate generated.</p>
+<h4 id="Make-Nginx-Online"><a href="#Make-Nginx-Online" class="headerlink" title="Make Nginx Online"></a>Make Nginx Online</h4><p>Now run the following command to bring Nginx online:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>To confim if the docker is running correctly, we could look the log file to check:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose logs</div></pre></td></tr></table></figure>
+<p>If there are some error messages, please check the Nginx config file and restart the docker.</p>
+<h4 id="docker-compose-yml-for-letsencrypt"><a href="#docker-compose-yml-for-letsencrypt" class="headerlink" title="docker-compose.yml for letsencrypt"></a>docker-compose.yml for letsencrypt</h4><p>In another folder, create a docker-compose.yml:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">cli:</span></div><div class="line"><span class="attr">  image:</span> bringnow/letsencrypt-manager:latest</div><div class="line"><span class="attr">  env_file:</span> config.env</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/lib/letsencrypt:/var/lib/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"></div><div class="line"><span class="attr">cron:</span></div><div class="line"><span class="attr">  image:</span> bringnow/letsencrypt-manager:latest</div><div class="line"><span class="attr">  env_file:</span> config.env</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/lib/letsencrypt:/var/lib/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"><span class="attr">  command:</span> cron-auto-renewal</div><div class="line"><span class="attr">  restart:</span> always</div></pre></td></tr></table></figure>
+<p>Modify it accordingly. Make sure the folder <code>/var/lib/letsencrypt</code> and <code>/var/acme-webroot</code> have created and exist.</p>
+<p>Then create config.env file in the same folder and input your email:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LE_EMAIL=</div><div class="line">LE_RSA_KEY_SIZE=4096</div></pre></td></tr></table></figure>
+<h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose run cli add domain [alternative domains]</div></pre></td></tr></table></figure>
+<p>If it fails, please check if Nginx is runing and the DNS setting is correct.</p>
+<p><strong>NOTE</strong>: If the certificate generate, don’t forget to remove comment on ssl_certificate lines in Nginx config file, and restart it.</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Now your website should up and running with https. Enjoy.</p>
+<p>~ EOF ~</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hexo Top 10 Popular Themes]]></title>
+      <url>https://en.abnerchou.me/Blog/5c00ca67/</url>
+      <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
+<p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
+<p>There are around 75 themes list on the <a href="https://hexo.io/themes/" target="_blank" rel="external">website</a>, here is the top 10 popular ones. </p>
+<a id="more"></a>
+<h2 id="NexT"><a href="#NexT" class="headerlink" title=" NexT"></a><img class="nofancybox" src="/img/top1.png" style="display: inline; border-style: none;"> NexT</h2><div style="text-align:center">
+  <div class="github-card" data-user="iissnan" data-repo="hexo-theme-next" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #one_column  #clean  #white</p>
+<h2 id="Yilia"><a href="#Yilia" class="headerlink" title=" Yilia"></a><img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia</h2><div style="text-align:center">
+  <div class="github-card" data-user="litten" data-repo="hexo-theme-yilia" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #elegant  #sidebar  #two_column  #one_column</p>
+<h2 id="Tranquilpeak"><a href="#Tranquilpeak" class="headerlink" title=" Tranquilpeak"></a><img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Tranquilpeak</h2><div style="text-align:center">
+  <div class="github-card" data-user="LouisBarranqueiro" data-repo="tranquilpeak-hexo-theme" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #gorgeous  #sidebar  #two_column  #one_column  #tag_plugins</p>
+<h2 id="Yelee"><a href="#Yelee" class="headerlink" title="Yelee"></a>Yelee</h2><div style="text-align:center">
+  <div class="github-card" data-user="MOxFIVE" data-repo="hexo-theme-yelee" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #two_column  #toc  #elegant  #simple  #background_image</p>
+<h2 id="Jacman"><a href="#Jacman" class="headerlink" title="Jacman"></a>Jacman</h2><div style="text-align:center">
+  <div class="github-card" data-user="wuchong" data-repo="jacman" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+ 
+<p>#responsive  #two_column  #blue  #elegant</p>
+<h2 id="Maupassant"><a href="#Maupassant" class="headerlink" title="Maupassant"></a>Maupassant</h2><div style="text-align:center">
+  <div class="github-card" data-user="tufu9441" data-repo="maupassant-hexo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#simple  #responsive  #two_column  #white  #jade  #scss</p>
+<h2 id="Apollo"><a href="#Apollo" class="headerlink" title="Apollo"></a>Apollo</h2><div style="text-align:center">
+  <div class="github-card" data-user="pinggod" data-repo="hexo-theme-apollo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#chinese  #light</p>
+<h2 id="Icarus"><a href="#Icarus" class="headerlink" title="Icarus"></a>Icarus</h2><div style="text-align:center">
+  <div class="github-card" data-user="ppoffice" data-repo="hexo-theme-icarus" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #three_column  #clean  #flat  #light</p>
+<h2 id="Material-10-gt-9"><a href="#Material-10-gt-9" class="headerlink" title="Material (10 -&gt; 9) "></a>Material (<em>10 -&gt; 9</em>) <img class="nofancybox" src="/img/up.png" style="display: inline; border-style: none;"></h2><div style="text-align:center">
+  <div class="github-card" data-user="viosey" data-repo="hexo-theme-material" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive #material #flat #light</p>
+<h2 id="Fexo-10-lt-9"><a href="#Fexo-10-lt-9" class="headerlink" title="Fexo (10 &lt;- 9) "></a>Fexo (<em>10 &lt;- 9</em>) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;"></h2><div style="text-align:center">
+  <div class="github-card" data-user="forsigner" data-repo="fexo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive #simple #elegant</p>
+<p>~ EOF ~</p>
+<p>Updated: 2016-Dec-06</p>
+<p>For real time rank please visit the following link: <a href="https://github.com/search?o=desc&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank" rel="external">Github Search</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Goodby Microsoft TechReward]]></title>
+      <url>https://en.abnerchou.me/Blog/8aae6eef/</url>
+      <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
+<p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
+<p>Really don’t have any hard feeling about this. The only reward attracted me was the AppToCerts, which rewarded you the MS certificate if passed two challenges. Other than it, to achieve a $2 reward, you have to complete at least 3 challenges, and the rewards are all donations.</p>
+<p>So here I will list the reasons why I think it is going to fail:</p>
+<a id="more"></a>
+<h3 id="Low-Profit-Rewards"><a href="#Low-Profit-Rewards" class="headerlink" title="Low Profit Rewards"></a>Low Profit Rewards</h3><p>For some usable rewards, like Skype credit, you have to complete more than 10 challenges, and each challenges takes around half hour to finish. Five hours for a $25 USD, it even not matches the basic salaries.</p>
+<h3 id="Outdated-instruction"><a href="#Outdated-instruction" class="headerlink" title="Outdated instruction"></a>Outdated instruction</h3><p>I followed instruction to complete a challenge, which takes around an hour to fix an issue because of the wrong description. The challenge is re-listed each month, but no one tries to correct it.</p>
+<h3 id="Slow-website-performance"><a href="#Slow-website-performance" class="headerlink" title="Slow website performance"></a>Slow website performance</h3><p>The layout of website likes 5 years ago, and felt lagged when loading content.</p>
+<h3 id="Lack-of-Popular-Techniques"><a href="#Lack-of-Popular-Techniques" class="headerlink" title="Lack of Popular Techniques"></a>Lack of Popular Techniques</h3><p>Microsoft wants to advertise its own products (C#, WPF, ect.), so there is rarely Java/Ruby/Python challenges (I couldn’t say no because I don’t use it very often). </p>
+<h3 id="Not-Fun-at-All"><a href="#Not-Fun-at-All" class="headerlink" title="Not Fun at All"></a>Not Fun at All</h3><p>Every challenges like ADs, promoting Microsoft latest tools or techniques, but not fun at all. It likes reading a textbook while go through its description.</p>
+<h3 id="No-Feedback"><a href="#No-Feedback" class="headerlink" title="No Feedback"></a>No Feedback</h3><p>If follows the instruction, most of the challenges will be passed, however, if it failed, you couldn’t get any feedbacks to point out the problems. You even couldn’t retry the challenge. </p>
+<h3 id="Redundant-Challenges"><a href="#Redundant-Challenges" class="headerlink" title="Redundant Challenges"></a>Redundant Challenges</h3><p>Because the challenges re-list every month, and not a lot of new ones added. Moreover, you couldn’t retake any challenges no matter you passed or failed. Although the challenges repeated each month, for people who take them, those are redundant.</p>
+<p>All in all, goodbye Microsoft TechRewards.</p>
+<p>~ EOF ~</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Set up HTTPS Free]]></title>
+      <url>https://en.abnerchou.me/Blog/daa790/</url>
+      <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
+<p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
+<a id="more"></a>
+<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="external">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
+<p><a href="https://www.cloudflare.com/" target="_blank" rel="external">Cloudflare</a> is a DNS and CDN provider. All the basic services are free of charge, and they are already good enough for a static website.</p>
+<p><a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="external">HTTPS</a> is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (<strong>not cheap</strong>), and set up it for your domain (<strong>not easy</strong>). One important reason to use HTTPS other than security is speed, that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see <a href="https://www.httpvshttps.com/" target="_blank" rel="external">http vs https</a>).</p>
+<p><a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank" rel="external">HSTS</a> helps your website more secure. It strictly forbids the HTTP connection on your website, if your website displays a content from a HTTP link, the browser will refuse to load. So before set your site up and run with HTTPS and eliminate mix contents, do not turn it on.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><h3 id="Settings-on-Github"><a href="#Settings-on-Github" class="headerlink" title="Settings on Github"></a>Settings on Github</h3><p>Set up an Github Pages, add CNAME to the root folder. Here is the <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="external">guide</a> for using custom domain with Github pages.</p>
+<h3 id="Settings-on-Cloudflare"><a href="#Settings-on-Cloudflare" class="headerlink" title="Settings on Cloudflare"></a>Settings on Cloudflare</h3><p>First, you have to set up the Cloudflare as your DNS manager. It basically tells the domain provider that DNS is handled by Cloudflare. You can google to find a tutorial about it.</p>
+<p>Then, connect to Github page. Just setting the A and CNAME records on DNS.</p>
+<h3 id="Test-if-Cloudflare-is-working"><a href="#Test-if-Cloudflare-is-working" class="headerlink" title="Test if Cloudflare is working"></a>Test if Cloudflare is working</h3><p>Type the following code in your console (replace theurloftheresource to the actual url)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -svo /dev/null http://theurloftheresource</div></pre></td></tr></table></figure>
+<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
+<h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
+<p><img src="/img/https_1.png" alt=""></p>
+<p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
+<p>There are three basic checks (at least) to turn on the HSTS:</p>
+<ul>
+<li>Always connected via HTTPS</li>
+<li><a href="http://domain.com" target="_blank" rel="external">http://domain.com</a> need to redirect to <a href="https://domain.com" target="_blank" rel="external">https://domain.com</a></li>
+<li><a href="http://domain.com" target="_blank" rel="external">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="external">https://www.domain.com</a></li>
+</ul>
+<p>To pass those checks, we only need two page rules (Cloudflare free plan can set maximum three page rules). The first it always using HTTPS, and the second is forwarding URL. Note, the order matters.</p>
+<p><img src="/img/https_2.png" alt=""></p>
+<p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="external">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
+<p><img src="/img/https_3.png" alt=""></p>
+<p>Everything is set and your website will always be connected through the secure protocol.</p>
+<h2 id="Extra-Page-Rule-Usage"><a href="#Extra-Page-Rule-Usage" class="headerlink" title="Extra Page Rule Usage"></a>Extra Page Rule Usage</h2><p>As we have one more page rule left, you could leave it as blank. But as stated above, the github pages set the Cache-Control: max-age=600, which is 10 mins. That means every 10 mins the user has to fetch data through github page, no matter it changed or not. This is really inefficiency. To overwrite this setting, we could set the browser cache TTL. I set it to one year, because my assets would rarely be modified.</p>
+<p><img src="/img/https_4.png" alt=""></p>
+<p>Moreover, there is another setting that could power up the static website. It is the edge cache TTL, which set the time length that Cloudflare will hold your content caches. For example, if we set it to 2 hours, which means every 2 hours Cloudflare has to fetch data from origin server. Since our static websites do not change a lot, we could set to one month.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The settings for Cloudflare is generic, that means you can use it to set up HTTPS on any kind of server free.</p>
+<p>Cloudflare has plenty powerful services, if using them wisely, can save your life for managing a website.</p>
+<p>Enjoy your secure and faster website!</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Coding Play and Learn]]></title>
+      <url>https://en.abnerchou.me/Blog/2db6c020/</url>
+      <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
+<p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
+<a id="more"></a>
+<p>Here are several sites that allow you to using coding to play.</p>
+<p><img src="/img/play_learn_code_combat.jpeg" alt=""></p>
+<p><a href="https://codecombat.com/" target="_blank" rel="external">CodeCombat</a> is an RPG game which you could use Javascript, Coffeescript, Lua, Python, Clojure, and Io.</p>
+<p><img src="/img/play_learn_code_hunt.png" alt=""></p>
+<p><a href="https://www.codehunt.com/" target="_blank" rel="external">Code Hunt</a> is developed by Microsoft Research. In which, you are a code hunter to find the bug in C#/Java code.</p>
+<p><img src="/img/play_learn_codingame.jpg" alt=""></p>
+<p><a href="https://www.codingame.com/start" target="_blank" rel="external">CodinGame</a> I haven’t played it yet, but it looks fun.</p>
+<p><img src="/img/play_learn_creeps.jpg" alt=""></p>
+<p><a href="https://screeps.com/" target="_blank" rel="external">Screeps</a> is an online RTS. You have to build up your territory, and defend it from AI and other player’s attach. For now, it only support the Javascript, and you have to pay2play.</p>
+<p><a href="http://fightcodegame.com/" target="_blank" rel="external">FightCode</a> Build your smart tank and beat others. It’s really similar to <a href="http://robocode.sourceforge.net/" target="_blank" rel="external">Robocode</a>.</p>
+<p><a href="http://play.elevatorsaga.com/" target="_blank" rel="external">Elevator Saga</a> You become an elevator operator. You have to deliver certain number of people within a time frame to pass to next level.</p>
+<p><a href="https://www.battlecode.org/" target="_blank" rel="external">Battle Code</a> Not know much about it, but it holds contest for students.</p>
+<p><a href="https://www.bloc.io/ruby-warrior/#/warriors" target="_blank" rel="external">Ruby Warrior</a> Learn Ruby and beat dungeon.</p>
+<p><a href="https://scratch.mit.edu/" target="_blank" rel="external">Scratch</a> Visually coding.</p>
+<p><a href="https://lightbot.com/" target="_blank" rel="external">LightBot</a> Simple game which teachs the basic function and loop concepts.</p>
+<p><a href="http://flexboxfroggy.com/" target="_blank" rel="external">FlexBox Froggy</a> Learn CSS FlexBox through games.</p>
+<p><a href="https://halite.io/" target="_blank" rel="external">Halite</a> Artificial Intelligence chanllenge game. </p>
+<p>Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[An Online Hacker Game]]></title>
+      <url>https://en.abnerchou.me/Blog/e4c9ee8f/</url>
+      <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
+<p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
+<p>I have posted hints and solutions on <a href="https://github.com/NoahDragon/fun.coolshell.cn" target="_blank" rel="external">my github</a>, use them wisely when you get difficulties.</p>
+<p>Enjoy :)</p>
+<p><img src="/img/online_hacker_game.PNG" alt=""></p>
+<p>A little bit show off and keep a record.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Set up VPN with transparent proxy on DigitalOcean]]></title>
+      <url>https://en.abnerchou.me/Blog/2b608f65/</url>
+      <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,<br>which is cheap for a student and who is price sensitive.<br>As it gives you all the controls of an OS, it likes a remote compute machine.<br>Meanwhile, you could do anything as you have your own server.</p>
+<a id="more"></a>
+<p>Therefore, it comes to my mind to create a VPN server.<br>VPN is a virtual private network that extends a private network across a public network,<br>which usually used to bypass firewalls or increase access speed.<br>Proxy is a server that acts as an intermediary for requests from clients seeking resources from other servers.<br>It needs to be set in software application’s configuration.<br>VPN and Proxy both could hide your ip.<br>The differences between them are listed following:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center">VPN</th>
+<th style="text-align:center">Proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Protocols&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align:center">Support any Protocols</td>
+<td style="text-align:center">Support certain Protocols, such as HTTP, SOCKS</td>
+</tr>
+<tr>
+<td style="text-align:left">Softwares</td>
+<td style="text-align:center">Any softwares that can run on the machine &nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align:center">Softwares support proxy configuration</td>
+</tr>
+<tr>
+<td style="text-align:left">Price</td>
+<td style="text-align:center">High if you rent from vpn provider</td>
+<td style="text-align:center">Low</td>
+</tr>
+<tr>
+<td style="text-align:left">Speed</td>
+<td style="text-align:center">Varies depend on number of users<br>usually depends on servers</td>
+<td style="text-align:center">Depend on servers</td>
+</tr>
+<tr>
+<td style="text-align:left">Security</td>
+<td style="text-align:center">Encryption (128-bit to 2048-bit)</td>
+<td style="text-align:center">Not encrypted</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Because of the encryption, every accesses through VPN retrive the objects directly from the source.<br>This could slow down the user experience when hits a same object multiple times, such as icons in a webpage.<br>If there is a way that could cache web objects into VPN server, that will significantly increase the access speed, which get objects from local disk instead of downloading from source website.<br>Here, I should introduce the transparent proxy, which usually sets on the gateway and caches content from WWW requests.<br>It calls transparent because client side does not need any configuration.<br>Hence, every WWW requests through VPN need go to transparent proxy.</p>
+<p>This installation guide is tested on Ubuntu 14.04 64bit.<br>VPN is set up by <a href="http://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol" target="_blank" rel="external">pptp</a>.<br>Transparent proxy is on <a href="http://www.squid-cache.org" target="_blank" rel="external">Squid3</a>.</p>
+<ul>
+<li><strong>pptp installation</strong></li>
+</ul>
+<p>In terminal, type the command bellow to install pptp server:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pptpd</div></pre></td></tr></table></figure></p>
+<p>To restrict user access your VPN server, you also need to add users and passwords in <code>/etc/ppp/chap-secets</code>.<br>In the client column is user’s name, the secret column is for passwords.<br>I masked mine for privacy.</p>
+<p><img src="/img/user_password.jpg" alt=""></p>
+<p>Add the following DNS to <code>/etc/ppp/pptpd-options</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ms-dns 8.8.8.8</div><div class="line">ms-dns 8.8.4.4</div></pre></td></tr></table></figure></p>
+<p>Restart pptp server by command <code>service pptpd restart</code>. Check if it is running by <code>netstat -alpn | grep :1723</code>.</p>
+<p>You also should enable the IP forwarding on your pptp server.<br>This would transfer the package between public ip and private ips on your server.<br>Open <code>/etc/sysctl.conf</code>, add the following line if not exist: <code>net.ipv4.ip_forward = 1</code>.<br>Then run <code>sysctl -p</code> to make the change effective.</p>
+<p>Create NAT rule for iptables, and your VPN is ready to use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables --table nat --append POSTROUTING -o eth0 -j MASQUERADE &amp;&amp; iptables-save</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>Squid3 installation</strong></li>
+</ul>
+<p>Similar to pptpd, typing the following in terminal:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install squid</div><div class="line">update-rc.d squid3 defaults</div></pre></td></tr></table></figure></p>
+<p>The proxy is usable now, but it is the normal proxy with default settings.<br>To change it to transparent proxy, we need to edit the <code>/etc/squid3/squid.conf</code> file.<br>The squid.conf follows the rules of allow/deny order.<br>It obeys the first come first serve, the first matched rule will apply.<br>For example, if you put “deny all” at the first line of squid.conf, then the proxy denies all request.<br>If a rule does not indicate in squid.conf, then it defaults as deny.</p>
+<p>First, find the line <code>http_port 3128</code>, change it to <code>http_port 3128 transparent</code>.<br><strong> this is important </strong></p>
+<p>Second, add the following rules:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">acl myhost src 192.168.0.1</div><div class="line">http_access allow myhost</div><div class="line">acl mymachine src 10.0.0.0/16</div><div class="line">http_access allow mymachine</div></pre></td></tr></table></figure></p>
+<p>The ‘192.168.0.1’ is my public ip, and the ‘10.0.0.0/16’ is my private ips.<br>Restart squid <code>sudo service squid3 restart</code>.</p>
+<p>Finally, we set the iptables to redirect all the traffic through 80 port to 3128 port that is our transparent proxy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -t nat -A PREROUTING -i ppp0 -p tcp -m tcp --dport 80 -j REDIRECT --to-port 3128</div></pre></td></tr></table></figure></p>
+<p>The transparent proxy is set up.</p>
+<ul>
+<li><strong>Restore iptables rules while system start up</strong></li>
+</ul>
+<p>Right now, you couldn’t restart the system, otherwise the iptables will be set to empty again.<br>But you can input the previous iptables commands again to solve this.</p>
+<p>Here I introduce a method that will do it once and for all.</p>
+<p>Save iptables into <code>/etc/network/iptables.rules</code> by <code>iptables-save &gt; /etc/network/iptables.rules</code></p>
+<p>Open <code>/etc/rc.local</code> and add the following line before “exit 0”:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/sbin/iptables-restore &lt; /etc/network/iptables.rules</div></pre></td></tr></table></figure></p>
+<p>Then our saved iptables rules will be loaded every time the system start up.</p>
+<p>Enjoy your VPN server with transparent proxy!</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Why Sun is the center of our solar system]]></title>
+      <url>https://en.abnerchou.me/Blog/e0efd72f/</url>
+      <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.<br>I don’t think the answer would be simple as that.<br>Why the Earth could not be the center?</p>
+<p>Actually it could.<br>As we learn in physic, all motions are relative, like we feel we are still on the Earth, but we actually spin and orbit the Sun.<br>Moreover, we orbit the Sun, in another words that the Sun also orbits us.<br>This doesn’t conflict with motion relative law.<br>But why we are not saying the Sun is orbiting Earth?<br><a id="more"></a><br>So let’s see how the planets move during heliocentric system and geocentric system.<br>Here is the link: <a href="http://noahdragon.github.io/SolarSystem.js/" target="_blank" rel="external">SolarSystem.js</a>.<br>You could click to switch the systems, and draw the orbit path for better viewing.</p>
+<p>The heliocentric system shows perfect concentric circles of planets path, in contrast, the geocentric system looks like random motion.<br>Untile we draw their path, only the Sun’s orbit is circle, the other planet tracks are like spiral.<br>After long enough years, the orbit will look like below picture:</p>
+<p><img src="/img/geocentric.jpg" alt=""></p>
+<p>It’s totally mess!</p>
+<p>This simulated program assumes the planets’ orbit is circle and in the same surface.<br>In our real solar system, it is way more complicate.</p>
+<p>I didn’t do the history research about why heliocentrism won the theory battle.<br>But I know heliocentrism is better because it is simpler.<br>This also aligns with the philosophy of Unix/Linux programming:<br>K.I.S.S., which stands for “Keep It Simple &amp; Straightforward”.</p>
+<p>Because of heliocentric system, we make satellite launch possible, and easily calculate the planets position.<br>Otherwise, I couldn’t image how hard the job is for a mathematician to compute the correct route from the Earth to Mars.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[My First Blog Here]]></title>
+      <url>https://en.abnerchou.me/Blog/90d363bc/</url>
+      <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
+<p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,<br>and I will briefly describe the way to set it up.</p>
+<a id="more"></a>
+<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">setup page</a>.<br>Follow the instruction,<br>install the dependencies that Octopress will need.</p>
+<p>Then choose the platform that the blog will be hosted on,<br>here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="external">deploying github pages</a>.<br><strong>Note</strong>: an error occured while I followed the instruction to rake it.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">rake aborted!</div><div class="line">You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.</div><div class="line">Prepending `bundle <span class="built_in">exec</span>` to your <span class="built_in">command</span> may solve this.</div><div class="line">/Users/Haochen/myB<span class="built_in">log</span>/octopress/Rakefile:2:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span></div><div class="line">(See full trace by running task with --trace)</div></pre></td></tr></table></figure></p>
+<p>This error could be easily solved by adding <code>bundle exec</code> in front of the <code>rake</code> command.</p>
+<p>After <code>rake generate</code>, go to ‘_deploy’ folder, and type <code>git pull origin master</code>.<br>Then type <code>rake deploy</code>.<br>Otherwise, there will be some errors:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error: failed to push some refs to <span class="string">'git@gihub.com:your github page repo'</span></div></pre></td></tr></table></figure></p>
+<p>Now, your blog page is on-line.<br>Although the pages are hosted on github,<br>you still need version control on your Octopress settings,<br>so don’t forget to commit to the ‘source’ branch.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m <span class="string">'your message'</span></div><div class="line">git push origin <span class="built_in">source</span></div></pre></td></tr></table></figure></p>
+<p>(I’d rather put them into a bash file than typing every time)<br><figure class="highlight bash"><figcaption><span>git_commit_source.sh</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">!/bin/bash</div><div class="line">git add . &amp;&amp;</div><div class="line">git commit -m <span class="string">"<span class="variable">$1</span>"</span> &amp;&amp; <span class="comment">#first argument will be the commit message</span></div><div class="line">git push origin <span class="built_in">source</span></div></pre></td></tr></table></figure></p>
+<p>To generate a blog page, you could use <figure class="highlight plain"><figcaption><span>new_post['blog name'] ```.</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">However, as I mentioned before the ```rake``` command wouldn&apos;t work properly if the ruby version didn&apos;t match.</div><div class="line">We could use ``` bundle exec rake ``` to run the command.</div><div class="line">Moreover, if you are using **zsh shell**, you should also add ``` noglob ``` in front of these command, because symbol &apos;[&apos; and &apos;]&apos; are reserved in zsh for regular expression.</div><div class="line"></div><div class="line">Finally, my blog is here.</div><div class="line">Much easier than I expected.</div><div class="line">Using Octopress can save your time on setting a blog site, and it generates pages automatically.</div><div class="line"></div><div class="line">This blog is still underconstruction. I would like to make it more simple and pretty.</div><div class="line">K.I.S.S</div><div class="line"></div><div class="line">**Update** (several minutes later):</div><div class="line">Encountered a problem of creating single page, e.g. 404.html.</div><div class="line">The command `rake new-page[&apos;404&apos;]` cannot work on zsh due to &apos;[]&apos; is converted.</div><div class="line">Hence, the only way to add cutomize page is to write a markdown file and put into &apos;source&apos; fold.</div><div class="line">But, do not forget to add the following to the head of page:</div><div class="line">``` bash</div><div class="line">---</div><div class="line">layout: page</div><div class="line">title: &quot;Super Awesome&quot;</div><div class="line">date: 2011-07-03 5:59</div><div class="line">comments: true</div><div class="line">sharing: true</div><div class="line">footer: true</div><div class="line">---</div></pre></td></tr></table></figure></p>
+<p><strong>Update</strong> (2014-Mar-12):<br><code>rake preview</code> has problem with Safari.<br>Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> .<br>Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="external">ref</a>]</p>
+<p>Due to save typing, I have written some bash files:<br><figure class="highlight bash"><figcaption><span>deploy.sh</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">bundle <span class="built_in">exec</span> rake generate &amp;&amp;</div><div class="line">bundle <span class="built_in">exec</span> rake deploy</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><figcaption><span>preview.sh</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment"># set up the octopress preview</span></div><div class="line"><span class="comment"># open http://localhost:4000 in Chrome</span></div><div class="line"><span class="comment"># Safari has some wired error in it</span></div><div class="line"></div><div class="line"><span class="comment"># if previous preview is running, stop it</span></div><div class="line">preview_pid=`/bin/ps -fu <span class="variable">$USER</span>| grep <span class="string">"rake\ preview"</span> | grep -v <span class="string">"grep"</span> | awk <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line"><span class="built_in">kill</span> -2 <span class="variable">$preview_pid</span></div><div class="line"></div><div class="line">bundle <span class="built_in">exec</span> rake generate &amp;&amp;</div><div class="line">bundle <span class="built_in">exec</span> rake preview &amp;</div><div class="line"></div><div class="line">sleep 5 <span class="comment"># wait a while to make sure the preview already running</span></div><div class="line"></div><div class="line"><span class="comment">#change the browser command if you are using a different OS and browser</span></div><div class="line">/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome <span class="string">'http://localhost:4000'</span></div><div class="line"></div><div class="line">pidof <span class="string">"Google Chrome"</span> | xargs <span class="built_in">wait</span></div><div class="line">preview_pid=`/bin/ps -fu <span class="variable">$USER</span>| grep <span class="string">"rake\ preview"</span> | grep -v <span class="string">"grep"</span> | awk <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line"><span class="built_in">kill</span> -2 <span class="variable">$preview_pid</span></div><div class="line"><span class="comment">#echo "$preview_pid"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Preview DONE!"</span></div></pre></td></tr></table></figure>
+<p>Please ignore the text below, the latest code fixes all of them. :P</p>
+<p><del><strong>Warnning</strong>:<br>This preview shell script may not work for you if you are a ruby developer,<br>or you are using some programs written or depended in/on ruby or ruby packages,<br>because it killed all ruby processes at the end.<br>Do not forget to fully quit Chrome (Comman+q in MacOS) before starting a new preview,<br>otherwise unknown error would occur (duplicate processes).</del></p>
+<p><del>BTW, the preview.sh also left a messy terminal for you.<br>Well, everything have side effects.<br>But you could add <code>clear</code> command at the end of the script,<br>if you don’t really care about the traces.</del></p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
