@@ -73,6 +73,7 @@ deploy:
   type: git
   repo: git@github.com:NoahDragon/en.git
   branch: gh-pages
+  force_push: false
 
 # Disqus
 disqus_shortname: abnerchou
