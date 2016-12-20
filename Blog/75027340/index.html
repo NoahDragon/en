@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Hard Code">
 <meta property="og:description" content="When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, le">
 <meta property="og:image" content="https://en.abnerchou.me/\img\https.png">
-<meta property="og:updated_time" content="2016-12-08T22:31:32.863Z">
+<meta property="og:updated_time" content="2016-12-20T14:37:42.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Build SSL HTTPS Website Using Docker">
 <meta name="twitter:description" content="When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, le">
@@ -403,7 +403,7 @@
 <p>Then create config.env file in the same folder and input your email:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LE_EMAIL=</div><div class="line">LE_RSA_KEY_SIZE=4096</div></pre></td></tr></table></figure>
 <h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose run cli add domain [alternative domains]</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose run cli add &lt;domain&gt; [alternative domains]</div></pre></td></tr></table></figure>
 <p>If it fails, please check if Nginx is runing and the DNS setting is correct.</p>
 <p><strong>NOTE</strong>: If the certificate generate, don’t forget to remove comment on ssl_certificate lines in Nginx config file, and restart it.</p>
 <h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Now your website should up and running with https. Enjoy.</p>
