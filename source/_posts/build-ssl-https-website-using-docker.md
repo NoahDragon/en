@@ -160,7 +160,7 @@ LE_RSA_KEY_SIZE=4096
 Finally, we could create our Https certificate. Run the commands:
 
 ``` bash
-docker-compose run cli add domain [alternative domains]
+docker-compose run cli add <domain> [alternative domains]
 ```
 
 If it fails, please check if Nginx is runing and the DNS setting is correct.
