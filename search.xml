@@ -31,7 +31,7 @@
 </ul>
 <p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
 <h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">nginx:</span></div><div class="line"><span class="attr">  image:</span> bringnow/nginx-letsencrypt</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> ./nginx.conf:/etc/nginx/nginx.conf</div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"><span class="bullet">    -</span> /srv/docker/nginx/dhparam:/etc/nginx/dhparam</div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:80"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"443:443"</span></div><div class="line"><span class="attr">  net:</span> <span class="string">"host"</span></div><div class="line"><span class="attr">  dns_search:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"example.com"</span></div></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">nginx:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/nginx-letsencrypt</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">./nginx.conf:/etc/nginx/nginx.conf</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/srv/docker/nginx/dhparam:/etc/nginx/dhparam</span></div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:80"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"443:443"</span></div><div class="line"><span class="attr">  net:</span> <span class="string">"host"</span></div><div class="line"><span class="attr">  dns_search:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"example.com"</span></div></pre></td></tr></table></figure>
 <p>Modify it accordingly to fit your environment.</p>
 <h4 id="Generate-dhparam"><a href="#Generate-dhparam" class="headerlink" title="Generate dhparam"></a>Generate dhparam</h4><p>Although the nginx docker will create DH parameters on initial start up, it is time comsuming to generate the 4096 bit DH parameters (more than an hour on my VPS). Run the following command and copy the generated file to the <code>/srv/docker/nginx/dhparam</code> folder (set in docker-compose.yml).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl dhparam -out RSA4096.pem -5 4096</div></pre></td></tr></table></figure>
@@ -45,7 +45,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose logs</div></pre></td></tr></table></figure>
 <p>If there are some error messages, please check the Nginx config file and restart the docker.</p>
 <h4 id="docker-compose-yml-for-letsencrypt"><a href="#docker-compose-yml-for-letsencrypt" class="headerlink" title="docker-compose.yml for letsencrypt"></a>docker-compose.yml for letsencrypt</h4><p>In another folder, create a docker-compose.yml:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">cli:</span></div><div class="line"><span class="attr">  image:</span> bringnow/letsencrypt-manager:latest</div><div class="line"><span class="attr">  env_file:</span> config.env</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/lib/letsencrypt:/var/lib/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"></div><div class="line"><span class="attr">cron:</span></div><div class="line"><span class="attr">  image:</span> bringnow/letsencrypt-manager:latest</div><div class="line"><span class="attr">  env_file:</span> config.env</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/lib/letsencrypt:/var/lib/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"><span class="attr">  command:</span> cron-auto-renewal</div><div class="line"><span class="attr">  restart:</span> always</div></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">cli:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/letsencrypt-manager:latest</span></div><div class="line"><span class="attr">  env_file:</span> <span class="string">config.env</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"></div><div class="line"><span class="attr">cron:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/letsencrypt-manager:latest</span></div><div class="line"><span class="attr">  env_file:</span> <span class="string">config.env</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"><span class="attr">  command:</span> <span class="string">cron-auto-renewal</span></div><div class="line"><span class="attr">  restart:</span> <span class="string">always</span></div></pre></td></tr></table></figure>
 <p>Modify it accordingly. Make sure the folder <code>/var/lib/letsencrypt</code> and <code>/var/acme-webroot</code> have created and exist.</p>
 <p>Then create config.env file in the same folder and input your email:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LE_EMAIL=</div><div class="line">LE_RSA_KEY_SIZE=4096</div></pre></td></tr></table></figure>
@@ -56,6 +56,24 @@
 <h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Now your website should up and running with https. Enjoy.</p>
 <p>~ EOF ~</p>
 ]]></content>
+      
+        <categories>
+            
+            <category> Docker </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> HTTPS </tag>
+            
+            <tag> SSL </tag>
+            
+            <tag> Nginx </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -66,61 +84,61 @@
 <p>There are around 75 themes list on the <a href="https://hexo.io/themes/" target="_blank" rel="external">website</a>, here is the top 10 popular ones. </p>
 <a id="more"></a>
 <h2 id="NexT"><a href="#NexT" class="headerlink" title=" NexT"></a><img class="nofancybox" src="/img/top1.png" style="display: inline; border-style: none;"> NexT</h2><div style="text-align:center">
-  <div class="github-card" data-user="iissnan" data-repo="hexo-theme-next" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #one_column  #clean  #white</p>
 <h2 id="Yilia"><a href="#Yilia" class="headerlink" title=" Yilia"></a><img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia</h2><div style="text-align:center">
-  <div class="github-card" data-user="litten" data-repo="hexo-theme-yilia" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #elegant  #sidebar  #two_column  #one_column</p>
-<h2 id="Tranquilpeak"><a href="#Tranquilpeak" class="headerlink" title=" Tranquilpeak"></a><img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Tranquilpeak</h2><div style="text-align:center">
-  <div class="github-card" data-user="LouisBarranqueiro" data-repo="tranquilpeak-hexo-theme" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+<h2 id="Material"><a href="#Material" class="headerlink" title=" Material"></a><img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Material</h2><div style="text-align:center">
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #simple  #material_design  #blog  #multi_styles  #minimalism  #i18n  #elegant  #material  #one_column</p>
+<h2 id="Tranquilpeek"><a href="#Tranquilpeek" class="headerlink" title="Tranquilpeek"></a>Tranquilpeek</h2><div style="text-align:center">
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #gorgeous  #sidebar  #two_column  #one_column  #tag_plugins</p>
-<h2 id="Yelee"><a href="#Yelee" class="headerlink" title="Yelee"></a>Yelee</h2><div style="text-align:center">
-  <div class="github-card" data-user="MOxFIVE" data-repo="hexo-theme-yelee" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
-</div>
-<script src="/github-card-lib/githubcard.js"></script>
-
-<p>#responsive  #two_column  #toc  #elegant  #simple  #background_image</p>
-<h2 id="Jacman"><a href="#Jacman" class="headerlink" title="Jacman"></a>Jacman</h2><div style="text-align:center">
-  <div class="github-card" data-user="wuchong" data-repo="jacman" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
-</div>
-<script src="/github-card-lib/githubcard.js"></script>
- 
-<p>#responsive  #two_column  #blue  #elegant</p>
 <h2 id="Maupassant"><a href="#Maupassant" class="headerlink" title="Maupassant"></a>Maupassant</h2><div style="text-align:center">
-  <div class="github-card" data-user="tufu9441" data-repo="maupassant-hexo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#simple  #responsive  #two_column  #white  #jade  #scss</p>
+<h2 id="Yelee"><a href="#Yelee" class="headerlink" title="Yelee"></a>Yelee</h2><div style="text-align:center">
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+</div>
+<script src="/github-card-lib/githubcard.js"></script>
+
+<p>#responsive  #two_column  #toc  #elegant  #simple  #background_image</p>
 <h2 id="Apollo"><a href="#Apollo" class="headerlink" title="Apollo"></a>Apollo</h2><div style="text-align:center">
-  <div class="github-card" data-user="pinggod" data-repo="hexo-theme-apollo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#chinese  #light</p>
 <h2 id="Icarus"><a href="#Icarus" class="headerlink" title="Icarus"></a>Icarus</h2><div style="text-align:center">
-  <div class="github-card" data-user="ppoffice" data-repo="hexo-theme-icarus" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #three_column  #clean  #flat  #light</p>
-<h2 id="Material-10-gt-9"><a href="#Material-10-gt-9" class="headerlink" title="Material (10 -&gt; 9) "></a>Material (<em>10 -&gt; 9</em>) <img class="nofancybox" src="/img/up.png" style="display: inline; border-style: none;"></h2><div style="text-align:center">
-  <div class="github-card" data-user="viosey" data-repo="hexo-theme-material" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+<h2 id="Jacman"><a href="#Jacman" class="headerlink" title="Jacman"></a>Jacman</h2><div style="text-align:center">
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
-
-<p>#responsive #material #flat #light</p>
-<h2 id="Fexo-10-lt-9"><a href="#Fexo-10-lt-9" class="headerlink" title="Fexo (10 &lt;- 9) "></a>Fexo (<em>10 &lt;- 9</em>) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;"></h2><div style="text-align:center">
-  <div class="github-card" data-user="forsigner" data-repo="fexo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+ 
+<p>#responsive  #two_column  #blue  #elegant</p>
+<h2 id="Fexo"><a href="#Fexo" class="headerlink" title="Fexo"></a>Fexo</h2><div style="text-align:center">
+  <div class="github-card" data-user="" data-repo="" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
@@ -128,7 +146,30 @@
 <p>~ EOF ~</p>
 <p>Updated: 2016-Dec-06</p>
 <p>For real time rank please visit the following link: <a href="https://github.com/search?o=desc&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank" rel="external">Github Search</a></p>
+<p>Updated: 2017-Apr-17</p>
+<p>The material theme is really a black sheep. It jumps from #9 to #3 since last update, and it even didn’t exist when this post created.</p>
+<p>Here is a performance compare among top three Hexo themes (this may explain why material is so popular):</p>
+<p><img src="/img/top-theme-compare.jpg" alt="Material NexT Yilia Performance"></p>
+<p>Image from <a href="http://weibo.com/645030234?refer_flag=1005055010_&amp;is_hot=1" target="_blank" rel="external">Weibo</a>.</p>
 ]]></content>
+      
+        <categories>
+            
+            <category> Hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Theme </tag>
+            
+            <tag> Blog </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -149,6 +190,16 @@
 <p>All in all, goodbye Microsoft TechRewards.</p>
 <p>~ EOF ~</p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> Microsoft </tag>
+            
+            <tag> TechReward </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -188,6 +239,18 @@
 <p>Cloudflare has plenty powerful services, if using them wisely, can save your life for managing a website.</p>
 <p>Enjoy your secure and faster website!</p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> HTTPS </tag>
+            
+            <tag> Cloudflare </tag>
+            
+            <tag> Github </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -215,6 +278,18 @@
 <p><a href="https://halite.io/" target="_blank" rel="external">Halite</a> Artificial Intelligence chanllenge game. </p>
 <p>Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.</p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> code </tag>
+            
+            <tag> programming </tag>
+            
+            <tag> games </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -227,6 +302,16 @@
 <p><img src="/img/online_hacker_game.PNG" alt=""></p>
 <p>A little bit show off and keep a record.</p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> Hacker game </tag>
+            
+            <tag> Programming </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -304,6 +389,26 @@
 <p>Then our saved iptables rules will be loaded every time the system start up.</p>
 <p>Enjoy your VPN server with transparent proxy!</p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> VPN </tag>
+            
+            <tag> pptp </tag>
+            
+            <tag> Squid </tag>
+            
+            <tag> Transparent Proxy </tag>
+            
+            <tag> Proxy </tag>
+            
+            <tag> DigitalOcean </tag>
+            
+            <tag> VPS </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -318,6 +423,18 @@
 <p>I didn’t do the history research about why heliocentrism won the theory battle.<br>But I know heliocentrism is better because it is simpler.<br>This also aligns with the philosophy of Unix/Linux programming:<br>K.I.S.S., which stands for “Keep It Simple &amp; Straightforward”.</p>
 <p>Because of heliocentric system, we make satellite launch possible, and easily calculate the planets position.<br>Otherwise, I couldn’t image how hard the job is for a mathematician to compute the correct route from the Earth to Mars.</p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> Solar System </tag>
+            
+            <tag> Javascript </tag>
+            
+            <tag> Simulation </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -340,6 +457,18 @@
 <p><del><strong>Warnning</strong>:<br>This preview shell script may not work for you if you are a ruby developer,<br>or you are using some programs written or depended in/on ruby or ruby packages,<br>because it killed all ruby processes at the end.<br>Do not forget to fully quit Chrome (Comman+q in MacOS) before starting a new preview,<br>otherwise unknown error would occur (duplicate processes).</del></p>
 <p><del>BTW, the preview.sh also left a messy terminal for you.<br>Well, everything have side effects.<br>But you could add <code>clear</code> command at the end of the script,<br>if you don’t really care about the traces.</del></p>
 ]]></content>
+      
+        
+        <tags>
+            
+            <tag> Blog </tag>
+            
+            <tag> General </tag>
+            
+            <tag> Octopress </tag>
+            
+        </tags>
+        
     </entry>
     
   

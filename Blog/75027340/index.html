@@ -87,17 +87,18 @@
 
 
 <meta name="description" content="When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, le">
+<meta name="keywords" content="HTTPS,SSL,Nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Build SSL HTTPS Website Using Docker">
 <meta property="og:url" content="https://en.abnerchou.me/Blog/75027340/index.html">
 <meta property="og:site_name" content="Hard Code">
 <meta property="og:description" content="When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, le">
-<meta property="og:image" content="https://en.abnerchou.me/\img\https.png">
-<meta property="og:updated_time" content="2016-12-20T14:37:42.342Z">
+<meta property="og:image" content="https://en.abnerchou.me/img/https.png">
+<meta property="og:updated_time" content="2017-04-17T16:11:54.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Build SSL HTTPS Website Using Docker">
 <meta name="twitter:description" content="When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, le">
-<meta name="twitter:image" content="https://en.abnerchou.me/\img\https.png">
+<meta name="twitter:image" content="https://en.abnerchou.me/img/https.png">
 
 
 
@@ -384,7 +385,7 @@
 </ul>
 <p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
 <h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">nginx:</span></div><div class="line"><span class="attr">  image:</span> bringnow/nginx-letsencrypt</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> ./nginx.conf:/etc/nginx/nginx.conf</div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"><span class="bullet">    -</span> /srv/docker/nginx/dhparam:/etc/nginx/dhparam</div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:80"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"443:443"</span></div><div class="line"><span class="attr">  net:</span> <span class="string">"host"</span></div><div class="line"><span class="attr">  dns_search:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"example.com"</span></div></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">nginx:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/nginx-letsencrypt</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">./nginx.conf:/etc/nginx/nginx.conf</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/srv/docker/nginx/dhparam:/etc/nginx/dhparam</span></div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:80"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"443:443"</span></div><div class="line"><span class="attr">  net:</span> <span class="string">"host"</span></div><div class="line"><span class="attr">  dns_search:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"example.com"</span></div></pre></td></tr></table></figure>
 <p>Modify it accordingly to fit your environment.</p>
 <h4 id="Generate-dhparam"><a href="#Generate-dhparam" class="headerlink" title="Generate dhparam"></a>Generate dhparam</h4><p>Although the nginx docker will create DH parameters on initial start up, it is time comsuming to generate the 4096 bit DH parameters (more than an hour on my VPS). Run the following command and copy the generated file to the <code>/srv/docker/nginx/dhparam</code> folder (set in docker-compose.yml).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl dhparam -out RSA4096.pem -5 4096</div></pre></td></tr></table></figure>
@@ -398,7 +399,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose logs</div></pre></td></tr></table></figure>
 <p>If there are some error messages, please check the Nginx config file and restart the docker.</p>
 <h4 id="docker-compose-yml-for-letsencrypt"><a href="#docker-compose-yml-for-letsencrypt" class="headerlink" title="docker-compose.yml for letsencrypt"></a>docker-compose.yml for letsencrypt</h4><p>In another folder, create a docker-compose.yml:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">cli:</span></div><div class="line"><span class="attr">  image:</span> bringnow/letsencrypt-manager:latest</div><div class="line"><span class="attr">  env_file:</span> config.env</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/lib/letsencrypt:/var/lib/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"></div><div class="line"><span class="attr">cron:</span></div><div class="line"><span class="attr">  image:</span> bringnow/letsencrypt-manager:latest</div><div class="line"><span class="attr">  env_file:</span> config.env</div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> /etc/letsencrypt:/etc/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/lib/letsencrypt:/var/lib/letsencrypt</div><div class="line"><span class="bullet">    -</span> /var/acme-webroot:/var/acme-webroot</div><div class="line"><span class="attr">  command:</span> cron-auto-renewal</div><div class="line"><span class="attr">  restart:</span> always</div></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">cli:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/letsencrypt-manager:latest</span></div><div class="line"><span class="attr">  env_file:</span> <span class="string">config.env</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"></div><div class="line"><span class="attr">cron:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/letsencrypt-manager:latest</span></div><div class="line"><span class="attr">  env_file:</span> <span class="string">config.env</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"><span class="attr">  command:</span> <span class="string">cron-auto-renewal</span></div><div class="line"><span class="attr">  restart:</span> <span class="string">always</span></div></pre></td></tr></table></figure>
 <p>Modify it accordingly. Make sure the folder <code>/var/lib/letsencrypt</code> and <code>/var/acme-webroot</code> have created and exist.</p>
 <p>Then create config.env file in the same folder and input your email:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LE_EMAIL=</div><div class="line">LE_RSA_KEY_SIZE=4096</div></pre></td></tr></table></figure>
@@ -443,13 +444,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/5c00ca67/" rel="next" title="Hexo Top 10 Popular Themes">
-                <i class="fa fa-chevron-left"></i> Hexo Top 10 Popular Themes
-              </a>
-            
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/5c00ca67/" rel="prev" title="Hexo Top 10 Popular Themes">
+                Hexo Top 10 Popular Themes <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -616,7 +617,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
