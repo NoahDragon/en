@@ -32,29 +32,29 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #responsive  #elegant  #sidebar  #two_column  #one_column
 
-## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Tranquilpeak 
+## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Material
 
-{% githubCard LouisBarranqueiro tranquilpeak-hexo-theme 400 medium %}
+{% githubCard viosey hexo-theme-material 400 medium %}
+
+#responsive  #simple  #material_design  #blog  #multi_styles  #minimalism  #i18n  #elegant  #material  #one_column
+
+## Tranquilpeek
+
+{% githubCard LouisBarranqueiro tranquilpeak-hexo-theme %}
 
 #responsive  #gorgeous  #sidebar  #two_column  #one_column  #tag_plugins
-
-## Yelee 
-
-{% githubCard MOxFIVE hexo-theme-yelee %}
-
-#responsive  #two_column  #toc  #elegant  #simple  #background_image
-
-## Jacman
-
-{% githubCard wuchong jacman%} 
-
-#responsive  #two_column  #blue  #elegant
 
 ## Maupassant
 
 {% githubCard tufu9441 maupassant-hexo %}
 
 #simple  #responsive  #two_column  #white  #jade  #scss
+
+## Yelee 
+
+{% githubCard MOxFIVE hexo-theme-yelee %}
+
+#responsive  #two_column  #toc  #elegant  #simple  #background_image
 
 ## Apollo 
 
@@ -68,13 +68,13 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 #responsive  #three_column  #clean  #flat  #light
 
-## Material (*10 -> 9*) <img class="nofancybox" src="/img/up.png" style="display: inline; border-style: none;">
+## Jacman
 
-{% githubCard viosey hexo-theme-material %}
+{% githubCard wuchong jacman%} 
 
-#responsive #material #flat #light
+#responsive  #two_column  #blue  #elegant
 
-## Fexo (*10 <- 9*) <img class="nofancybox" src="/img/down.png" style="display: inline; border-style: none;">
+## Fexo 
 
 {% githubCard forsigner fexo %}
 
@@ -85,3 +85,13 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 Updated: 2016-Dec-06
 
 For real time rank please visit the following link: [Github Search](https://github.com/search?o=desc&q=hexo-theme&s=stars&type=Repositories&utf8=%E2%9C%93)
+
+Updated: 2017-Apr-17
+
+The material theme is really a black sheep. It jumps from #9 to #3 since last update, and it even didn't exist when this post created.
+
+Here is a performance compare among top three Hexo themes (this may explain why material is so popular):
+
+![Material NexT Yilia Performance](/img/top-theme-compare.jpg)
+
+Image from [Weibo](http://weibo.com/645030234?refer_flag=1005055010_&is_hot=1).
