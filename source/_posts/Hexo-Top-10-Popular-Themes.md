@@ -22,61 +22,61 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 ##  <img class="nofancybox" src="/img/top1.png" style="display: inline; border-style: none;"> NexT
 
-{% githubCard iissnan hexo-theme-next 400 medium %}
+{% githubCard user:iissnan repo:hexo-theme-next 400 medium %}
 
 #responsive  #one_column  #clean  #white
 
 ## <img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia 
 
-{% githubCard litten hexo-theme-yilia 400 medium %}
+{% githubCard user:litten repo:hexo-theme-yilia 400 medium %}
 
 #responsive  #elegant  #sidebar  #two_column  #one_column
 
 ## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Material
 
-{% githubCard viosey hexo-theme-material 400 medium %}
+{% githubCard user:viosey repo:hexo-theme-material 400 medium %}
 
 #responsive  #simple  #material_design  #blog  #multi_styles  #minimalism  #i18n  #elegant  #material  #one_column
 
 ## Tranquilpeek
 
-{% githubCard LouisBarranqueiro tranquilpeak-hexo-theme %}
+{% githubCard user:LouisBarranqueiro repo:tranquilpeak-hexo-theme %}
 
 #responsive  #gorgeous  #sidebar  #two_column  #one_column  #tag_plugins
 
 ## Maupassant
 
-{% githubCard tufu9441 maupassant-hexo %}
+{% githubCard user:tufu9441 repo:maupassant-hexo %}
 
 #simple  #responsive  #two_column  #white  #jade  #scss
 
 ## Yelee 
 
-{% githubCard MOxFIVE hexo-theme-yelee %}
+{% githubCard user:MOxFIVE repo:hexo-theme-yelee %}
 
 #responsive  #two_column  #toc  #elegant  #simple  #background_image
 
 ## Apollo 
 
-{% githubCard pinggod hexo-theme-apollo %}
+{% githubCard user:pinggod repo:hexo-theme-apollo %}
 
 #chinese  #light
 
 ## Icarus 
 
-{% githubCard ppoffice hexo-theme-icarus %}
+{% githubCard user:ppoffice repo:hexo-theme-icarus %}
 
 #responsive  #three_column  #clean  #flat  #light
 
 ## Jacman
 
-{% githubCard wuchong jacman%} 
+{% githubCard user:wuchong repo:jacman%} 
 
 #responsive  #two_column  #blue  #elegant
 
 ## Fexo 
 
-{% githubCard forsigner fexo %}
+{% githubCard user:forsigner repo:fexo %}
 
 #responsive #simple #elegant
 
