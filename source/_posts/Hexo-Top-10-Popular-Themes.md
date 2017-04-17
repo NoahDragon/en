@@ -22,19 +22,19 @@ There are around 75 themes list on the [website](https://hexo.io/themes/), here 
 
 ##  <img class="nofancybox" src="/img/top1.png" style="display: inline; border-style: none;"> NexT
 
-{% githubCard user:iissnan repo:hexo-theme-next 400 medium %}
+{% githubCard user:iissnan repo:hexo-theme-next theme:medium %}
 
 #responsive  #one_column  #clean  #white
 
 ## <img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia 
 
-{% githubCard user:litten repo:hexo-theme-yilia 400 medium %}
+{% githubCard user:litten repo:hexo-theme-yilia theme:medium %}
 
 #responsive  #elegant  #sidebar  #two_column  #one_column
 
 ## <img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Material
 
-{% githubCard user:viosey repo:hexo-theme-material 400 medium %}
+{% githubCard user:viosey repo:hexo-theme-material theme:medium %}
 
 #responsive  #simple  #material_design  #blog  #multi_styles  #minimalism  #i18n  #elegant  #material  #one_column
 
