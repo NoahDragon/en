@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://en.abnerchou.me/"/>
-  <updated>2017-04-19T21:07:36.400Z</updated>
+  <updated>2017-04-19T22:51:33.949Z</updated>
   <id>https://en.abnerchou.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://en.abnerchou.me/Blog/75027340/"/>
     <id>https://en.abnerchou.me/Blog/75027340/</id>
     <published>2016-11-18T22:35:10.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https.png" alt="https"></p>
 <p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
@@ -47,26 +47,85 @@
 </ul>
 <p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
 <h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">nginx:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/nginx-letsencrypt</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">./nginx.conf:/etc/nginx/nginx.conf</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/srv/docker/nginx/dhparam:/etc/nginx/dhparam</span></div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:80"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"443:443"</span></div><div class="line"><span class="attr">  net:</span> <span class="string">"host"</span></div><div class="line"><span class="attr">  dns_search:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"example.com"</span></div></pre></td></tr></table></figure>
+<pre class=" language-yml"><code class="language-yml">nginx:
+  image: bringnow/nginx-letsencrypt
+  volumes:
+    - ./nginx.conf:/etc/nginx/nginx.conf
+    - /etc/letsencrypt:/etc/letsencrypt
+    - /var/acme-webroot:/var/acme-webroot
+    - /srv/docker/nginx/dhparam:/etc/nginx/dhparam
+  ports:
+    - "80:80"
+    - "443:443"
+  net: "host"
+  dns_search:
+    - "example.com"
+</code></pre>
 <p>Modify it accordingly to fit your environment.</p>
 <h4 id="Generate-dhparam"><a href="#Generate-dhparam" class="headerlink" title="Generate dhparam"></a>Generate dhparam</h4><p>Although the nginx docker will create DH parameters on initial start up, it is time comsuming to generate the 4096 bit DH parameters (more than an hour on my VPS). Run the following command and copy the generated file to the <code>/srv/docker/nginx/dhparam</code> folder (set in docker-compose.yml).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl dhparam -out RSA4096.pem -5 4096</div></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">openssl dhparam -out RSA4096.pem -5 4096
+</code></pre>
 <h4 id="Create-Nginx-Config-file"><a href="#Create-Nginx-Config-file" class="headerlink" title="Create Nginx Config file"></a>Create Nginx Config file</h4><p>In order to complete the letsencrypt challenge, the server has to open the 80 port. The nginx-letsencrypt image already come with the setting snippets: <code>snippets/letsencryptauth.conf</code> and <code>snippets/sslconfig.conf</code>.</p>
 <p>Here is the sample config file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">events &#123;</div><div class="line">  worker_connections 1024;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">  include snippets/letsencryptauth.conf;</div><div class="line">  include snippets/sslconfig.conf;</div><div class="line"></div><div class="line">  server &#123;</div><div class="line">    listen 443 ssl default_server;</div><div class="line">    server_name example.com www.example.com</div><div class="line"></div><div class="line">    ssl_certificate /etc/letsencrypt/live/www.example.com/fullchain.pem;</div><div class="line">    ssl_certificate_key /etc/letsencrypt/live/www.example.com/privkey.pem;</div><div class="line"></div><div class="line">    add_header Strict-Transport-Security &quot;max-age=31536000; includeSubdomains&quot; always;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">      # Just return a blank response</div><div class="line">      return 200;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-nginx"><code class="language-nginx"><span class="token keyword">events</span> <span class="token punctuation">{</span>
+  <span class="token keyword">worker_connections</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">http</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">include</span> snippets<span class="token operator">/</span>letsencryptauth<span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
+  <span class="token keyword">include</span> snippets<span class="token operator">/</span>sslconfig<span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
+
+  <span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span> default_server<span class="token punctuation">;</span>
+    <span class="token keyword">server_name</span> example<span class="token punctuation">.</span>com www<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com
+
+    <span class="token keyword">ssl_certificate</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>fullchain<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>privkey<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+
+    <span class="token keyword">add_header</span> Strict<span class="token operator">-</span>Transport<span class="token operator">-</span>Security <span class="token string">"max-age=31536000; includeSubdomains"</span> always<span class="token punctuation">;</span>
+
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true"># Just return a blank response</span>
+      <span class="token keyword">return</span> <span class="token number">200</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p><strong>NOTE</strong>: Please comment out those two lines start up ssl_certificate before the certificate generated.</p>
 <h4 id="Make-Nginx-Online"><a href="#Make-Nginx-Online" class="headerlink" title="Make Nginx Online"></a>Make Nginx Online</h4><p>Now run the following command to bring Nginx online:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">docker-compose up -d
+</code></pre>
 <p>To confim if the docker is running correctly, we could look the log file to check:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose logs</div></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">docker-compose logs
+</code></pre>
 <p>If there are some error messages, please check the Nginx config file and restart the docker.</p>
 <h4 id="docker-compose-yml-for-letsencrypt"><a href="#docker-compose-yml-for-letsencrypt" class="headerlink" title="docker-compose.yml for letsencrypt"></a>docker-compose.yml for letsencrypt</h4><p>In another folder, create a docker-compose.yml:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">cli:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/letsencrypt-manager:latest</span></div><div class="line"><span class="attr">  env_file:</span> <span class="string">config.env</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"></div><div class="line"><span class="attr">cron:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">bringnow/letsencrypt-manager:latest</span></div><div class="line"><span class="attr">  env_file:</span> <span class="string">config.env</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/var/acme-webroot:/var/acme-webroot</span></div><div class="line"><span class="attr">  command:</span> <span class="string">cron-auto-renewal</span></div><div class="line"><span class="attr">  restart:</span> <span class="string">always</span></div></pre></td></tr></table></figure>
+<pre class=" language-yml"><code class="language-yml">cli:
+  image: bringnow/letsencrypt-manager:latest
+  env_file: config.env
+  volumes:
+    - /etc/letsencrypt:/etc/letsencrypt
+    - /var/lib/letsencrypt:/var/lib/letsencrypt
+    - /var/acme-webroot:/var/acme-webroot
+
+cron:
+  image: bringnow/letsencrypt-manager:latest
+  env_file: config.env
+  volumes:
+    - /etc/letsencrypt:/etc/letsencrypt
+    - /var/lib/letsencrypt:/var/lib/letsencrypt
+    - /var/acme-webroot:/var/acme-webroot
+  command: cron-auto-renewal
+  restart: always
+</code></pre>
 <p>Modify it accordingly. Make sure the folder <code>/var/lib/letsencrypt</code> and <code>/var/acme-webroot</code> have created and exist.</p>
 <p>Then create config.env file in the same folder and input your email:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LE_EMAIL=</div><div class="line">LE_RSA_KEY_SIZE=4096</div></pre></td></tr></table></figure>
-<h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose run cli add &lt;domain&gt; [alternative domains]</div></pre></td></tr></table></figure>
+<pre><code>LE_EMAIL=
+LE_RSA_KEY_SIZE=4096
+</code></pre><h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
+<pre class=" language-bash"><code class="language-bash">docker-compose run cli add <span class="token operator">&lt;</span>domain<span class="token operator">></span> <span class="token punctuation">[</span>alternative domains<span class="token punctuation">]</span>
+</code></pre>
 <p>If it fails, please check if Nginx is runing and the DNS setting is correct.</p>
 <p><strong>NOTE</strong>: If the certificate generate, don’t forget to remove comment on ssl_certificate lines in Nginx config file, and restart it.</p>
 <h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Now your website should up and running with https. Enjoy.</p>
@@ -97,7 +156,7 @@
     <link href="https://en.abnerchou.me/Blog/5c00ca67/"/>
     <id>https://en.abnerchou.me/Blog/5c00ca67/</id>
     <published>2016-10-16T19:41:21.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
 <p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
@@ -197,7 +256,7 @@
     <link href="https://en.abnerchou.me/Blog/8aae6eef/"/>
     <id>https://en.abnerchou.me/Blog/8aae6eef/</id>
     <published>2016-10-06T17:31:44.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
 <p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
@@ -236,7 +295,7 @@
     <link href="https://en.abnerchou.me/Blog/daa790/"/>
     <id>https://en.abnerchou.me/Blog/daa790/</id>
     <published>2016-09-22T21:52:47.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
@@ -249,8 +308,8 @@
 <h3 id="Settings-on-Cloudflare"><a href="#Settings-on-Cloudflare" class="headerlink" title="Settings on Cloudflare"></a>Settings on Cloudflare</h3><p>First, you have to set up the Cloudflare as your DNS manager. It basically tells the domain provider that DNS is handled by Cloudflare. You can google to find a tutorial about it.</p>
 <p>Then, connect to Github page. Just setting the A and CNAME records on DNS.</p>
 <h3 id="Test-if-Cloudflare-is-working"><a href="#Test-if-Cloudflare-is-working" class="headerlink" title="Test if Cloudflare is working"></a>Test if Cloudflare is working</h3><p>Type the following code in your console (replace theurloftheresource to the actual url)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -svo /dev/null http://theurloftheresource</div></pre></td></tr></table></figure>
-<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
+<pre><code>curl -svo /dev/null http://theurloftheresource
+</code></pre><p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
 <p><img src="/img/https_1.png" alt=""></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
@@ -294,7 +353,7 @@
     <link href="https://en.abnerchou.me/Blog/2db6c020/"/>
     <id>https://en.abnerchou.me/Blog/2db6c020/</id>
     <published>2016-09-03T22:42:12.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
 <p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
@@ -340,7 +399,7 @@
     <link href="https://en.abnerchou.me/Blog/e4c9ee8f/"/>
     <id>https://en.abnerchou.me/Blog/e4c9ee8f/</id>
     <published>2014-08-05T22:22:48.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
@@ -368,11 +427,20 @@
     <link href="https://en.abnerchou.me/Blog/2b608f65/"/>
     <id>https://en.abnerchou.me/Blog/2b608f65/</id>
     <published>2014-07-13T00:43:47.000Z</published>
-    <updated>2017-04-19T21:07:36.404Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
-    <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,<br>which is cheap for a student and who is price sensitive.<br>As it gives you all the controls of an OS, it likes a remote compute machine.<br>Meanwhile, you could do anything as you have your own server.</p>
+    <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,
+which is cheap for a student and who is price sensitive.
+As it gives you all the controls of an OS, it likes a remote compute machine.
+Meanwhile, you could do anything as you have your own server.</p>
 <a id="more"></a>
-<p>Therefore, it comes to my mind to create a VPN server.<br>VPN is a virtual private network that extends a private network across a public network,<br>which usually used to bypass firewalls or increase access speed.<br>Proxy is a server that acts as an intermediary for requests from clients seeking resources from other servers.<br>It needs to be set in software application’s configuration.<br>VPN and Proxy both could hide your ip.<br>The differences between them are listed following:</p>
+<p>Therefore, it comes to my mind to create a VPN server.
+VPN is a virtual private network that extends a private network across a public network,
+which usually used to bypass firewalls or increase access speed.
+Proxy is a server that acts as an intermediary for requests from clients seeking resources from other servers.
+It needs to be set in software application’s configuration.
+VPN and Proxy both could hide your ip.
+The differences between them are listed following:</p>
 <table>
 <thead>
 <tr>
@@ -410,42 +478,81 @@
 </tbody>
 </table>
 <p><br></p>
-<p>Because of the encryption, every accesses through VPN retrive the objects directly from the source.<br>This could slow down the user experience when hits a same object multiple times, such as icons in a webpage.<br>If there is a way that could cache web objects into VPN server, that will significantly increase the access speed, which get objects from local disk instead of downloading from source website.<br>Here, I should introduce the transparent proxy, which usually sets on the gateway and caches content from WWW requests.<br>It calls transparent because client side does not need any configuration.<br>Hence, every WWW requests through VPN need go to transparent proxy.</p>
-<p>This installation guide is tested on Ubuntu 14.04 64bit.<br>VPN is set up by <a href="http://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol" target="_blank" rel="external">pptp</a>.<br>Transparent proxy is on <a href="http://www.squid-cache.org" target="_blank" rel="external">Squid3</a>.</p>
+<p>Because of the encryption, every accesses through VPN retrive the objects directly from the source.
+This could slow down the user experience when hits a same object multiple times, such as icons in a webpage.
+If there is a way that could cache web objects into VPN server, that will significantly increase the access speed, which get objects from local disk instead of downloading from source website.
+Here, I should introduce the transparent proxy, which usually sets on the gateway and caches content from WWW requests.
+It calls transparent because client side does not need any configuration.
+Hence, every WWW requests through VPN need go to transparent proxy.</p>
+<p>This installation guide is tested on Ubuntu 14.04 64bit.
+VPN is set up by <a href="http://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol" target="_blank" rel="external">pptp</a>.
+Transparent proxy is on <a href="http://www.squid-cache.org" target="_blank" rel="external">Squid3</a>.</p>
 <ul>
 <li><strong>pptp installation</strong></li>
 </ul>
-<p>In terminal, type the command bellow to install pptp server:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pptpd</div></pre></td></tr></table></figure></p>
-<p>To restrict user access your VPN server, you also need to add users and passwords in <code>/etc/ppp/chap-secets</code>.<br>In the client column is user’s name, the secret column is for passwords.<br>I masked mine for privacy.</p>
+<p>In terminal, type the command bellow to install pptp server:</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> pptpd
+</code></pre>
+<p>To restrict user access your VPN server, you also need to add users and passwords in <code>/etc/ppp/chap-secets</code>.
+In the client column is user’s name, the secret column is for passwords.
+I masked mine for privacy.</p>
 <p><img src="/img/user_password.jpg" alt=""></p>
-<p>Add the following DNS to <code>/etc/ppp/pptpd-options</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ms-dns 8.8.8.8</div><div class="line">ms-dns 8.8.4.4</div></pre></td></tr></table></figure></p>
-<p>Restart pptp server by command <code>service pptpd restart</code>. Check if it is running by <code>netstat -alpn | grep :1723</code>.</p>
-<p>You also should enable the IP forwarding on your pptp server.<br>This would transfer the package between public ip and private ips on your server.<br>Open <code>/etc/sysctl.conf</code>, add the following line if not exist: <code>net.ipv4.ip_forward = 1</code>.<br>Then run <code>sysctl -p</code> to make the change effective.</p>
-<p>Create NAT rule for iptables, and your VPN is ready to use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables --table nat --append POSTROUTING -o eth0 -j MASQUERADE &amp;&amp; iptables-save</div></pre></td></tr></table></figure></p>
+<p>Add the following DNS to <code>/etc/ppp/pptpd-options</code>:</p>
+<pre><code>ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+</code></pre><p>Restart pptp server by command <code>service pptpd restart</code>. Check if it is running by <code>netstat -alpn | grep :1723</code>.</p>
+<p>You also should enable the IP forwarding on your pptp server.
+This would transfer the package between public ip and private ips on your server.
+Open <code>/etc/sysctl.conf</code>, add the following line if not exist: <code>net.ipv4.ip_forward = 1</code>.
+Then run <code>sysctl -p</code> to make the change effective.</p>
+<p>Create NAT rule for iptables, and your VPN is ready to use:</p>
+<pre class=" language-bash"><code class="language-bash">iptables --table nat --append POSTROUTING -o eth0 -j MASQUERADE <span class="token operator">&amp;&amp;</span> iptables-save
+</code></pre>
 <ul>
 <li><strong>Squid3 installation</strong></li>
 </ul>
-<p>Similar to pptpd, typing the following in terminal:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install squid</div><div class="line">update-rc.d squid3 defaults</div></pre></td></tr></table></figure></p>
-<p>The proxy is usable now, but it is the normal proxy with default settings.<br>To change it to transparent proxy, we need to edit the <code>/etc/squid3/squid.conf</code> file.<br>The squid.conf follows the rules of allow/deny order.<br>It obeys the first come first serve, the first matched rule will apply.<br>For example, if you put “deny all” at the first line of squid.conf, then the proxy denies all request.<br>If a rule does not indicate in squid.conf, then it defaults as deny.</p>
-<p>First, find the line <code>http_port 3128</code>, change it to <code>http_port 3128 transparent</code>.<br><strong> this is important </strong></p>
-<p>Second, add the following rules:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">acl myhost src 192.168.0.1</div><div class="line">http_access allow myhost</div><div class="line">acl mymachine src 10.0.0.0/16</div><div class="line">http_access allow mymachine</div></pre></td></tr></table></figure></p>
-<p>The ‘192.168.0.1’ is my public ip, and the ‘10.0.0.0/16’ is my private ips.<br>Restart squid <code>sudo service squid3 restart</code>.</p>
-<p>Finally, we set the iptables to redirect all the traffic through 80 port to 3128 port that is our transparent proxy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -t nat -A PREROUTING -i ppp0 -p tcp -m tcp --dport 80 -j REDIRECT --to-port 3128</div></pre></td></tr></table></figure></p>
+<p>Similar to pptpd, typing the following in terminal:</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> squid
+update-rc.d squid3 defaults
+</code></pre>
+<p>The proxy is usable now, but it is the normal proxy with default settings.
+To change it to transparent proxy, we need to edit the <code>/etc/squid3/squid.conf</code> file.
+The squid.conf follows the rules of allow/deny order.
+It obeys the first come first serve, the first matched rule will apply.
+For example, if you put “deny all” at the first line of squid.conf, then the proxy denies all request.
+If a rule does not indicate in squid.conf, then it defaults as deny.</p>
+<p>First, find the line <code>http_port 3128</code>, change it to <code>http_port 3128 transparent</code>.
+<strong> this is important </strong></p>
+<p>Second, add the following rules:</p>
+<pre><code>acl myhost src 192.168.0.1
+http_access allow myhost
+acl mymachine src 10.0.0.0/16
+http_access allow mymachine
+</code></pre><p>The ‘192.168.0.1’ is my public ip, and the ‘10.0.0.0/16’ is my private ips.
+Restart squid <code>sudo service squid3 restart</code>.</p>
+<p>Finally, we set the iptables to redirect all the traffic through 80 port to 3128 port that is our transparent proxy.</p>
+<pre class=" language-bash"><code class="language-bash">iptables -t nat -A PREROUTING -i ppp0 -p tcp -m tcp --dport 80 -j REDIRECT --to-port 3128
+</code></pre>
 <p>The transparent proxy is set up.</p>
 <ul>
 <li><strong>Restore iptables rules while system start up</strong></li>
 </ul>
-<p>Right now, you couldn’t restart the system, otherwise the iptables will be set to empty again.<br>But you can input the previous iptables commands again to solve this.</p>
+<p>Right now, you couldn’t restart the system, otherwise the iptables will be set to empty again.
+But you can input the previous iptables commands again to solve this.</p>
 <p>Here I introduce a method that will do it once and for all.</p>
 <p>Save iptables into <code>/etc/network/iptables.rules</code> by <code>iptables-save &gt; /etc/network/iptables.rules</code></p>
-<p>Open <code>/etc/rc.local</code> and add the following line before “exit 0”:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/sbin/iptables-restore &lt; /etc/network/iptables.rules</div></pre></td></tr></table></figure></p>
-<p>Then our saved iptables rules will be loaded every time the system start up.</p>
+<p>Open <code>/etc/rc.local</code> and add the following line before “exit 0”:</p>
+<pre><code>/sbin/iptables-restore &lt; /etc/network/iptables.rules
+</code></pre><p>Then our saved iptables rules will be loaded every time the system start up.</p>
 <p>Enjoy your VPN server with transparent proxy!</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Recently I just rent a VPS on &lt;a href=&quot;https://www.digitalocean.com&quot;&gt;Digital Ocean&lt;/a&gt;,&lt;br&gt;which is cheap for a student and who is price sensitive.&lt;br&gt;As it gives you all the controls of an OS, it likes a remote compute machine.&lt;br&gt;Meanwhile, you could do anything as you have your own server.&lt;/p&gt;
+      &lt;p&gt;Recently I just rent a VPS on &lt;a href=&quot;https://www.digitalocean.com&quot;&gt;Digital Ocean&lt;/a&gt;,
+which is cheap for a student and who is price sensitive.
+As it gives you all the controls of an OS, it likes a remote compute machine.
+Meanwhile, you could do anything as you have your own server.&lt;/p&gt;
     
     </summary>
     
@@ -471,22 +578,45 @@
     <link href="https://en.abnerchou.me/Blog/e0efd72f/"/>
     <id>https://en.abnerchou.me/Blog/e0efd72f/</id>
     <published>2014-07-03T02:44:44.000Z</published>
-    <updated>2017-04-19T21:07:36.404Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
-    <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.<br>I don’t think the answer would be simple as that.<br>Why the Earth could not be the center?</p>
-<p>Actually it could.<br>As we learn in physic, all motions are relative, like we feel we are still on the Earth, but we actually spin and orbit the Sun.<br>Moreover, we orbit the Sun, in another words that the Sun also orbits us.<br>This doesn’t conflict with motion relative law.<br>But why we are not saying the Sun is orbiting Earth?<br><a id="more"></a><br>So let’s see how the planets move during heliocentric system and geocentric system.<br>Here is the link: <a href="http://noahdragon.github.io/SolarSystem.js/" target="_blank" rel="external">SolarSystem.js</a>.<br>You could click to switch the systems, and draw the orbit path for better viewing.</p>
-<p>The heliocentric system shows perfect concentric circles of planets path, in contrast, the geocentric system looks like random motion.<br>Untile we draw their path, only the Sun’s orbit is circle, the other planet tracks are like spiral.<br>After long enough years, the orbit will look like below picture:</p>
+    <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.
+I don’t think the answer would be simple as that.
+Why the Earth could not be the center?</p>
+<p>Actually it could.
+As we learn in physic, all motions are relative, like we feel we are still on the Earth, but we actually spin and orbit the Sun.
+Moreover, we orbit the Sun, in another words that the Sun also orbits us.
+This doesn’t conflict with motion relative law.
+But why we are not saying the Sun is orbiting Earth?
+<a id="more"></a>
+So let’s see how the planets move during heliocentric system and geocentric system.
+Here is the link: <a href="http://noahdragon.github.io/SolarSystem.js/" target="_blank" rel="external">SolarSystem.js</a>.
+You could click to switch the systems, and draw the orbit path for better viewing.</p>
+<p>The heliocentric system shows perfect concentric circles of planets path, in contrast, the geocentric system looks like random motion.
+Untile we draw their path, only the Sun’s orbit is circle, the other planet tracks are like spiral.
+After long enough years, the orbit will look like below picture:</p>
 <p><img src="/img/geocentric.jpg" alt=""></p>
 <p>It’s totally mess!</p>
-<p>This simulated program assumes the planets’ orbit is circle and in the same surface.<br>In our real solar system, it is way more complicate.</p>
-<p>I didn’t do the history research about why heliocentrism won the theory battle.<br>But I know heliocentrism is better because it is simpler.<br>This also aligns with the philosophy of Unix/Linux programming:<br>K.I.S.S., which stands for “Keep It Simple &amp; Straightforward”.</p>
-<p>Because of heliocentric system, we make satellite launch possible, and easily calculate the planets position.<br>Otherwise, I couldn’t image how hard the job is for a mathematician to compute the correct route from the Earth to Mars.</p>
+<p>This simulated program assumes the planets’ orbit is circle and in the same surface.
+In our real solar system, it is way more complicate.</p>
+<p>I didn’t do the history research about why heliocentrism won the theory battle.
+But I know heliocentrism is better because it is simpler.
+This also aligns with the philosophy of Unix/Linux programming:
+K.I.S.S., which stands for “Keep It Simple &amp; Straightforward”.</p>
+<p>Because of heliocentric system, we make satellite launch possible, and easily calculate the planets position.
+Otherwise, I couldn’t image how hard the job is for a mathematician to compute the correct route from the Earth to Mars.</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Because our Earth is in a system called Solar System.&lt;br&gt;I don’t think the answer would be simple as that.&lt;br&gt;Why the Earth could not be the center?&lt;/p&gt;
-&lt;p&gt;Actually it could.&lt;br&gt;As we learn in physic, all motions are relative, like we feel we are still on the Earth, but we actually spin and orbit the Sun.&lt;br&gt;Moreover, we orbit the Sun, in another words that the Sun also orbits us.&lt;br&gt;This doesn’t conflict with motion relative law.&lt;br&gt;But why we are not saying the Sun is orbiting Earth?&lt;br&gt;
+      &lt;p&gt;Because our Earth is in a system called Solar System.
+I don’t think the answer would be simple as that.
+Why the Earth could not be the center?&lt;/p&gt;
+&lt;p&gt;Actually it could.
+As we learn in physic, all motions are relative, like we feel we are still on the Earth, but we actually spin and orbit the Sun.
+Moreover, we orbit the Sun, in another words that the Sun also orbits us.
+This doesn’t conflict with motion relative law.
+But why we are not saying the Sun is orbiting Earth?
     
     </summary>
     
@@ -504,30 +634,119 @@
     <link href="https://en.abnerchou.me/Blog/90d363bc/"/>
     <id>https://en.abnerchou.me/Blog/90d363bc/</id>
     <published>2014-03-12T02:52:09.000Z</published>
-    <updated>2017-04-19T21:07:36.400Z</updated>
+    <updated>2017-04-19T22:51:33.949Z</updated>
     
     <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
-<p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,<br>and I will briefly describe the way to set it up.</p>
+<p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
+and I will briefly describe the way to set it up.</p>
 <a id="more"></a>
-<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">setup page</a>.<br>Follow the instruction,<br>install the dependencies that Octopress will need.</p>
-<p>Then choose the platform that the blog will be hosted on,<br>here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="external">deploying github pages</a>.<br><strong>Note</strong>: an error occured while I followed the instruction to rake it.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">rake aborted!</div><div class="line">You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.</div><div class="line">Prepending `bundle <span class="built_in">exec</span>` to your <span class="built_in">command</span> may solve this.</div><div class="line">/Users/Haochen/myB<span class="built_in">log</span>/octopress/Rakefile:2:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span></div><div class="line">(See full trace by running task with --trace)</div></pre></td></tr></table></figure></p>
+<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">setup page</a>.
+Follow the instruction,
+install the dependencies that Octopress will need.</p>
+<p>Then choose the platform that the blog will be hosted on,
+here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="external">deploying github pages</a>.
+<strong>Note</strong>: an error occured while I followed the instruction to rake it.</p>
+<pre class=" language-bash"><code class="language-bash">rake aborted<span class="token operator">!</span>
+You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.
+Prepending <span class="token variable"><span class="token variable">`</span>bundle <span class="token function">exec</span><span class="token variable">`</span></span> to your <span class="token function">command</span> may solve this.
+/Users/Haochen/myBlog/octopress/Rakefile:2:in `<span class="token operator">&lt;</span>top <span class="token punctuation">(</span>required<span class="token punctuation">)</span><span class="token operator">></span>'
+<span class="token punctuation">(</span>See full trace by running task with --trace<span class="token punctuation">)</span>
+</code></pre>
 <p>This error could be easily solved by adding <code>bundle exec</code> in front of the <code>rake</code> command.</p>
-<p>After <code>rake generate</code>, go to ‘_deploy’ folder, and type <code>git pull origin master</code>.<br>Then type <code>rake deploy</code>.<br>Otherwise, there will be some errors:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error: failed to push some refs to <span class="string">'git@gihub.com:your github page repo'</span></div></pre></td></tr></table></figure></p>
-<p>Now, your blog page is on-line.<br>Although the pages are hosted on github,<br>you still need version control on your Octopress settings,<br>so don’t forget to commit to the ‘source’ branch.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m <span class="string">'your message'</span></div><div class="line">git push origin <span class="built_in">source</span></div></pre></td></tr></table></figure></p>
-<p>(I’d rather put them into a bash file than typing every time)<br><figure class="highlight bash"><figcaption><span>git_commit_source.sh</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">!/bin/bash</div><div class="line">git add . &amp;&amp;</div><div class="line">git commit -m <span class="string">"<span class="variable">$1</span>"</span> &amp;&amp; <span class="comment">#first argument will be the commit message</span></div><div class="line">git push origin <span class="built_in">source</span></div></pre></td></tr></table></figure></p>
-<p>To generate a blog page, you could use <figure class="highlight plain"><figcaption><span>new_post['blog name'] ```.</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">However, as I mentioned before the ```rake``` command wouldn&apos;t work properly if the ruby version didn&apos;t match.</div><div class="line">We could use ``` bundle exec rake ``` to run the command.</div><div class="line">Moreover, if you are using **zsh shell**, you should also add ``` noglob ``` in front of these command, because symbol &apos;[&apos; and &apos;]&apos; are reserved in zsh for regular expression.</div><div class="line"></div><div class="line">Finally, my blog is here.</div><div class="line">Much easier than I expected.</div><div class="line">Using Octopress can save your time on setting a blog site, and it generates pages automatically.</div><div class="line"></div><div class="line">This blog is still underconstruction. I would like to make it more simple and pretty.</div><div class="line">K.I.S.S</div><div class="line"></div><div class="line">**Update** (several minutes later):</div><div class="line">Encountered a problem of creating single page, e.g. 404.html.</div><div class="line">The command `rake new-page[&apos;404&apos;]` cannot work on zsh due to &apos;[]&apos; is converted.</div><div class="line">Hence, the only way to add cutomize page is to write a markdown file and put into &apos;source&apos; fold.</div><div class="line">But, do not forget to add the following to the head of page:</div><div class="line">``` bash</div><div class="line">---</div><div class="line">layout: page</div><div class="line">title: &quot;Super Awesome&quot;</div><div class="line">date: 2011-07-03 5:59</div><div class="line">comments: true</div><div class="line">sharing: true</div><div class="line">footer: true</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p><strong>Update</strong> (2014-Mar-12):<br><code>rake preview</code> has problem with Safari.<br>Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> .<br>Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="external">ref</a>]</p>
-<p>Due to save typing, I have written some bash files:<br><figure class="highlight bash"><figcaption><span>deploy.sh</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">bundle <span class="built_in">exec</span> rake generate &amp;&amp;</div><div class="line">bundle <span class="built_in">exec</span> rake deploy</div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><figcaption><span>preview.sh</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment"># set up the octopress preview</span></div><div class="line"><span class="comment"># open http://localhost:4000 in Chrome</span></div><div class="line"><span class="comment"># Safari has some wired error in it</span></div><div class="line"></div><div class="line"><span class="comment"># if previous preview is running, stop it</span></div><div class="line">preview_pid=`/bin/ps -fu <span class="variable">$USER</span>| grep <span class="string">"rake\ preview"</span> | grep -v <span class="string">"grep"</span> | awk <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line"><span class="built_in">kill</span> -2 <span class="variable">$preview_pid</span></div><div class="line"></div><div class="line">bundle <span class="built_in">exec</span> rake generate &amp;&amp;</div><div class="line">bundle <span class="built_in">exec</span> rake preview &amp;</div><div class="line"></div><div class="line">sleep 5 <span class="comment"># wait a while to make sure the preview already running</span></div><div class="line"></div><div class="line"><span class="comment">#change the browser command if you are using a different OS and browser</span></div><div class="line">/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome <span class="string">'http://localhost:4000'</span></div><div class="line"></div><div class="line">pidof <span class="string">"Google Chrome"</span> | xargs <span class="built_in">wait</span></div><div class="line">preview_pid=`/bin/ps -fu <span class="variable">$USER</span>| grep <span class="string">"rake\ preview"</span> | grep -v <span class="string">"grep"</span> | awk <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line"><span class="built_in">kill</span> -2 <span class="variable">$preview_pid</span></div><div class="line"><span class="comment">#echo "$preview_pid"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Preview DONE!"</span></div></pre></td></tr></table></figure>
+<p>After <code>rake generate</code>, go to ‘_deploy’ folder, and type <code>git pull origin master</code>.
+Then type <code>rake deploy</code>.
+Otherwise, there will be some errors:</p>
+<pre class=" language-bash"><code class="language-bash">error: failed to push some refs to <span class="token string">'git@gihub.com:your github page repo'</span>
+</code></pre>
+<p>Now, your blog page is on-line.
+Although the pages are hosted on github,
+you still need version control on your Octopress settings,
+so don’t forget to commit to the ‘source’ branch.</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> add <span class="token keyword">.</span>
+<span class="token function">git</span> commit -m <span class="token string">'your message'</span>
+<span class="token function">git</span> push origin <span class="token function">source</span>
+</code></pre>
+<p>I’d rather put them into a bash file git_commit_source.sh, rather than typing every time</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">!</span>/bin/bash
+<span class="token function">git</span> add <span class="token keyword">.</span> <span class="token operator">&amp;&amp;</span>
+<span class="token function">git</span> commit -m <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token operator">&amp;&amp;</span> <span class="token comment" spellcheck="true">#first argument will be the commit message</span>
+<span class="token function">git</span> push origin <span class="token function">source</span>
+</code></pre>
+<p>To generate a blog page, you could use <code>rake new_post[&#39;blog name&#39;]</code>.
+However, as I mentioned before the <code>rake</code> command wouldn’t work properly if the ruby version didn’t match.
+We could use <code>bundle exec rake</code> to run the command.
+Moreover, if you are using <strong>zsh shell</strong>, you should also add <code>noglob</code> in front of these command, because symbol ‘[‘ and ‘]’ are reserved in zsh for regular expression.</p>
+<p>Finally, my blog is here.
+Much easier than I expected.
+Using Octopress can save your time on setting a blog site, and it generates pages automatically.</p>
+<p>This blog is still underconstruction. I would like to make it more simple and pretty.
+K.I.S.S</p>
+<p><strong>Update</strong> (several minutes later):
+Encountered a problem of creating single page, e.g. 404.html.
+The command <code>rake new-page[&#39;404&#39;]</code> cannot work on zsh due to ‘[]’ is converted.
+Hence, the only way to add cutomize page is to write a markdown file and put into ‘source’ fold.
+But, do not forget to add the following to the head of page:</p>
+<pre class=" language-bash"><code class="language-bash">---
+layout: page
+title: <span class="token string">"Super Awesome"</span>
+date: 2011-07-03 5:59
+comments: <span class="token boolean">true</span>
+sharing: <span class="token boolean">true</span>
+footer: <span class="token boolean">true</span>
+---
+</code></pre>
+<p><strong>Update</strong> (2014-Mar-12):
+<code>rake preview</code> has problem with Safari.
+Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> .
+Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="external">ref</a>]</p>
+<p>Due to save typing, I have written some bash files (deploy.sh and preview.sh):</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+bundle <span class="token function">exec</span> rake generate <span class="token operator">&amp;&amp;</span>
+bundle <span class="token function">exec</span> rake deploy
+</code></pre>
+<pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment" spellcheck="true"># set up the octopress preview</span>
+<span class="token comment" spellcheck="true"># open http://localhost:4000 in Chrome</span>
+<span class="token comment" spellcheck="true"># Safari has some wired error in it</span>
+
+<span class="token comment" spellcheck="true"># if previous preview is running, stop it</span>
+preview_pid<span class="token operator">=</span>`/bin/ps -fu <span class="token variable">$USER</span><span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"rake\ preview"</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">"grep"</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span>`
+<span class="token function">kill</span> -2 <span class="token variable">$preview_pid</span>
+
+bundle <span class="token function">exec</span> rake generate <span class="token operator">&amp;&amp;</span>
+bundle <span class="token function">exec</span> rake preview <span class="token operator">&amp;</span>
+
+<span class="token function">sleep</span> 5 <span class="token comment" spellcheck="true"># wait a while to make sure the preview already running</span>
+
+<span class="token comment" spellcheck="true">#change the browser command if you are using a different OS and browser</span>
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome <span class="token string">'http://localhost:4000'</span>
+
+pidof <span class="token string">"Google Chrome"</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">wait</span>
+preview_pid<span class="token operator">=</span>`/bin/ps -fu <span class="token variable">$USER</span><span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"rake\ preview"</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">"grep"</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span>`
+<span class="token function">kill</span> -2 <span class="token variable">$preview_pid</span>
+<span class="token comment" spellcheck="true">#echo "$preview_pid"</span>
+<span class="token keyword">echo</span> <span class="token string">"Preview DONE!"</span>
+</code></pre>
 <p>Please ignore the text below, the latest code fixes all of them. :P</p>
-<p><del><strong>Warnning</strong>:<br>This preview shell script may not work for you if you are a ruby developer,<br>or you are using some programs written or depended in/on ruby or ruby packages,<br>because it killed all ruby processes at the end.<br>Do not forget to fully quit Chrome (Comman+q in MacOS) before starting a new preview,<br>otherwise unknown error would occur (duplicate processes).</del></p>
-<p><del>BTW, the preview.sh also left a messy terminal for you.<br>Well, everything have side effects.<br>But you could add <code>clear</code> command at the end of the script,<br>if you don’t really care about the traces.</del></p>
+<p><del><strong>Warnning</strong>:
+This preview shell script may not work for you if you are a ruby developer,
+or you are using some programs written or depended in/on ruby or ruby packages,
+because it killed all ruby processes at the end.
+Do not forget to fully quit Chrome (Comman+q in MacOS) before starting a new preview,
+otherwise unknown error would occur (duplicate processes).</del></p>
+<p><del>BTW, the preview.sh also left a messy terminal for you.
+Well, everything have side effects.
+But you could add <code>clear</code> command at the end of the script,
+if you don’t really care about the traces.</del></p>
 ]]></content>
     
     <summary type="html">
     
       &lt;p&gt;Well, this is my first blog here (right now on github).&lt;/p&gt;
-&lt;p&gt;I’m using the &lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt; as blog content management,&lt;br&gt;and I will briefly describe the way to set it up.&lt;/p&gt;
+&lt;p&gt;I’m using the &lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt; as blog content management,
+and I will briefly describe the way to set it up.&lt;/p&gt;
     
     </summary>
     
