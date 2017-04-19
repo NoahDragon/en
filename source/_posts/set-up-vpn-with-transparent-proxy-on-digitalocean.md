@@ -54,7 +54,7 @@ Transparent proxy is on [Squid3](http://www.squid-cache.org).
 * **pptp installation**
 
 In terminal, type the command bellow to install pptp server:
-```
+```bash
 sudo apt-get install pptpd
 ```
 To restrict user access your VPN server, you also need to add users and passwords in `/etc/ppp/chap-secets`.
@@ -76,14 +76,14 @@ Open `/etc/sysctl.conf`, add the following line if not exist: `net.ipv4.ip_forwa
 Then run `sysctl -p` to make the change effective.
 
 Create NAT rule for iptables, and your VPN is ready to use:
-```
+```bash
 iptables --table nat --append POSTROUTING -o eth0 -j MASQUERADE && iptables-save
 ```
 
 * **Squid3 installation**
 
 Similar to pptpd, typing the following in terminal:
-```
+```bash
 sudo apt-get install squid
 update-rc.d squid3 defaults
 ```
@@ -108,7 +108,7 @@ The '192.168.0.1' is my public ip, and the '10.0.0.0/16' is my private ips.
 Restart squid `sudo service squid3 restart`.
 
 Finally, we set the iptables to redirect all the traffic through 80 port to 3128 port that is our transparent proxy.
-```
+```bash
 iptables -t nat -A PREROUTING -i ppp0 -p tcp -m tcp --dport 80 -j REDIRECT --to-port 3128
 ```
 The transparent proxy is set up.

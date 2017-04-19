@@ -25,6 +25,7 @@ install the dependencies that Octopress will need.
 Then choose the platform that the blog will be hosted on,
 here is a link for [deploying github pages](http://octopress.org/docs/deploying/github/).
 **Note**: an error occured while I followed the instruction to rake it.
+
 ``` bash
 rake aborted!
 You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.
@@ -32,11 +33,13 @@ Prepending `bundle exec` to your command may solve this.
 /Users/Haochen/myBlog/octopress/Rakefile:2:in `<top (required)>'
 (See full trace by running task with --trace)
 ```
+
 This error could be easily solved by adding `bundle exec` in front of the `rake` command.
 
 After `rake generate`, go to '_deploy' folder, and type `git pull origin master`.
 Then type `rake deploy`.
 Otherwise, there will be some errors:
+
 ``` bash
 error: failed to push some refs to 'git@gihub.com:your github page repo'
 ```
@@ -45,23 +48,26 @@ Now, your blog page is on-line.
 Although the pages are hosted on github,
 you still need version control on your Octopress settings,
 so don't forget to commit to the 'source' branch.
+
 ``` bash
 git add .
 git commit -m 'your message'
 git push origin source
 ```
-(I'd rather put them into a bash file than typing every time)
-``` bash git_commit_source.sh
+
+I'd rather put them into a bash file git_commit_source.sh, rather than typing every time
+
+``` bash
 !/bin/bash
 git add . &&
 git commit -m "$1" && #first argument will be the commit message
 git push origin source
 ```
 
-To generate a blog page, you could use ``` rake new_post['blog name'] ```.
-However, as I mentioned before the ```rake``` command wouldn't work properly if the ruby version didn't match.
-We could use ``` bundle exec rake ``` to run the command.
-Moreover, if you are using **zsh shell**, you should also add ``` noglob ``` in front of these command, because symbol '[' and ']' are reserved in zsh for regular expression.
+To generate a blog page, you could use ` rake new_post['blog name'] `.
+However, as I mentioned before the `rake` command wouldn't work properly if the ruby version didn't match.
+We could use ` bundle exec rake ` to run the command.
+Moreover, if you are using **zsh shell**, you should also add ` noglob ` in front of these command, because symbol '[' and ']' are reserved in zsh for regular expression.
 
 Finally, my blog is here.
 Much easier than I expected.
@@ -75,6 +81,7 @@ Encountered a problem of creating single page, e.g. 404.html.
 The command `rake new-page['404']` cannot work on zsh due to '[]' is converted.
 Hence, the only way to add cutomize page is to write a markdown file and put into 'source' fold.
 But, do not forget to add the following to the head of page:
+
 ``` bash
 ---
 layout: page
@@ -91,8 +98,9 @@ footer: true
 Don't know why but only show blank page while open [http://localhost:4000](http://localhost:4000) .
 Using Chrome or Firefox will solve this.[[ref](https://github.com/imathis/octopress/issues/1395)]
 
-Due to save typing, I have written some bash files:
-``` bash deploy.sh
+Due to save typing, I have written some bash files (deploy.sh and preview.sh):
+
+``` bash
 #!/bin/bash
 
 bundle exec rake generate &&
@@ -100,7 +108,7 @@ bundle exec rake deploy
 
 ```
 
-``` bash preview.sh
+``` bash
 #!/bin/bash
 
 # set up the octopress preview

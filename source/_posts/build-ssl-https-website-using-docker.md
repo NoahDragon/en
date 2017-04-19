@@ -45,7 +45,7 @@ The niginx server has to start up before running the letsencrypt, because the le
 
 Create `docker-compose.yml` and paste the following into it.
 
-```yml   
+```yml
 nginx:
   image: bringnow/nginx-letsencrypt
   volumes:
@@ -77,7 +77,7 @@ In order to complete the letsencrypt challenge, the server has to open the 80 po
 
 Here is the sample config file:
 
-```
+```nginx
 events {
   worker_connections 1024;
 }

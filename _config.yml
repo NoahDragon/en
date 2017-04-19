@@ -40,10 +40,15 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
+# Alternative highlight js
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'coy'
+  line_number: false    # default false
 
 # Category & Tag
 default_category: uncategorized
@@ -93,3 +98,15 @@ feed:
   path: atom.xml
   limit: 10
   hub:
+
+# marked
+marked:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: false
+  smartLists: true
+  smartypants: true
+  modifyAnchors: ''
+  autolink: true
