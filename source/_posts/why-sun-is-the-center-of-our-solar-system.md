@@ -7,6 +7,7 @@ tags:
   - Solar System
   - Javascript
   - Simulation
+categories: Science
 abbrlink: e0efd72f
 showAd: true
 ---
