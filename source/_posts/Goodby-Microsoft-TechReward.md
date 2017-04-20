@@ -5,6 +5,7 @@ comments: true
 tags:
   - Microsoft
   - TechReward
+categories: Exam
 abbrlink: 8aae6eef
 date: 2016-10-06 17:31:44
 ---
