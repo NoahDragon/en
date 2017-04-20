@@ -11,6 +11,7 @@ tags:
   - Proxy
   - DigitalOcean
   - VPS
+categories: Server
 abbrlink: 2b608f65
 showAd: true
 ---
@@ -64,7 +65,7 @@ I masked mine for privacy.
 ![](/img/user_password.jpg)
 
 Add the following DNS to `/etc/ppp/pptpd-options`:
-```
+``` bash
 ms-dns 8.8.8.8
 ms-dns 8.8.4.4
 ```
@@ -83,7 +84,7 @@ iptables --table nat --append POSTROUTING -o eth0 -j MASQUERADE && iptables-save
 * **Squid3 installation**
 
 Similar to pptpd, typing the following in terminal:
-```bash
+``` bash
 sudo apt-get install squid
 update-rc.d squid3 defaults
 ```
@@ -98,7 +99,7 @@ First, find the line `http_port 3128`, change it to `http_port 3128 transparent`
 ** this is important **
 
 Second, add the following rules:
-```
+``` bash
 acl myhost src 192.168.0.1
 http_access allow myhost
 acl mymachine src 10.0.0.0/16
@@ -123,7 +124,7 @@ Here I introduce a method that will do it once and for all.
 Save iptables into `/etc/network/iptables.rules` by `iptables-save > /etc/network/iptables.rules`
 
 Open `/etc/rc.local` and add the following line before "exit 0":
-```
+``` bash
 /sbin/iptables-restore < /etc/network/iptables.rules
 ```
 Then our saved iptables rules will be loaded every time the system start up.
