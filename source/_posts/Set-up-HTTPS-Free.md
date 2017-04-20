@@ -42,7 +42,7 @@ Then, connect to Github page. Just setting the A and CNAME records on DNS.
 
 Type the following code in your console (replace theurloftheresource to the actual url)
 
-```
+``` bash
 curl -svo /dev/null http://theurloftheresource
 ```
 
