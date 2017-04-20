@@ -42,7 +42,7 @@ js_effect:
 
 # Reading experience
 reading:
-    entry_excerpt: 80
+    entry_excerpt: 150
 
 # Thumbnail Settings
 thumbnail:
@@ -63,7 +63,7 @@ background:
 
 # Images Settings
 img:
-    logo: "/img/logo.png"
+    logo: "/logo.png"
     avatar: "/avatar.jpeg"
     daily_pic: "/img/daily_pic.png"
     sidebar_header: "/img/sidebar_header.png"
