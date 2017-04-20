@@ -4,6 +4,7 @@ tags:
     - code
     - programming
     - games
+categories: Game
 comments: true
 abbrlink: 2db6c020
 date: 2016-09-03 22:42:12
