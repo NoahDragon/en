@@ -7,29 +7,43 @@
     </url>
 
     <url>
-        <loc>https://en.abnerchou.me/categories/Hexo/</loc>
-        <lastmod>2017-04-20T01:50:58.298Z</lastmod>
+        <loc>https://en.abnerchou.me/categories/Exam/</loc>
+        <lastmod>2017-04-20T01:52:39.292Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://en.abnerchou.me/categories/Server/</loc>
-        <lastmod>2017-04-20T01:50:58.298Z</lastmod>
+        <loc>https://en.abnerchou.me/categories/Hexo/</loc>
+        <lastmod>2017-04-20T01:52:39.292Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://en.abnerchou.me/categories/Game/</loc>
+        <lastmod>2017-04-20T01:52:39.296Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://en.abnerchou.me/categories/Website/</loc>
-        <lastmod>2017-04-20T01:50:58.298Z</lastmod>
+        <lastmod>2017-04-20T01:52:39.296Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://en.abnerchou.me/categories/Server/</loc>
+        <lastmod>2017-04-20T01:52:39.296Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://en.abnerchou.me/categories/Docker/</loc>
-        <lastmod>2017-04-20T01:50:58.298Z</lastmod>
+        <lastmod>2017-04-20T01:52:39.296Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
