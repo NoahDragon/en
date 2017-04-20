@@ -420,8 +420,9 @@
 <h3 id="Settings-on-Cloudflare"><a href="#Settings-on-Cloudflare" class="headerlink" title="Settings on Cloudflare"></a>Settings on Cloudflare</h3><p>First, you have to set up the Cloudflare as your DNS manager. It basically tells the domain provider that DNS is handled by Cloudflare. You can google to find a tutorial about it.</p>
 <p>Then, connect to Github page. Just setting the A and CNAME records on DNS.</p>
 <h3 id="Test-if-Cloudflare-is-working"><a href="#Test-if-Cloudflare-is-working" class="headerlink" title="Test if Cloudflare is working"></a>Test if Cloudflare is working</h3><p>Type the following code in your console (replace theurloftheresource to the actual url)</p>
-<pre><code>curl -svo /dev/null http://theurloftheresource
-</code></pre><p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
+<pre class=" language-bash"><code class="language-bash">curl -svo /dev/null http://theurloftheresource
+</code></pre>
+<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
 <p><img src="/img/https_1.png" alt=""></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>

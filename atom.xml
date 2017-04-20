@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://en.abnerchou.me/"/>
-  <updated>2017-04-20T01:45:52.646Z</updated>
+  <updated>2017-04-20T01:47:37.207Z</updated>
   <id>https://en.abnerchou.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://en.abnerchou.me/Blog/75027340/"/>
     <id>https://en.abnerchou.me/Blog/75027340/</id>
     <published>2016-11-18T22:35:10.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https.png" alt="https"></p>
 <p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
@@ -144,11 +144,11 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       <category term="Docker" scheme="https://en.abnerchou.me/categories/Docker/"/>
     
     
-      <category term="HTTPS" scheme="https://en.abnerchou.me/tags/HTTPS/"/>
-    
       <category term="SSL" scheme="https://en.abnerchou.me/tags/SSL/"/>
     
       <category term="Nginx" scheme="https://en.abnerchou.me/tags/Nginx/"/>
+    
+      <category term="HTTPS" scheme="https://en.abnerchou.me/tags/HTTPS/"/>
     
   </entry>
   
@@ -157,7 +157,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/5c00ca67/"/>
     <id>https://en.abnerchou.me/Blog/5c00ca67/</id>
     <published>2016-10-16T19:41:21.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
 <p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
@@ -257,7 +257,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/8aae6eef/"/>
     <id>https://en.abnerchou.me/Blog/8aae6eef/</id>
     <published>2016-10-06T17:31:44.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
 <p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
@@ -296,7 +296,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/daa790/"/>
     <id>https://en.abnerchou.me/Blog/daa790/</id>
     <published>2016-09-22T21:52:47.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.291Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
@@ -309,8 +309,9 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 <h3 id="Settings-on-Cloudflare"><a href="#Settings-on-Cloudflare" class="headerlink" title="Settings on Cloudflare"></a>Settings on Cloudflare</h3><p>First, you have to set up the Cloudflare as your DNS manager. It basically tells the domain provider that DNS is handled by Cloudflare. You can google to find a tutorial about it.</p>
 <p>Then, connect to Github page. Just setting the A and CNAME records on DNS.</p>
 <h3 id="Test-if-Cloudflare-is-working"><a href="#Test-if-Cloudflare-is-working" class="headerlink" title="Test if Cloudflare is working"></a>Test if Cloudflare is working</h3><p>Type the following code in your console (replace theurloftheresource to the actual url)</p>
-<pre><code>curl -svo /dev/null http://theurloftheresource
-</code></pre><p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
+<pre class=" language-bash"><code class="language-bash">curl -svo /dev/null http://theurloftheresource
+</code></pre>
+<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
 <p><img src="/img/https_1.png" alt=""></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
@@ -354,7 +355,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/2db6c020/"/>
     <id>https://en.abnerchou.me/Blog/2db6c020/</id>
     <published>2016-09-03T22:42:12.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
 <p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
@@ -400,7 +401,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/e4c9ee8f/"/>
     <id>https://en.abnerchou.me/Blog/e4c9ee8f/</id>
     <published>2014-08-05T22:22:48.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
@@ -428,7 +429,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/2b608f65/"/>
     <id>https://en.abnerchou.me/Blog/2b608f65/</id>
     <published>2014-07-13T00:43:47.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,
 which is cheap for a student and who is price sensitive.
@@ -579,7 +580,7 @@ Meanwhile, you could do anything as you have your own server.&lt;/p&gt;
     <link href="https://en.abnerchou.me/Blog/e0efd72f/"/>
     <id>https://en.abnerchou.me/Blog/e0efd72f/</id>
     <published>2014-07-03T02:44:44.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.
 I don’t think the answer would be simple as that.
@@ -635,7 +636,7 @@ But why we are not saying the Sun is orbiting Earth?
     <link href="https://en.abnerchou.me/Blog/90d363bc/"/>
     <id>https://en.abnerchou.me/Blog/90d363bc/</id>
     <published>2014-03-12T02:52:09.000Z</published>
-    <updated>2017-04-20T01:45:52.646Z</updated>
+    <updated>2017-04-20T01:47:37.207Z</updated>
     
     <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
 <p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
