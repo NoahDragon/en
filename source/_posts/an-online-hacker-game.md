@@ -6,6 +6,7 @@ comments: true
 tags:
   - Hacker game
   - Programming
+categories: Game
 abbrlink: e4c9ee8f
 showAd: true
 ---
