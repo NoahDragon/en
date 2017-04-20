@@ -126,11 +126,11 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
         
         <tags>
             
+            <tag> HTTPS </tag>
+            
             <tag> SSL </tag>
             
             <tag> Nginx </tag>
-            
-            <tag> HTTPS </tag>
             
         </tags>
         
@@ -301,6 +301,12 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 <p>Enjoy your secure and faster website!</p>
 ]]></content>
       
+        <categories>
+            
+            <category> Website </category>
+            
+        </categories>
+        
         
         <tags>
             
