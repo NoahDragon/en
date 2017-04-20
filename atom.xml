@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://en.abnerchou.me/"/>
-  <updated>2017-04-19T23:04:55.210Z</updated>
+  <updated>2017-04-20T01:44:08.937Z</updated>
   <id>https://en.abnerchou.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://en.abnerchou.me/Blog/75027340/"/>
     <id>https://en.abnerchou.me/Blog/75027340/</id>
     <published>2016-11-18T22:35:10.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https.png" alt="https"></p>
 <p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
@@ -47,19 +47,19 @@
 </ul>
 <p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
 <h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
-<pre class=" language-yml"><code class="language-yml">nginx:
-  image: bringnow/nginx-letsencrypt
-  volumes:
-    - ./nginx.conf:/etc/nginx/nginx.conf
-    - /etc/letsencrypt:/etc/letsencrypt
-    - /var/acme-webroot:/var/acme-webroot
-    - /srv/docker/nginx/dhparam:/etc/nginx/dhparam
-  ports:
-    - "80:80"
-    - "443:443"
-  net: "host"
-  dns_search:
-    - "example.com"
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">nginx</span><span class="token punctuation">:</span>
+  <span class="token key atrule">image</span><span class="token punctuation">:</span> bringnow/nginx<span class="token punctuation">-</span>letsencrypt
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> ./nginx.conf<span class="token punctuation">:</span>/etc/nginx/nginx.conf
+    <span class="token punctuation">-</span> /etc/letsencrypt<span class="token punctuation">:</span>/etc/letsencrypt
+    <span class="token punctuation">-</span> /var/acme<span class="token punctuation">-</span>webroot<span class="token punctuation">:</span>/var/acme<span class="token punctuation">-</span>webroot
+    <span class="token punctuation">-</span> /srv/docker/nginx/dhparam<span class="token punctuation">:</span>/etc/nginx/dhparam
+  <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token string">"80:80"</span>
+    <span class="token punctuation">-</span> <span class="token string">"443:443"</span>
+  <span class="token key atrule">net</span><span class="token punctuation">:</span> <span class="token string">"host"</span>
+  <span class="token key atrule">dns_search</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token string">"example.com"</span>
 </code></pre>
 <p>Modify it accordingly to fit your environment.</p>
 <h4 id="Generate-dhparam"><a href="#Generate-dhparam" class="headerlink" title="Generate dhparam"></a>Generate dhparam</h4><p>Although the nginx docker will create DH parameters on initial start up, it is time comsuming to generate the 4096 bit DH parameters (more than an hour on my VPS). Run the following command and copy the generated file to the <code>/srv/docker/nginx/dhparam</code> folder (set in docker-compose.yml).</p>
@@ -101,29 +101,30 @@
 </code></pre>
 <p>If there are some error messages, please check the Nginx config file and restart the docker.</p>
 <h4 id="docker-compose-yml-for-letsencrypt"><a href="#docker-compose-yml-for-letsencrypt" class="headerlink" title="docker-compose.yml for letsencrypt"></a>docker-compose.yml for letsencrypt</h4><p>In another folder, create a docker-compose.yml:</p>
-<pre class=" language-yml"><code class="language-yml">cli:
-  image: bringnow/letsencrypt-manager:latest
-  env_file: config.env
-  volumes:
-    - /etc/letsencrypt:/etc/letsencrypt
-    - /var/lib/letsencrypt:/var/lib/letsencrypt
-    - /var/acme-webroot:/var/acme-webroot
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">cli</span><span class="token punctuation">:</span>
+  <span class="token key atrule">image</span><span class="token punctuation">:</span> bringnow/letsencrypt<span class="token punctuation">-</span>manager<span class="token punctuation">:</span>latest
+  <span class="token key atrule">env_file</span><span class="token punctuation">:</span> config.env
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> /etc/letsencrypt<span class="token punctuation">:</span>/etc/letsencrypt
+    <span class="token punctuation">-</span> /var/lib/letsencrypt<span class="token punctuation">:</span>/var/lib/letsencrypt
+    <span class="token punctuation">-</span> /var/acme<span class="token punctuation">-</span>webroot<span class="token punctuation">:</span>/var/acme<span class="token punctuation">-</span>webroot
 
-cron:
-  image: bringnow/letsencrypt-manager:latest
-  env_file: config.env
-  volumes:
-    - /etc/letsencrypt:/etc/letsencrypt
-    - /var/lib/letsencrypt:/var/lib/letsencrypt
-    - /var/acme-webroot:/var/acme-webroot
-  command: cron-auto-renewal
-  restart: always
+<span class="token key atrule">cron</span><span class="token punctuation">:</span>
+  <span class="token key atrule">image</span><span class="token punctuation">:</span> bringnow/letsencrypt<span class="token punctuation">-</span>manager<span class="token punctuation">:</span>latest
+  <span class="token key atrule">env_file</span><span class="token punctuation">:</span> config.env
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> /etc/letsencrypt<span class="token punctuation">:</span>/etc/letsencrypt
+    <span class="token punctuation">-</span> /var/lib/letsencrypt<span class="token punctuation">:</span>/var/lib/letsencrypt
+    <span class="token punctuation">-</span> /var/acme<span class="token punctuation">-</span>webroot<span class="token punctuation">:</span>/var/acme<span class="token punctuation">-</span>webroot
+  <span class="token key atrule">command</span><span class="token punctuation">:</span> cron<span class="token punctuation">-</span>auto<span class="token punctuation">-</span>renewal
+  <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
 </code></pre>
 <p>Modify it accordingly. Make sure the folder <code>/var/lib/letsencrypt</code> and <code>/var/acme-webroot</code> have created and exist.</p>
 <p>Then create config.env file in the same folder and input your email:</p>
-<pre><code>LE_EMAIL=
-LE_RSA_KEY_SIZE=4096
-</code></pre><h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
+<pre class=" language-bash"><code class="language-bash">LE_EMAIL<span class="token operator">=</span>
+LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
+</code></pre>
+<h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
 <pre class=" language-bash"><code class="language-bash">docker-compose run cli add <span class="token operator">&lt;</span>domain<span class="token operator">></span> <span class="token punctuation">[</span>alternative domains<span class="token punctuation">]</span>
 </code></pre>
 <p>If it fails, please check if Nginx is runing and the DNS setting is correct.</p>
@@ -156,7 +157,7 @@ LE_RSA_KEY_SIZE=4096
     <link href="https://en.abnerchou.me/Blog/5c00ca67/"/>
     <id>https://en.abnerchou.me/Blog/5c00ca67/</id>
     <published>2016-10-16T19:41:21.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
 <p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
@@ -256,7 +257,7 @@ LE_RSA_KEY_SIZE=4096
     <link href="https://en.abnerchou.me/Blog/8aae6eef/"/>
     <id>https://en.abnerchou.me/Blog/8aae6eef/</id>
     <published>2016-10-06T17:31:44.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
 <p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
@@ -295,7 +296,7 @@ LE_RSA_KEY_SIZE=4096
     <link href="https://en.abnerchou.me/Blog/daa790/"/>
     <id>https://en.abnerchou.me/Blog/daa790/</id>
     <published>2016-09-22T21:52:47.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
@@ -353,7 +354,7 @@ LE_RSA_KEY_SIZE=4096
     <link href="https://en.abnerchou.me/Blog/2db6c020/"/>
     <id>https://en.abnerchou.me/Blog/2db6c020/</id>
     <published>2016-09-03T22:42:12.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
 <p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
@@ -399,7 +400,7 @@ LE_RSA_KEY_SIZE=4096
     <link href="https://en.abnerchou.me/Blog/e4c9ee8f/"/>
     <id>https://en.abnerchou.me/Blog/e4c9ee8f/</id>
     <published>2014-08-05T22:22:48.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
@@ -427,7 +428,7 @@ LE_RSA_KEY_SIZE=4096
     <link href="https://en.abnerchou.me/Blog/2b608f65/"/>
     <id>https://en.abnerchou.me/Blog/2b608f65/</id>
     <published>2014-07-13T00:43:47.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,
 which is cheap for a student and who is price sensitive.
@@ -578,7 +579,7 @@ Meanwhile, you could do anything as you have your own server.&lt;/p&gt;
     <link href="https://en.abnerchou.me/Blog/e0efd72f/"/>
     <id>https://en.abnerchou.me/Blog/e0efd72f/</id>
     <published>2014-07-03T02:44:44.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.
 I don’t think the answer would be simple as that.
@@ -634,7 +635,7 @@ But why we are not saying the Sun is orbiting Earth?
     <link href="https://en.abnerchou.me/Blog/90d363bc/"/>
     <id>https://en.abnerchou.me/Blog/90d363bc/</id>
     <published>2014-03-12T02:52:09.000Z</published>
-    <updated>2017-04-19T23:04:55.210Z</updated>
+    <updated>2017-04-20T01:44:08.937Z</updated>
     
     <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
 <p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
