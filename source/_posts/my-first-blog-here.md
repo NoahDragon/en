@@ -82,7 +82,7 @@ The command `rake new-page['404']` cannot work on zsh due to '[]' is converted.
 Hence, the only way to add cutomize page is to write a markdown file and put into 'source' fold.
 But, do not forget to add the following to the head of page:
 
-``` bash
+``` markdown
 ---
 layout: page
 title: "Super Awesome"
