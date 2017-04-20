@@ -459,14 +459,14 @@ Encountered a problem of creating single page, e.g. 404.html.
 The command <code>rake new-page[&#39;404&#39;]</code> cannot work on zsh due to ‘[]’ is converted.
 Hence, the only way to add cutomize page is to write a markdown file and put into ‘source’ fold.
 But, do not forget to add the following to the head of page:</p>
-<pre class=" language-bash"><code class="language-bash">---
+<pre class=" language-markdown"><code class="language-markdown"><span class="token hr punctuation">---</span>
 layout: page
-title: <span class="token string">"Super Awesome"</span>
+title: "Super Awesome"
 date: 2011-07-03 5:59
-comments: <span class="token boolean">true</span>
-sharing: <span class="token boolean">true</span>
-footer: <span class="token boolean">true</span>
----
+comments: true
+sharing: true
+<span class="token title important">footer: true
+<span class="token punctuation">---</span></span>
 </code></pre>
 <p><strong>Update</strong> (2014-Mar-12):
 <code>rake preview</code> has problem with Safari.
