@@ -45,7 +45,7 @@ The niginx server has to start up before running the letsencrypt, because the le
 
 Create `docker-compose.yml` and paste the following into it.
 
-```yml
+```yaml
 nginx:
   image: bringnow/nginx-letsencrypt
   volumes:
@@ -126,7 +126,7 @@ If there are some error messages, please check the Nginx config file and restart
 
 In another folder, create a docker-compose.yml:
 
-```yml
+```yaml
 cli:
   image: bringnow/letsencrypt-manager:latest
   env_file: config.env
@@ -150,7 +150,7 @@ Modify it accordingly. Make sure the folder `/var/lib/letsencrypt` and `/var/acm
 
 Then create config.env file in the same folder and input your email:
 
-```
+``` bash
 LE_EMAIL=
 LE_RSA_KEY_SIZE=4096
 ```
