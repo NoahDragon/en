@@ -133,6 +133,10 @@ sidebar:
             link: "/about"
             icon: person
             divider: false
+        Projects:
+            link: "http://legofan.cc/projects/"
+            icon: book
+            divider: false
         Tags Cloud:
             link: "/tags"
             icon: cloud
