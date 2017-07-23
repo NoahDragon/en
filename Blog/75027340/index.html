@@ -414,18 +414,12 @@
 <p>The purpose of this post is to help people to avoid the pitfalls that I encountered, and severs as a note for future reference.</p>
 <a id="more"></a>
 <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li><p>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</p>
-</li>
-<li><p><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</p>
-</li>
-<li><p><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</p>
-</li>
-<li><p>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</p>
-</li>
-<li><p>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</p>
-</li>
-<li><p>Git is also an option, unless you would like to build the image on your own.</p>
-</li>
+<li>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</li>
+<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</li>
+<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
+<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
+<li>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</li>
+<li>Git is also an option, unless you would like to build the image on your own.</li>
 </ul>
 <h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><p>Only two docker images are used:</p>
 <ul>
@@ -635,6 +629,14 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/Blog/562ef8f1/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
@@ -733,7 +735,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -751,7 +753,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/CI/">CI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

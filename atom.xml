@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://en.abnerchou.me/"/>
-  <updated>2017-07-13T13:41:28.923Z</updated>
+  <updated>2017-07-23T03:24:25.254Z</updated>
   <id>https://en.abnerchou.me/</id>
   
   <author>
@@ -16,29 +16,71 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Auto Sync Github Forked Repos</title>
+    <link href="https://en.abnerchou.me/Blog/562ef8f1/"/>
+    <id>https://en.abnerchou.me/Blog/562ef8f1/</id>
+    <published>2017-07-22T22:32:53.000Z</published>
+    <updated>2017-07-23T03:24:25.254Z</updated>
+    
+    <content type="html"><![CDATA[<p>As a Github heavy user, when I saw an interested repos, I would fork them to my “secret” organization to read/use in future. However, when checked them later, most of the time (99%), the repos have already out of synced. There are three options I normally choose:</p>
+<ol>
+<li>delete the forked repo and re-fork;</li>
+<li>manually merge to the latest commit;</li>
+<li>use the PR and switch the source and destination (<a href="https://stackoverflow.com/a/23853061" target="_blank" rel="external">ref</a>).</li>
+</ol>
+<a id="more"></a>
+<p>Although those three options works like a “charm” in a small amount of repos, it’s more like chores when maintaining hundreds forked repos.</p>
+<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p>Then I came up the idea to use Travis-CI to sync those repos automatically. The mechanism is simple and straightforward, which runs a script periodically to update forked repos with source repos. The script could be bash, javascript, python, or any language which could call git command in the Linux OS.</p>
+<h3 id="My-Approach"><a href="#My-Approach" class="headerlink" title="My Approach"></a>My Approach</h3><p>Based on the above idea, I wrote a <a href="https://github.com/NoahDragon/update-forked-repo" target="_blank" rel="external">js script</a> to do the job. But this script is only a solution my problems:</p>
+<ul>
+<li>Only works on forked repos in a Github Org.</li>
+<li>Forked repos should never be modified. </li>
+<li>User Github personal token to access.</li>
+<li>Not support private repos.</li>
+</ul>
+<p>If your needs also match the aboves, then simple fork my script, and modify the <code>org</code> in <code>.config.yml</code>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;As a Github heavy user, when I saw an interested repos, I would fork them to my “secret” organization to read/use in future. However, when checked them later, most of the time (99%), the repos have already out of synced. There are three options I normally choose:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;delete the forked repo and re-fork;&lt;/li&gt;
+&lt;li&gt;manually merge to the latest commit;&lt;/li&gt;
+&lt;li&gt;use the PR and switch the source and destination (&lt;a href=&quot;https://stackoverflow.com/a/23853061&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ref&lt;/a&gt;).&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="CI" scheme="https://en.abnerchou.me/categories/CI/"/>
+    
+    
+      <category term="travis-ci" scheme="https://en.abnerchou.me/tags/travis-ci/"/>
+    
+      <category term="Github" scheme="https://en.abnerchou.me/tags/Github/"/>
+    
+      <category term="nodejs" scheme="https://en.abnerchou.me/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Build SSL HTTPS Website Using Docker</title>
     <link href="https://en.abnerchou.me/Blog/75027340/"/>
     <id>https://en.abnerchou.me/Blog/75027340/</id>
     <published>2016-11-18T22:35:10.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https.png" alt="https"></p>
 <p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
 <p>The purpose of this post is to help people to avoid the pitfalls that I encountered, and severs as a note for future reference.</p>
 <a id="more"></a>
 <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li><p>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</p>
-</li>
-<li><p><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</p>
-</li>
-<li><p><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</p>
-</li>
-<li><p>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</p>
-</li>
-<li><p>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</p>
-</li>
-<li><p>Git is also an option, unless you would like to build the image on your own.</p>
-</li>
+<li>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</li>
+<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</li>
+<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
+<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
+<li>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</li>
+<li>Git is also an option, unless you would like to build the image on your own.</li>
 </ul>
 <h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><p>Only two docker images are used:</p>
 <ul>
@@ -157,7 +199,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/5c00ca67/"/>
     <id>https://en.abnerchou.me/Blog/5c00ca67/</id>
     <published>2016-10-16T19:41:21.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
 <p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
@@ -257,7 +299,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/8aae6eef/"/>
     <id>https://en.abnerchou.me/Blog/8aae6eef/</id>
     <published>2016-10-06T17:31:44.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
 <p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
@@ -298,7 +340,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/daa790/"/>
     <id>https://en.abnerchou.me/Blog/daa790/</id>
     <published>2016-09-22T21:52:47.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
@@ -346,11 +388,11 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       <category term="Website" scheme="https://en.abnerchou.me/categories/Website/"/>
     
     
+      <category term="Github" scheme="https://en.abnerchou.me/tags/Github/"/>
+    
       <category term="HTTPS" scheme="https://en.abnerchou.me/tags/HTTPS/"/>
     
       <category term="Cloudflare" scheme="https://en.abnerchou.me/tags/Cloudflare/"/>
-    
-      <category term="Github" scheme="https://en.abnerchou.me/tags/Github/"/>
     
   </entry>
   
@@ -359,7 +401,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/2db6c020/"/>
     <id>https://en.abnerchou.me/Blog/2db6c020/</id>
     <published>2016-09-03T22:42:12.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
 <p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
@@ -407,7 +449,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/e4c9ee8f/"/>
     <id>https://en.abnerchou.me/Blog/e4c9ee8f/</id>
     <published>2014-08-05T22:22:48.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
@@ -437,7 +479,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/2b608f65/"/>
     <id>https://en.abnerchou.me/Blog/2b608f65/</id>
     <published>2014-07-13T00:43:47.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,
 which is cheap for a student and who is price sensitive.
@@ -593,7 +635,7 @@ Meanwhile, you could do anything as you have your own server.&lt;/p&gt;
     <link href="https://en.abnerchou.me/Blog/e0efd72f/"/>
     <id>https://en.abnerchou.me/Blog/e0efd72f/</id>
     <published>2014-07-03T02:44:44.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.
 I don’t think the answer would be simple as that.
@@ -651,7 +693,7 @@ But why we are not saying the Sun is orbiting Earth?
     <link href="https://en.abnerchou.me/Blog/90d363bc/"/>
     <id>https://en.abnerchou.me/Blog/90d363bc/</id>
     <published>2014-03-12T02:52:09.000Z</published>
-    <updated>2017-07-13T13:41:28.923Z</updated>
+    <updated>2017-07-23T03:24:25.254Z</updated>
     
     <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
 <p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
