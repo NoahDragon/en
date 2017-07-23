@@ -22,15 +22,10 @@ The purpose of this post is to help people to avoid the pitfalls that I encounte
 ### Prerequisites
 
 * All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.
-
 * [Docker](https://docs.docker.com/engine/installation/) must be installed and properly functioning.
-
 * [Docker compose](https://docs.docker.com/compose/install/) is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.
-
 * Any machine/VPS/cloud server that you have root control, like [Digital Ocean](https://m.do.co/c/eaf9c533bc55)[Get $10 with coupon code `ACTIVATE10`], [Vultr](http://www.vultr.com/?ref=7025798)[Get $50 (expired after 6 months) with coupon code `DOMORE` ], [Lindo](https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2)[Get $20 with coupon code `PodcastInIt20`], and etc.
-
 * DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.
-
 * Git is also an option, unless you would like to build the image on your own.
 
 ### Set Up
