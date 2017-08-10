@@ -4,6 +4,108 @@
   
     
     <entry>
+      <title><![CDATA[DIY SLI Liquid Cooling GPU Computer]]></title>
+      <url>https://en.abnerchou.me/Blog/31404856/</url>
+      <content type="html"><![CDATA[<p>It’s kind of shame to say, as a computer science major professional, I have never build my own desktop computer ever, until recent. All because the old desktop dead (purchased 2012), I finally made the decision to DIY a powerful amateur deep learning machine.</p>
+<p>Here I will record all the pitfalls, caveats, and tricks during the building processes. Hope could provide some help or hint for people would like to build their dream game (or amateur machine learning) machine.</p>
+<a id="more"></a>
+<p>Here is the <a href="https://ca.pcpartpicker.com/user/AbnerChou/saved/6zvgsY" target="_blank" rel="external">components list</a> for my build on PCPartPicker. The currency is Canadian Dollar since I’m living in the cold North (but don’t have the wall of cause). </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Parts</th>
+<th style="text-align:left">Brand</th>
+<th style="text-align:center">Purchase Price</th>
+<th style="text-align:left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CPU</td>
+<td style="text-align:left">Inter Core i7-7700K 4.2Ghz Quad-Core</td>
+<td style="text-align:center">$427.95</td>
+<td style="text-align:left">From Memory Express.</td>
+</tr>
+<tr>
+<td style="text-align:center">GPU</td>
+<td style="text-align:left">2 X MSI GeForce 1080 DirectX 12 GTX SEA HAWK</td>
+<td style="text-align:center">$732.99 X 2</td>
+<td style="text-align:left">From NewEgg. Got total $40 mail-in rebates</td>
+</tr>
+<tr>
+<td style="text-align:center">CPU Cooling</td>
+<td style="text-align:left">Corsair H100i v2 Hydro Liquid CPU Cooler</td>
+<td style="text-align:center">$124.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Motherboard</td>
+<td style="text-align:left">ASUS PRIME Z270-A LGA 1151</td>
+<td style="text-align:center">$199.99</td>
+<td style="text-align:left">From NewEgg</td>
+</tr>
+<tr>
+<td style="text-align:center">Disk</td>
+<td style="text-align:left">Kingston SSD A400 480GB</td>
+<td style="text-align:center">$194.10</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Memory</td>
+<td style="text-align:left">Kingston HyperX Fury 32GB DDR4 2666MHZ 4X8GB</td>
+<td style="text-align:center">$269.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Case</td>
+<td style="text-align:left">Fractal Design Define S ATX Mid Tower Window Case</td>
+<td style="text-align:center">$89.99</td>
+<td style="text-align:left">From Canada Computers</td>
+</tr>
+<tr>
+<td style="text-align:center">Power</td>
+<td style="text-align:left">EVGA SuperNOVA 750W G2L Modular PSU</td>
+<td style="text-align:center">$139.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Extra</td>
+<td style="text-align:left">Asus USB-AC51 Dual-Band Wireless AC600 Wireless Adapter</td>
+<td style="text-align:center">$39.99</td>
+<td style="text-align:left">From Memory Express. Got $10 mail-in rebates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Purchase-items"><a href="#Purchase-items" class="headerlink" title="Purchase items"></a>Purchase items</h2><p>I have spent about a month to collect all parts. The reason why it took so long is I would lik to get the price as cheaper as possible. To ensure that, I have developed several “techniques”.</p>
+<blockquote>
+<p>The tricks use here are suitable for Canada or best North America, because these online services/stores are only shipping within North America or Canada only. However, you could definitely find alternatives within your regions/countries (check out <a href="https://pcpartpicker.com/" target="_blank" rel="external">PCPartPicker</a> support countries).</p>
+</blockquote>
+<p><img src="/img/diy_pc_1.jpg" alt="Before Open Box"></p>
+<p>First of all, don’t forget using <a href="https://www.ebates.ca" target="_blank" rel="external">ebates</a>. It’s a online rebate website, user could get instant rebate if purchase through the ebates supported vendors online. The rebate rate is from 1% to 5%. Although not much, better than nothing.</p>
+<p>Second, use price matching. Many online store support price matching, some even give 10% more off (I only found one). The <a href="https://www.memoryexpress.com/" target="_blank" rel="external">Memory Express</a> is one of my favorite computer component online shop. It provides the lowest prices most of the time, moreover, its price match is better – match the price plus 10% off on the difference. E.g, a CPU costs $500 on ME, another store has lower price for the same CPU, let’s say it $400, then the price on ME after the price match is 400-(500-400)*10% = $390. The only con shopping on ME is they charge shipping fee and don’t have local store in east Canada.</p>
+<p>As mentioned above, the shipping fee may also cost a lot, especially the item weight increases. So if online store has physical store, use pick up wisely. I have purchased several parts on <a href="http://http://www.ncix.com/" target="_blank" rel="external">NCIX</a> and <a href="http://www.canadacomputers.com" target="_blank" rel="external">Canada Computer</a> just to save the shipping fee. Even more, both also provide price match, which make them more affordable.</p>
+<p>Amazon also has great deals eventually, but due to the currency exchange rate Amazon Canada alway have match higher price regardless of the physical distant is so close. Therefore, using Amazon US is also a good option if living near the boarder. Sometime, even including the import fee purchasing from Amazon US, the price is still cheaper than in Canada. What a life Canadian is!</p>
+<p>Finally, wait holiday or promotional events. Especially Boxing day, you could get the best price. However, normally the quantity are limit. One of my friends bought he loved GPU by lining up at 5am in front of the store.</p>
+<h2 id="Build-up"><a href="#Build-up" class="headerlink" title="Build up"></a>Build up</h2><p>It is usually easy to assembly the parts (just follow the manual), however, my build is a little bit special that have three radiators – one for CPU, two for GPU. Not many people using dual GPU with AIO liquid radiators, which makes there is no much info online to help me choose the right case.  </p>
+<p>After googling, I conclude the Define S could be the best fit for my needs. But I was only half right. Define S is well designed for water cooling system, and beautiful out look. I’m definitely satisfied with the choice. However, the case is a little bit wider to put the GPU AIO radiator on the front panel.</p>
+<p><img src="/img/diy_pc_3.jpg" alt="Building the pc"></p>
+<p>As the above pic shows, I have no options to put the radiator into the tiny space beside PSU. Here is the part I love Define S, it supports the bottom fan and saves my day. Otherwise, I would have to disassemble all parts and exchange another case, then do it again.</p>
+<p>At the bottom front panel, another fan is installed to pull air in to provide positive air pressure. The air flow inside the case illustrates in the following pic:</p>
+<p><img src="/img/diy_pc_4.jpg" alt="Airflow in PC case"></p>
+<h2 id="All-in-all"><a href="#All-in-all" class="headerlink" title="All in all"></a>All in all</h2><p>After a day and a night, the PC finally up and run. Here is some conclusions I learned:</p>
+<ol>
+<li>Patient while purchasing. There is alway a deal waiting to be discovered. However, the price also could infinitely low, watch the history price, it only could be at the lowest at a certain point, after that the price remain the normal or the item discontinued.</li>
+<li>Case is as important as GPU and CPU. A good case can save a day.</li>
+<li>Modular PSU is clean and simple. My build could become true is not only because the case is great, but also the modular PSU save much space for the radiator.</li>
+</ol>
+<p>Here is the complete shot:</p>
+<p><img src="/img/diy_pc_2.jpg" alt="Completed PC"> </p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Auto Sync Github Forked Repos]]></title>
       <url>https://en.abnerchou.me/Blog/562ef8f1/</url>
       <content type="html"><![CDATA[<p>As a Github heavy user, when I saw an interested repos, I would fork them to my “secret” organization to read/use in future. However, when checked them later, most of the time (99%), the repos have already out of synced. There are three options I normally choose:</p>

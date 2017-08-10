@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://en.abnerchou.me/"/>
-  <updated>2017-07-23T03:24:25.254Z</updated>
+  <updated>2017-08-10T21:16:16.407Z</updated>
   <id>https://en.abnerchou.me/</id>
   
   <author>
@@ -16,11 +16,124 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>DIY SLI Liquid Cooling GPU Computer</title>
+    <link href="https://en.abnerchou.me/Blog/31404856/"/>
+    <id>https://en.abnerchou.me/Blog/31404856/</id>
+    <published>2017-08-10T13:54:35.000Z</published>
+    <updated>2017-08-10T21:16:16.407Z</updated>
+    
+    <content type="html"><![CDATA[<p>It’s kind of shame to say, as a computer science major professional, I have never build my own desktop computer ever, until recent. All because the old desktop dead (purchased 2012), I finally made the decision to DIY a powerful amateur deep learning machine.</p>
+<p>Here I will record all the pitfalls, caveats, and tricks during the building processes. Hope could provide some help or hint for people would like to build their dream game (or amateur machine learning) machine.</p>
+<a id="more"></a>
+<p>Here is the <a href="https://ca.pcpartpicker.com/user/AbnerChou/saved/6zvgsY" target="_blank" rel="external">components list</a> for my build on PCPartPicker. The currency is Canadian Dollar since I’m living in the cold North (but don’t have the wall of cause). </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Parts</th>
+<th style="text-align:left">Brand</th>
+<th style="text-align:center">Purchase Price</th>
+<th style="text-align:left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CPU</td>
+<td style="text-align:left">Inter Core i7-7700K 4.2Ghz Quad-Core</td>
+<td style="text-align:center">$427.95</td>
+<td style="text-align:left">From Memory Express.</td>
+</tr>
+<tr>
+<td style="text-align:center">GPU</td>
+<td style="text-align:left">2 X MSI GeForce 1080 DirectX 12 GTX SEA HAWK</td>
+<td style="text-align:center">$732.99 X 2</td>
+<td style="text-align:left">From NewEgg. Got total $40 mail-in rebates</td>
+</tr>
+<tr>
+<td style="text-align:center">CPU Cooling</td>
+<td style="text-align:left">Corsair H100i v2 Hydro Liquid CPU Cooler</td>
+<td style="text-align:center">$124.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Motherboard</td>
+<td style="text-align:left">ASUS PRIME Z270-A LGA 1151</td>
+<td style="text-align:center">$199.99</td>
+<td style="text-align:left">From NewEgg</td>
+</tr>
+<tr>
+<td style="text-align:center">Disk</td>
+<td style="text-align:left">Kingston SSD A400 480GB</td>
+<td style="text-align:center">$194.10</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Memory</td>
+<td style="text-align:left">Kingston HyperX Fury 32GB DDR4 2666MHZ 4X8GB</td>
+<td style="text-align:center">$269.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Case</td>
+<td style="text-align:left">Fractal Design Define S ATX Mid Tower Window Case</td>
+<td style="text-align:center">$89.99</td>
+<td style="text-align:left">From Canada Computers</td>
+</tr>
+<tr>
+<td style="text-align:center">Power</td>
+<td style="text-align:left">EVGA SuperNOVA 750W G2L Modular PSU</td>
+<td style="text-align:center">$139.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Extra</td>
+<td style="text-align:left">Asus USB-AC51 Dual-Band Wireless AC600 Wireless Adapter</td>
+<td style="text-align:center">$39.99</td>
+<td style="text-align:left">From Memory Express. Got $10 mail-in rebates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Purchase-items"><a href="#Purchase-items" class="headerlink" title="Purchase items"></a>Purchase items</h2><p>I have spent about a month to collect all parts. The reason why it took so long is I would lik to get the price as cheaper as possible. To ensure that, I have developed several “techniques”.</p>
+<blockquote>
+<p>The tricks use here are suitable for Canada or best North America, because these online services/stores are only shipping within North America or Canada only. However, you could definitely find alternatives within your regions/countries (check out <a href="https://pcpartpicker.com/" target="_blank" rel="external">PCPartPicker</a> support countries).</p>
+</blockquote>
+<p><img src="/img/diy_pc_1.jpg" alt="Before Open Box"></p>
+<p>First of all, don’t forget using <a href="https://www.ebates.ca" target="_blank" rel="external">ebates</a>. It’s a online rebate website, user could get instant rebate if purchase through the ebates supported vendors online. The rebate rate is from 1% to 5%. Although not much, better than nothing.</p>
+<p>Second, use price matching. Many online store support price matching, some even give 10% more off (I only found one). The <a href="https://www.memoryexpress.com/" target="_blank" rel="external">Memory Express</a> is one of my favorite computer component online shop. It provides the lowest prices most of the time, moreover, its price match is better – match the price plus 10% off on the difference. E.g, a CPU costs $500 on ME, another store has lower price for the same CPU, let’s say it $400, then the price on ME after the price match is 400-(500-400)*10% = $390. The only con shopping on ME is they charge shipping fee and don’t have local store in east Canada.</p>
+<p>As mentioned above, the shipping fee may also cost a lot, especially the item weight increases. So if online store has physical store, use pick up wisely. I have purchased several parts on <a href="http://http://www.ncix.com/" target="_blank" rel="external">NCIX</a> and <a href="http://www.canadacomputers.com" target="_blank" rel="external">Canada Computer</a> just to save the shipping fee. Even more, both also provide price match, which make them more affordable.</p>
+<p>Amazon also has great deals eventually, but due to the currency exchange rate Amazon Canada alway have match higher price regardless of the physical distant is so close. Therefore, using Amazon US is also a good option if living near the boarder. Sometime, even including the import fee purchasing from Amazon US, the price is still cheaper than in Canada. What a life Canadian is!</p>
+<p>Finally, wait holiday or promotional events. Especially Boxing day, you could get the best price. However, normally the quantity are limit. One of my friends bought he loved GPU by lining up at 5am in front of the store.</p>
+<h2 id="Build-up"><a href="#Build-up" class="headerlink" title="Build up"></a>Build up</h2><p>It is usually easy to assembly the parts (just follow the manual), however, my build is a little bit special that have three radiators – one for CPU, two for GPU. Not many people using dual GPU with AIO liquid radiators, which makes there is no much info online to help me choose the right case.  </p>
+<p>After googling, I conclude the Define S could be the best fit for my needs. But I was only half right. Define S is well designed for water cooling system, and beautiful out look. I’m definitely satisfied with the choice. However, the case is a little bit wider to put the GPU AIO radiator on the front panel.</p>
+<p><img src="/img/diy_pc_3.jpg" alt="Building the pc"></p>
+<p>As the above pic shows, I have no options to put the radiator into the tiny space beside PSU. Here is the part I love Define S, it supports the bottom fan and saves my day. Otherwise, I would have to disassemble all parts and exchange another case, then do it again.</p>
+<p>At the bottom front panel, another fan is installed to pull air in to provide positive air pressure. The air flow inside the case illustrates in the following pic:</p>
+<p><img src="/img/diy_pc_4.jpg" alt="Airflow in PC case"></p>
+<h2 id="All-in-all"><a href="#All-in-all" class="headerlink" title="All in all"></a>All in all</h2><p>After a day and a night, the PC finally up and run. Here is some conclusions I learned:</p>
+<ol>
+<li>Patient while purchasing. There is alway a deal waiting to be discovered. However, the price also could infinitely low, watch the history price, it only could be at the lowest at a certain point, after that the price remain the normal or the item discontinued.</li>
+<li>Case is as important as GPU and CPU. A good case can save a day.</li>
+<li>Modular PSU is clean and simple. My build could become true is not only because the case is great, but also the modular PSU save much space for the radiator.</li>
+</ol>
+<p>Here is the complete shot:</p>
+<p><img src="/img/diy_pc_2.jpg" alt="Completed PC"> </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;It’s kind of shame to say, as a computer science major professional, I have never build my own desktop computer ever, until recent. All because the old desktop dead (purchased 2012), I finally made the decision to DIY a powerful amateur deep learning machine.&lt;/p&gt;
+&lt;p&gt;Here I will record all the pitfalls, caveats, and tricks during the building processes. Hope could provide some help or hint for people would like to build their dream game (or amateur machine learning) machine.&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Auto Sync Github Forked Repos</title>
     <link href="https://en.abnerchou.me/Blog/562ef8f1/"/>
     <id>https://en.abnerchou.me/Blog/562ef8f1/</id>
     <published>2017-07-22T22:32:53.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.407Z</updated>
     
     <content type="html"><![CDATA[<p>As a Github heavy user, when I saw an interested repos, I would fork them to my “secret” organization to read/use in future. However, when checked them later, most of the time (99%), the repos have already out of synced. There are three options I normally choose:</p>
 <ol>
@@ -68,7 +181,7 @@
     <link href="https://en.abnerchou.me/Blog/75027340/"/>
     <id>https://en.abnerchou.me/Blog/75027340/</id>
     <published>2016-11-18T22:35:10.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https.png" alt="https"></p>
 <p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
@@ -199,7 +312,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/5c00ca67/"/>
     <id>https://en.abnerchou.me/Blog/5c00ca67/</id>
     <published>2016-10-16T19:41:21.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
 <p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
@@ -299,7 +412,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/8aae6eef/"/>
     <id>https://en.abnerchou.me/Blog/8aae6eef/</id>
     <published>2016-10-06T17:31:44.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
 <p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
@@ -340,7 +453,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/daa790/"/>
     <id>https://en.abnerchou.me/Blog/daa790/</id>
     <published>2016-09-22T21:52:47.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
@@ -401,7 +514,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/2db6c020/"/>
     <id>https://en.abnerchou.me/Blog/2db6c020/</id>
     <published>2016-09-03T22:42:12.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.407Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
 <p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
@@ -449,7 +562,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/e4c9ee8f/"/>
     <id>https://en.abnerchou.me/Blog/e4c9ee8f/</id>
     <published>2014-08-05T22:22:48.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
@@ -479,7 +592,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <link href="https://en.abnerchou.me/Blog/2b608f65/"/>
     <id>https://en.abnerchou.me/Blog/2b608f65/</id>
     <published>2014-07-13T00:43:47.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,
 which is cheap for a student and who is price sensitive.
@@ -635,7 +748,7 @@ Meanwhile, you could do anything as you have your own server.&lt;/p&gt;
     <link href="https://en.abnerchou.me/Blog/e0efd72f/"/>
     <id>https://en.abnerchou.me/Blog/e0efd72f/</id>
     <published>2014-07-03T02:44:44.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
+    <updated>2017-08-10T21:16:16.411Z</updated>
     
     <content type="html"><![CDATA[<p>Because our Earth is in a system called Solar System.
 I don’t think the answer would be simple as that.
@@ -685,138 +798,6 @@ But why we are not saying the Sun is orbiting Earth?
       <category term="Javascript" scheme="https://en.abnerchou.me/tags/Javascript/"/>
     
       <category term="Simulation" scheme="https://en.abnerchou.me/tags/Simulation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>My First Blog Here</title>
-    <link href="https://en.abnerchou.me/Blog/90d363bc/"/>
-    <id>https://en.abnerchou.me/Blog/90d363bc/</id>
-    <published>2014-03-12T02:52:09.000Z</published>
-    <updated>2017-07-23T03:24:25.254Z</updated>
-    
-    <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
-<p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
-and I will briefly describe the way to set it up.</p>
-<a id="more"></a>
-<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">setup page</a>.
-Follow the instruction,
-install the dependencies that Octopress will need.</p>
-<p>Then choose the platform that the blog will be hosted on,
-here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="external">deploying github pages</a>.
-<strong>Note</strong>: an error occured while I followed the instruction to rake it.</p>
-<pre class=" language-bash"><code class="language-bash">rake aborted<span class="token operator">!</span>
-You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.
-Prepending <span class="token variable"><span class="token variable">`</span>bundle <span class="token function">exec</span><span class="token variable">`</span></span> to your <span class="token function">command</span> may solve this.
-/Users/Haochen/myBlog/octopress/Rakefile:2:in `<span class="token operator">&lt;</span>top <span class="token punctuation">(</span>required<span class="token punctuation">)</span><span class="token operator">></span>'
-<span class="token punctuation">(</span>See full trace by running task with --trace<span class="token punctuation">)</span>
-</code></pre>
-<p>This error could be easily solved by adding <code>bundle exec</code> in front of the <code>rake</code> command.</p>
-<p>After <code>rake generate</code>, go to ‘_deploy’ folder, and type <code>git pull origin master</code>.
-Then type <code>rake deploy</code>.
-Otherwise, there will be some errors:</p>
-<pre class=" language-bash"><code class="language-bash">error: failed to push some refs to <span class="token string">'git@gihub.com:your github page repo'</span>
-</code></pre>
-<p>Now, your blog page is on-line.
-Although the pages are hosted on github,
-you still need version control on your Octopress settings,
-so don’t forget to commit to the ‘source’ branch.</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> add <span class="token keyword">.</span>
-<span class="token function">git</span> commit -m <span class="token string">'your message'</span>
-<span class="token function">git</span> push origin <span class="token function">source</span>
-</code></pre>
-<p>I’d rather put them into a bash file git_commit_source.sh, rather than typing every time</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token operator">!</span>/bin/bash
-<span class="token function">git</span> add <span class="token keyword">.</span> <span class="token operator">&amp;&amp;</span>
-<span class="token function">git</span> commit -m <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token operator">&amp;&amp;</span> <span class="token comment" spellcheck="true">#first argument will be the commit message</span>
-<span class="token function">git</span> push origin <span class="token function">source</span>
-</code></pre>
-<p>To generate a blog page, you could use <code>rake new_post[&#39;blog name&#39;]</code>.
-However, as I mentioned before the <code>rake</code> command wouldn’t work properly if the ruby version didn’t match.
-We could use <code>bundle exec rake</code> to run the command.
-Moreover, if you are using <strong>zsh shell</strong>, you should also add <code>noglob</code> in front of these command, because symbol ‘[‘ and ‘]’ are reserved in zsh for regular expression.</p>
-<p>Finally, my blog is here.
-Much easier than I expected.
-Using Octopress can save your time on setting a blog site, and it generates pages automatically.</p>
-<p>This blog is still underconstruction. I would like to make it more simple and pretty.
-K.I.S.S</p>
-<p><strong>Update</strong> (several minutes later):
-Encountered a problem of creating single page, e.g. 404.html.
-The command <code>rake new-page[&#39;404&#39;]</code> cannot work on zsh due to ‘[]’ is converted.
-Hence, the only way to add cutomize page is to write a markdown file and put into ‘source’ fold.
-But, do not forget to add the following to the head of page:</p>
-<pre class=" language-markdown"><code class="language-markdown"><span class="token hr punctuation">---</span>
-layout: page
-title: "Super Awesome"
-date: 2011-07-03 5:59
-comments: true
-sharing: true
-<span class="token title important">footer: true
-<span class="token punctuation">---</span></span>
-</code></pre>
-<p><strong>Update</strong> (2014-Mar-12):
-<code>rake preview</code> has problem with Safari.
-Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> .
-Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="external">ref</a>]</p>
-<p>Due to save typing, I have written some bash files (deploy.sh and preview.sh):</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-
-bundle <span class="token function">exec</span> rake generate <span class="token operator">&amp;&amp;</span>
-bundle <span class="token function">exec</span> rake deploy
-</code></pre>
-<pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-
-<span class="token comment" spellcheck="true"># set up the octopress preview</span>
-<span class="token comment" spellcheck="true"># open http://localhost:4000 in Chrome</span>
-<span class="token comment" spellcheck="true"># Safari has some wired error in it</span>
-
-<span class="token comment" spellcheck="true"># if previous preview is running, stop it</span>
-preview_pid<span class="token operator">=</span>`/bin/ps -fu <span class="token variable">$USER</span><span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"rake\ preview"</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">"grep"</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span>`
-<span class="token function">kill</span> -2 <span class="token variable">$preview_pid</span>
-
-bundle <span class="token function">exec</span> rake generate <span class="token operator">&amp;&amp;</span>
-bundle <span class="token function">exec</span> rake preview <span class="token operator">&amp;</span>
-
-<span class="token function">sleep</span> 5 <span class="token comment" spellcheck="true"># wait a while to make sure the preview already running</span>
-
-<span class="token comment" spellcheck="true">#change the browser command if you are using a different OS and browser</span>
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome <span class="token string">'http://localhost:4000'</span>
-
-pidof <span class="token string">"Google Chrome"</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">wait</span>
-preview_pid<span class="token operator">=</span>`/bin/ps -fu <span class="token variable">$USER</span><span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"rake\ preview"</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">"grep"</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span>`
-<span class="token function">kill</span> -2 <span class="token variable">$preview_pid</span>
-<span class="token comment" spellcheck="true">#echo "$preview_pid"</span>
-<span class="token keyword">echo</span> <span class="token string">"Preview DONE!"</span>
-</code></pre>
-<p>Please ignore the text below, the latest code fixes all of them. :P</p>
-<p><del><strong>Warnning</strong>:
-This preview shell script may not work for you if you are a ruby developer,
-or you are using some programs written or depended in/on ruby or ruby packages,
-because it killed all ruby processes at the end.
-Do not forget to fully quit Chrome (Comman+q in MacOS) before starting a new preview,
-otherwise unknown error would occur (duplicate processes).</del></p>
-<p><del>BTW, the preview.sh also left a messy terminal for you.
-Well, everything have side effects.
-But you could add <code>clear</code> command at the end of the script,
-if you don’t really care about the traces.</del></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Well, this is my first blog here (right now on github).&lt;/p&gt;
-&lt;p&gt;I’m using the &lt;a href=&quot;http://octopress.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Octopress&lt;/a&gt; as blog content management,
-and I will briefly describe the way to set it up.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Website" scheme="https://en.abnerchou.me/categories/Website/"/>
-    
-    
-      <category term="Blog" scheme="https://en.abnerchou.me/tags/Blog/"/>
-    
-      <category term="General" scheme="https://en.abnerchou.me/tags/General/"/>
-    
-      <category term="Octopress" scheme="https://en.abnerchou.me/tags/Octopress/"/>
     
   </entry>
   

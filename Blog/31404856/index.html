@@ -10,7 +10,7 @@
     
     <title>
         
-            Build SSL HTTPS Website Using Docker | 
+            DIY SLI Liquid Cooling GPU Computer | 
         
         Hard Code
     </title>
@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Abner Chou">
     <meta name="description" content="A Developer in Limbo">
-    <meta name="keywords" content="developer, blog, abner, code,HTTPS,SSL,Nginx">
+    <meta name="keywords" content="developer, blog, abner, code">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/favicon.png">
@@ -60,9 +60,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://en.abnerchou.me">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Build SSL HTTPS Website Using Docker | Hard Code">
+    <meta property="og:title" content="DIY SLI Liquid Cooling GPU Computer | Hard Code">
     <meta property="og:description" content="A Developer in Limbo">
-    <meta property="og:article:tag" content="HTTPS"> <meta property="og:article:tag" content="SSL"> <meta property="og:article:tag" content="Nginx"> 
+    
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -253,7 +253,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Prerequisites"><span class="post-toc-number">1.</span> <span class="post-toc-text">Prerequisites</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Set-Up"><span class="post-toc-number">2.</span> <span class="post-toc-text">Set Up</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#docker-compose-yml-for-nignx"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">docker-compose.yml for nignx</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Generate-dhparam"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Generate dhparam</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Create-Nginx-Config-file"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Create Nginx Config file</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Make-Nginx-Online"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Make Nginx Online</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#docker-compose-yml-for-letsencrypt"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">docker-compose.yml for letsencrypt</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Generate-SSL-Certificate"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">Generate SSL Certificate</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Conclusion"><span class="post-toc-number">3.</span> <span class="post-toc-text">Conclusion</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Purchase-items"><span class="post-toc-number">1.</span> <span class="post-toc-text">Purchase items</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Build-up"><span class="post-toc-number">2.</span> <span class="post-toc-text">Build up</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#All-in-all"><span class="post-toc-number">3.</span> <span class="post-toc-text">All in all</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -290,7 +290,7 @@
         
     
             <p class="article-headline-p">
-                Build SSL HTTPS Website Using Docker
+                DIY SLI Liquid Cooling GPU Computer
             </p>
         </div>
 
@@ -309,7 +309,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Abner Chou</strong>
-        <span>Nov 18, 2016</span>
+        <span>Aug 10, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -330,7 +330,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">Read this article on other device</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACVElEQVR42u3aQZLCMAwEwPz/0/CBXTOyHMdQndMWBNadgy1Gul4/fV14eHh4eHh4eHiH8a74Gt//x7/551Pjezprw8PDw9vJ+7DVBssaI6v3t9aGh4eHt5E3PgySReQL6hwtH9aGh4eHdxgvweTF8dzxg4eHh/eNvGo8MRkr4OHh4R3PS37wJ6VwJ8h4OGvBw8PDi3nVBtjOvx/o7+Hh4eENeeWRpjh+rZba+WFQGLrCw8PDu4E313zKD4/Ot02Gv3h4eHgbebc39RvvJgNbeHh4eCfwEnbevkqK6fwR4OHh4T3FWzU0kA9d5Y8sD0fw8PDw9vPyRSSATry74OHi4eHhbedV381ji/x7cmShv4eHh4e3lJc3qPqjBnPHQOGB4uHh4R3Ay7f4tcX04hgXDw8P7wZedcvOx6HG93RCZDw8PLz9vITU39xzXif4wMPDw9vDS0LbuRGB6lExV9bj4eHh7eflEW1+MCSNtE4hjoeHh/csr9rEykOEu6nloSs8PDy8Rby5+GBuoVVM/rjx8PDwdvKqMUS+feeAapmOh4eHdyZvbvvuN8A6BToeHh7eHl51EeODpBpt5DFHK4zAw8PDW8rrRLr5kFZykCRhRxRV4OHh4d3Mu+KrekgkpfBcYLGgpMbDw8Nr8/JgN29HReVvUNCXjxA8PDy8jbykXO5jqiMI1VEGPDw8vNN4/c/msW+OxMPDw/tG3qpXqsMHeHh4eM/yOmHEXMHdj33x8PDwnuJVG2B5KZwMFrSih7mZMjw8PLwG7/cuPDw8PDw8PDy8A643gORY3OTMiBAAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACYUlEQVR42u3aQVYEIQwFwL7/pfUA8wZ/CDA4r1i50IZiEWKS5+er14OHh4eHh4eHh3cZ74nX61+Nv5PsUv1m9B08PDy8I7w/Qu2b33ndID/EmNQ5Gx4eHt5J3rsD5T/PBffxZeVnw8PDw7uZlwf0MXju+vDw8PD+Ly8vLiSJdf4FPDw8vHt4yT/8SQEiJ1Ufle21Fjw8PLyYVy0ZnPz5aH8PDw8PL+CVR5qSpHb4JHTaXdtnyvDw8PACXqfQUG1fJVfWGUTAw8PDO8Nbm+DODWlVW2XllBoPDw9vKS8v0eYbdIao5sYR8PDw8E7y5pr3/aPkyXp+HXh4eHhneDksLyKMU+RVowl4eHh4n+Il2+eH7ifceXmiPDqAh4eHt4GXb9wZAugMv0bJPR4eHt5mXhKI+6E8D+7VMVk8PDy8O3lJUM4T6GpTrVzywMPDw9vMyxPranI8PvrclS0oRuDh4eEtHVfNN6iWMPJRgPw6lk1G4OHh4TV4eZs/3/4prupeeHh4eJ/i7Uh/OwWOamEXDw8P7yQvKb/uaJXNFZGjJw0PDw/vCC9v83cKCknK3rksPDw8vPO8ahDPH5U8rFfxeHh4eDfw8ubWXLEgfwaqBVw8PDy8M7zqmkuv+89JYSgBDw8PbzOv09TvlHqTskX+ZTw8PLzzvGrKmwTxyfZVcdgLDw8P77O8aoCeK85WW27Lai14eHh4F/Dm0vFxUWOOjYeHh3c/b9V4VnWIIUrT8fDw8A7yqilyf8ggH2Y9VMbFw8PD29AAyx+J/HD9ZhseHh7eSd73LTw8PDw8PDw8vAvWL5VvXcmhHjbVAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -342,7 +342,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/HTTPS/">HTTPS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Nginx/">Nginx</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/SSL/">SSL</a>
+        
     </ul>
     
 
@@ -358,7 +358,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Build SSL HTTPS Website Using Docker&url=https://en.abnerchou.me//Blog/75027340/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=DIY SLI Liquid Cooling GPU Computer&url=https://en.abnerchou.me//Blog/31404856/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 Share to Weibo
             </li>
@@ -367,7 +367,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Build SSL HTTPS Website Using Docker&url=https://en.abnerchou.me//Blog/75027340/index.html&via=Abner Chou" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=DIY SLI Liquid Cooling GPU Computer&url=https://en.abnerchou.me//Blog/31404856/index.html&via=Abner Chou" target="_blank">
             <li class="mdl-menu__item">
                 Share to Twitter
             </li>
@@ -376,7 +376,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://en.abnerchou.me//Blog/75027340/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://en.abnerchou.me//Blog/31404856/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to Facebook
             </li>
@@ -385,7 +385,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://en.abnerchou.me//Blog/75027340/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://en.abnerchou.me//Blog/31404856/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to Google+
             </li>
@@ -409,109 +409,100 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><img src="\img\https.png" alt="https"></p>
-<p>When you’re visiting my website, you may not see the https in the URL, which means you have been directed to a CDN node other than my VPS server. This doesn’t mean the method doesn’t work. Anyway, let’s begin the talk.</p>
-<p>The purpose of this post is to help people to avoid the pitfalls that I encountered, and severs as a note for future reference.</p>
+        <p>It’s kind of shame to say, as a computer science major professional, I have never build my own desktop computer ever, until recent. All because the old desktop dead (purchased 2012), I finally made the decision to DIY a powerful amateur deep learning machine.</p>
+<p>Here I will record all the pitfalls, caveats, and tricks during the building processes. Hope could provide some help or hint for people would like to build their dream game (or amateur machine learning) machine.</p>
 <a id="more"></a>
-<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</li>
-<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</li>
-<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
-<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
-<li>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</li>
-<li>Git is also an option, unless you would like to build the image on your own.</li>
-</ul>
-<h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><p>Only two docker images are used:</p>
-<ul>
-<li><a href="https://github.com/bringnow/docker-letsencrypt-manager" target="_blank" rel="external">Docker-letsencrypt-manager</a></li>
-<li><a href="https://github.com/bringnow/docker-nginx-letsencrypt" target="_blank" rel="external">Docker-nginx-letsencrypt</a></li>
-</ul>
-<p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
-<h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">nginx</span><span class="token punctuation">:</span>
-  <span class="token key atrule">image</span><span class="token punctuation">:</span> bringnow/nginx<span class="token punctuation">-</span>letsencrypt
-  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> ./nginx.conf<span class="token punctuation">:</span>/etc/nginx/nginx.conf
-    <span class="token punctuation">-</span> /etc/letsencrypt<span class="token punctuation">:</span>/etc/letsencrypt
-    <span class="token punctuation">-</span> /var/acme<span class="token punctuation">-</span>webroot<span class="token punctuation">:</span>/var/acme<span class="token punctuation">-</span>webroot
-    <span class="token punctuation">-</span> /srv/docker/nginx/dhparam<span class="token punctuation">:</span>/etc/nginx/dhparam
-  <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token string">"80:80"</span>
-    <span class="token punctuation">-</span> <span class="token string">"443:443"</span>
-  <span class="token key atrule">net</span><span class="token punctuation">:</span> <span class="token string">"host"</span>
-  <span class="token key atrule">dns_search</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token string">"example.com"</span>
-</code></pre>
-<p>Modify it accordingly to fit your environment.</p>
-<h4 id="Generate-dhparam"><a href="#Generate-dhparam" class="headerlink" title="Generate dhparam"></a>Generate dhparam</h4><p>Although the nginx docker will create DH parameters on initial start up, it is time comsuming to generate the 4096 bit DH parameters (more than an hour on my VPS). Run the following command and copy the generated file to the <code>/srv/docker/nginx/dhparam</code> folder (set in docker-compose.yml).</p>
-<pre class=" language-bash"><code class="language-bash">openssl dhparam -out RSA4096.pem -5 4096
-</code></pre>
-<h4 id="Create-Nginx-Config-file"><a href="#Create-Nginx-Config-file" class="headerlink" title="Create Nginx Config file"></a>Create Nginx Config file</h4><p>In order to complete the letsencrypt challenge, the server has to open the 80 port. The nginx-letsencrypt image already come with the setting snippets: <code>snippets/letsencryptauth.conf</code> and <code>snippets/sslconfig.conf</code>.</p>
-<p>Here is the sample config file:</p>
-<pre class=" language-nginx"><code class="language-nginx"><span class="token keyword">events</span> <span class="token punctuation">{</span>
-  <span class="token keyword">worker_connections</span> <span class="token number">1024</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">http</span> <span class="token punctuation">{</span>
-
-  <span class="token keyword">include</span> snippets<span class="token operator">/</span>letsencryptauth<span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
-  <span class="token keyword">include</span> snippets<span class="token operator">/</span>sslconfig<span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
-
-  <span class="token keyword">server</span> <span class="token punctuation">{</span>
-    <span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span> default_server<span class="token punctuation">;</span>
-    <span class="token keyword">server_name</span> example<span class="token punctuation">.</span>com www<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com
-
-    <span class="token keyword">ssl_certificate</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>fullchain<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
-    <span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>privkey<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
-
-    <span class="token keyword">add_header</span> Strict<span class="token operator">-</span>Transport<span class="token operator">-</span>Security <span class="token string">"max-age=31536000; includeSubdomains"</span> always<span class="token punctuation">;</span>
-
-    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
-      <span class="token comment" spellcheck="true"># Just return a blank response</span>
-      <span class="token keyword">return</span> <span class="token number">200</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p><strong>NOTE</strong>: Please comment out those two lines start up ssl_certificate before the certificate generated.</p>
-<h4 id="Make-Nginx-Online"><a href="#Make-Nginx-Online" class="headerlink" title="Make Nginx Online"></a>Make Nginx Online</h4><p>Now run the following command to bring Nginx online:</p>
-<pre class=" language-bash"><code class="language-bash">docker-compose up -d
-</code></pre>
-<p>To confim if the docker is running correctly, we could look the log file to check:</p>
-<pre class=" language-bash"><code class="language-bash">docker-compose logs
-</code></pre>
-<p>If there are some error messages, please check the Nginx config file and restart the docker.</p>
-<h4 id="docker-compose-yml-for-letsencrypt"><a href="#docker-compose-yml-for-letsencrypt" class="headerlink" title="docker-compose.yml for letsencrypt"></a>docker-compose.yml for letsencrypt</h4><p>In another folder, create a docker-compose.yml:</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">cli</span><span class="token punctuation">:</span>
-  <span class="token key atrule">image</span><span class="token punctuation">:</span> bringnow/letsencrypt<span class="token punctuation">-</span>manager<span class="token punctuation">:</span>latest
-  <span class="token key atrule">env_file</span><span class="token punctuation">:</span> config.env
-  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> /etc/letsencrypt<span class="token punctuation">:</span>/etc/letsencrypt
-    <span class="token punctuation">-</span> /var/lib/letsencrypt<span class="token punctuation">:</span>/var/lib/letsencrypt
-    <span class="token punctuation">-</span> /var/acme<span class="token punctuation">-</span>webroot<span class="token punctuation">:</span>/var/acme<span class="token punctuation">-</span>webroot
-
-<span class="token key atrule">cron</span><span class="token punctuation">:</span>
-  <span class="token key atrule">image</span><span class="token punctuation">:</span> bringnow/letsencrypt<span class="token punctuation">-</span>manager<span class="token punctuation">:</span>latest
-  <span class="token key atrule">env_file</span><span class="token punctuation">:</span> config.env
-  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> /etc/letsencrypt<span class="token punctuation">:</span>/etc/letsencrypt
-    <span class="token punctuation">-</span> /var/lib/letsencrypt<span class="token punctuation">:</span>/var/lib/letsencrypt
-    <span class="token punctuation">-</span> /var/acme<span class="token punctuation">-</span>webroot<span class="token punctuation">:</span>/var/acme<span class="token punctuation">-</span>webroot
-  <span class="token key atrule">command</span><span class="token punctuation">:</span> cron<span class="token punctuation">-</span>auto<span class="token punctuation">-</span>renewal
-  <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
-</code></pre>
-<p>Modify it accordingly. Make sure the folder <code>/var/lib/letsencrypt</code> and <code>/var/acme-webroot</code> have created and exist.</p>
-<p>Then create config.env file in the same folder and input your email:</p>
-<pre class=" language-bash"><code class="language-bash">LE_EMAIL<span class="token operator">=</span>
-LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
-</code></pre>
-<h4 id="Generate-SSL-Certificate"><a href="#Generate-SSL-Certificate" class="headerlink" title="Generate SSL Certificate"></a>Generate SSL Certificate</h4><p>Finally, we could create our Https certificate. Run the commands:</p>
-<pre class=" language-bash"><code class="language-bash">docker-compose run cli add <span class="token operator">&lt;</span>domain<span class="token operator">></span> <span class="token punctuation">[</span>alternative domains<span class="token punctuation">]</span>
-</code></pre>
-<p>If it fails, please check if Nginx is runing and the DNS setting is correct.</p>
-<p><strong>NOTE</strong>: If the certificate generate, don’t forget to remove comment on ssl_certificate lines in Nginx config file, and restart it.</p>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Now your website should up and running with https. Enjoy.</p>
-<p>~ EOF ~</p>
+<p>Here is the <a href="https://ca.pcpartpicker.com/user/AbnerChou/saved/6zvgsY" target="_blank" rel="external">components list</a> for my build on PCPartPicker. The currency is Canadian Dollar since I’m living in the cold North (but don’t have the wall of cause). </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Parts</th>
+<th style="text-align:left">Brand</th>
+<th style="text-align:center">Purchase Price</th>
+<th style="text-align:left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CPU</td>
+<td style="text-align:left">Inter Core i7-7700K 4.2Ghz Quad-Core</td>
+<td style="text-align:center">$427.95</td>
+<td style="text-align:left">From Memory Express.</td>
+</tr>
+<tr>
+<td style="text-align:center">GPU</td>
+<td style="text-align:left">2 X MSI GeForce 1080 DirectX 12 GTX SEA HAWK</td>
+<td style="text-align:center">$732.99 X 2</td>
+<td style="text-align:left">From NewEgg. Got total $40 mail-in rebates</td>
+</tr>
+<tr>
+<td style="text-align:center">CPU Cooling</td>
+<td style="text-align:left">Corsair H100i v2 Hydro Liquid CPU Cooler</td>
+<td style="text-align:center">$124.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Motherboard</td>
+<td style="text-align:left">ASUS PRIME Z270-A LGA 1151</td>
+<td style="text-align:center">$199.99</td>
+<td style="text-align:left">From NewEgg</td>
+</tr>
+<tr>
+<td style="text-align:center">Disk</td>
+<td style="text-align:left">Kingston SSD A400 480GB</td>
+<td style="text-align:center">$194.10</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Memory</td>
+<td style="text-align:left">Kingston HyperX Fury 32GB DDR4 2666MHZ 4X8GB</td>
+<td style="text-align:center">$269.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Case</td>
+<td style="text-align:left">Fractal Design Define S ATX Mid Tower Window Case</td>
+<td style="text-align:center">$89.99</td>
+<td style="text-align:left">From Canada Computers</td>
+</tr>
+<tr>
+<td style="text-align:center">Power</td>
+<td style="text-align:left">EVGA SuperNOVA 750W G2L Modular PSU</td>
+<td style="text-align:center">$139.99</td>
+<td style="text-align:left">From Memory Express</td>
+</tr>
+<tr>
+<td style="text-align:center">Extra</td>
+<td style="text-align:left">Asus USB-AC51 Dual-Band Wireless AC600 Wireless Adapter</td>
+<td style="text-align:center">$39.99</td>
+<td style="text-align:left">From Memory Express. Got $10 mail-in rebates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Purchase-items"><a href="#Purchase-items" class="headerlink" title="Purchase items"></a>Purchase items</h2><p>I have spent about a month to collect all parts. The reason why it took so long is I would lik to get the price as cheaper as possible. To ensure that, I have developed several “techniques”.</p>
+<blockquote>
+<p>The tricks use here are suitable for Canada or best North America, because these online services/stores are only shipping within North America or Canada only. However, you could definitely find alternatives within your regions/countries (check out <a href="https://pcpartpicker.com/" target="_blank" rel="external">PCPartPicker</a> support countries).</p>
+</blockquote>
+<p><img src="/img/diy_pc_1.jpg" alt="Before Open Box"></p>
+<p>First of all, don’t forget using <a href="https://www.ebates.ca" target="_blank" rel="external">ebates</a>. It’s a online rebate website, user could get instant rebate if purchase through the ebates supported vendors online. The rebate rate is from 1% to 5%. Although not much, better than nothing.</p>
+<p>Second, use price matching. Many online store support price matching, some even give 10% more off (I only found one). The <a href="https://www.memoryexpress.com/" target="_blank" rel="external">Memory Express</a> is one of my favorite computer component online shop. It provides the lowest prices most of the time, moreover, its price match is better – match the price plus 10% off on the difference. E.g, a CPU costs $500 on ME, another store has lower price for the same CPU, let’s say it $400, then the price on ME after the price match is 400-(500-400)*10% = $390. The only con shopping on ME is they charge shipping fee and don’t have local store in east Canada.</p>
+<p>As mentioned above, the shipping fee may also cost a lot, especially the item weight increases. So if online store has physical store, use pick up wisely. I have purchased several parts on <a href="http://http://www.ncix.com/" target="_blank" rel="external">NCIX</a> and <a href="http://www.canadacomputers.com" target="_blank" rel="external">Canada Computer</a> just to save the shipping fee. Even more, both also provide price match, which make them more affordable.</p>
+<p>Amazon also has great deals eventually, but due to the currency exchange rate Amazon Canada alway have match higher price regardless of the physical distant is so close. Therefore, using Amazon US is also a good option if living near the boarder. Sometime, even including the import fee purchasing from Amazon US, the price is still cheaper than in Canada. What a life Canadian is!</p>
+<p>Finally, wait holiday or promotional events. Especially Boxing day, you could get the best price. However, normally the quantity are limit. One of my friends bought he loved GPU by lining up at 5am in front of the store.</p>
+<h2 id="Build-up"><a href="#Build-up" class="headerlink" title="Build up"></a>Build up</h2><p>It is usually easy to assembly the parts (just follow the manual), however, my build is a little bit special that have three radiators – one for CPU, two for GPU. Not many people using dual GPU with AIO liquid radiators, which makes there is no much info online to help me choose the right case.  </p>
+<p>After googling, I conclude the Define S could be the best fit for my needs. But I was only half right. Define S is well designed for water cooling system, and beautiful out look. I’m definitely satisfied with the choice. However, the case is a little bit wider to put the GPU AIO radiator on the front panel.</p>
+<p><img src="/img/diy_pc_3.jpg" alt="Building the pc"></p>
+<p>As the above pic shows, I have no options to put the radiator into the tiny space beside PSU. Here is the part I love Define S, it supports the bottom fan and saves my day. Otherwise, I would have to disassemble all parts and exchange another case, then do it again.</p>
+<p>At the bottom front panel, another fan is installed to pull air in to provide positive air pressure. The air flow inside the case illustrates in the following pic:</p>
+<p><img src="/img/diy_pc_4.jpg" alt="Airflow in PC case"></p>
+<h2 id="All-in-all"><a href="#All-in-all" class="headerlink" title="All in all"></a>All in all</h2><p>After a day and a night, the PC finally up and run. Here is some conclusions I learned:</p>
+<ol>
+<li>Patient while purchasing. There is alway a deal waiting to be discovered. However, the price also could infinitely low, watch the history price, it only could be at the lowest at a certain point, after that the price remain the normal or the item discontinued.</li>
+<li>Case is as important as GPU and CPU. A good case can save a day.</li>
+<li>Modular PSU is clean and simple. My build could become true is not only because the case is great, but also the modular PSU save much space for the radiator.</li>
+</ol>
+<p>Here is the complete shot:</p>
+<p><img src="/img/diy_pc_2.jpg" alt="Completed PC"> </p>
 
     
 
@@ -597,8 +588,8 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://en.abnerchou.me/Blog/75027340/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = '75027340'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://en.abnerchou.me/Blog/31404856/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '31404856'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     $('.btn_click_load').click(function() {  //click to load comments
         (function() { // DON'T EDIT BELOW THIS LINE
@@ -629,21 +620,13 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/Blog/562ef8f1/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Newer
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/Blog/5c00ca67/" id="post_nav-older" class="next-content">
+        <a href="/Blog/562ef8f1/" id="post_nav-older" class="next-content">
             Older
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
