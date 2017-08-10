@@ -4,7 +4,10 @@ comments: true
 abbrlink: '31404856'
 date: 2017-08-10 13:54:35
 tags:
-categories:
+  - SLI
+  - Water Cooling
+  - Deep Learning
+categories: DIY
 ---
 
 It's kind of shame to say, as a computer science major professional, I have never build my own desktop computer ever, until recent. All because the old desktop dead (purchased 2012), I finally made the decision to DIY a powerful amateur deep learning machine.
