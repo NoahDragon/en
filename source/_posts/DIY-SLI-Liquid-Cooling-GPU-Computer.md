@@ -74,5 +74,7 @@ Here is the complete shot:
 
 ![Completed PC](/img/diy_pc_2.jpg) 
 
+**Update(2017-Aug-14)**: I also bought an M.2 SSD to install the Ubuntu OS, as the most machine learning algorithms are build upon Linux system. Moreover, the driver officially provided for the Asus USB-AC51 is not compatible for Ubuntu 16.04 LTS (I also tried several customized drivers, they may fit the 14.04 LTS but not the 16.04). So be careful when purchase the USB Wifi adapter, here is a [list](http://willhaley.com/blog/linux-16-04-1-usb-wifi-adapters/) that has some "work out of box" USB for Ubuntu 16.04 and above.
+
 
 
