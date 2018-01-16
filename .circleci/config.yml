@@ -31,7 +31,7 @@ jobs:
       - run: yarn install
       - run: echo -e 'Host 118.193.213.247\n\tStrictHostKeyChecking no\n' >> ~/.ssh/config
       - run: ssh-keyscan -H -t rsa,dsa -p 21521 118.193.213.247 >> ~/.ssh/known_hosts
-      - run: hexo clean
+      - run: yarn run clean
       - run: yarn run build
 
       - save_cache:
