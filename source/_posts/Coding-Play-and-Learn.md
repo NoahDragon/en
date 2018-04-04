@@ -51,5 +51,9 @@ Here are several sites that allow you to using coding to play.
 
 [Halite](https://halite.io/) Artificial Intelligence chanllenge game. 
 
+![Crypto Zombies](/img/cryptozombies.jpeg)
+
+[CryptoZombies](https://cryptozombies.io/) is an interactive code school that teaches you to write smart contracts in Solidity through building your own crypto-collectables game.
+
 Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.
 
