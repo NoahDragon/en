@@ -2,7 +2,7 @@
 title: Auto Sync Github Forked Repos
 comments: true
 categories:
-  - CI
+  - DevOps
 abbrlink: 562ef8f1
 date: 2017-07-22 22:32:53
 tags:

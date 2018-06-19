@@ -6,7 +6,8 @@ tags:
   - HTTPS
   - Cloudflare
   - Github
-categories: Website
+  - Website
+categories: Server
 abbrlink: daa790
 date: 2016-09-22 21:52:47
 ---
