@@ -1,5 +1,5 @@
 ---
-title: A real scenario machine learning question
+title: A Real Scenario Machine Learning Question
 comments: true
 tags:
   - Machine Learning
