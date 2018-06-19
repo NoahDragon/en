@@ -68,8 +68,8 @@ To mitigate the impact of incorrect labels, we could add an extra step in datase
 
 I set up an experiment for the solution, which trained YOLOv3 [[10](https://pjreddie.com/darknet/yolo/)] (pre-trained on ImageNet [[11](http://www.image-net.org/)]) with 30 manually labeled invoices images (google searched images, each invoice contains vendor, logo, and amount labels). Although the predicated labels on validation dataset look promising, the mAP is almost zero on the test dataset. The reason for the low performance may be caused by the principle of CNN, the CNN only can learn the features that appear in the training set. The way to improve the model would be training on a larger dataset and assume it covers all test cases. Therefore, I would like to propose two new solutions for the ML question.
 
-    1. Using the Recurrent Neural Network (RNN) with Long Short-Term Memory cells (LSTM) [[12](https://en.wikipedia.org/wiki/Long_short-term_memory)].
-    2. Using the Reinforcement Learning (RL) [[13](https://en.wikipedia.org/wiki/Reinforcement_learning)].
+  1. Using the Recurrent Neural Network (RNN) with Long Short-Term Memory cells (LSTM) [[12](https://en.wikipedia.org/wiki/Long_short-term_memory)].
+  2. Using the Reinforcement Learning (RL) [[13](https://en.wikipedia.org/wiki/Reinforcement_learning)].
 
 ## RNN
 
