@@ -21,11 +21,6 @@ addons:
       - g++-4.8
   ssh_known_hosts: 
       - github.com
-      - 118.193.213.247
-
-before_script:
-  - echo -e 'Host 118.193.213.247\n\tStrictHostKeyChecking no\n' >> ~/.ssh/config
-  - ssh-keyscan -H -t rsa,dsa -p 21521 118.193.213.247 >> ~/.ssh/known_hosts
 
 script:
   - npm run build
@@ -37,6 +32,3 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    
-after_script:
-  - rsync -avz -e 'ssh -p 21521' ./public/ haochen@118.193.213.247:/home/haochen/site/root/en/
