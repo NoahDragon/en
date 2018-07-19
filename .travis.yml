@@ -21,7 +21,6 @@ addons:
       - g++-4.8
   ssh_known_hosts: 
       - github.com
-      - 118.193.213.247
 
 script:
   - npm run build
@@ -30,6 +29,7 @@ script:
 deploy:
   provider: script
   script: .travis/deploy.sh
+  github-token: $GITHUB_TOKEN
   skip_cleanup: true
   on:
     branch: master
