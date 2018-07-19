@@ -28,11 +28,11 @@ jobs:
       
       # install dependency
       - run: sudo apt update
-      - run: sudo apt install -y rsync --fix-missing
       - run: npm install
-      - run: echo -e 'Host 118.193.213.247\n\tStrictHostKeyChecking no\n' >> ~/.ssh/config
-      - run: ssh-keyscan -H -t rsa,dsa -p 21521 118.193.213.247 >> ~/.ssh/known_hosts
+      - run: git config --global user.email "hi@abnerchou.me"
+      - run: git config --global user.name "Abner"
       - run: npm run build
+      - run: npm run deploy
 
       - save_cache:
           paths:
