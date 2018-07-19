@@ -11,7 +11,7 @@ date: 2018-01-16 16:13:10
 ---
 
 
-I joined the [Kaggle TensorFlow Speech Recognition Challenge](https://www.kaggle.com/c/tensorflow-speech-recognition-challenge) two month ago. I should say I was attracted by the money rewards, but turns out I was learned more then I expected.
+I joined the [Kaggle TensorFlow Speech Recognition Challenge](https://www.kaggle.com/c/tensorflow-speech-recognition-challenge) two month ago. I should say I was attracted by the money rewards, but turns out I was learned more than I expected.
 
 <!-- more -->
 
