@@ -5,8 +5,9 @@ tags:
   - SSL
   - Nginx
   - HTTPS
-categories:
   - Docker
+categories:
+  - DevOps
 abbrlink: '75027340'
 date: 2016-11-18 22:35:10
 ---

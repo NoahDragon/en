@@ -7,7 +7,7 @@ tags:
   - Theme
   - Blog
 categories:
-  - Hexo
+  - Blog
 abbrlink: 5c00ca67
 date: 2016-10-16 19:41:21
 ---
