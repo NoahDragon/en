@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Abner Chou">
     <meta name="description" content="A Developer in Limbo">
-    <meta name="keywords" content="developer, blog, abner, code,Blog,General,Octopress">
+    <meta name="keywords" content="developer, blog, abner, code,Blog,Website,General,Octopress">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/favicon.png">
@@ -62,7 +62,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="My First Blog Here | Hard Code">
     <meta property="og:description" content="A Developer in Limbo">
-    <meta property="og:article:tag" content="Blog"> <meta property="og:article:tag" content="General"> <meta property="og:article:tag" content="Octopress"> 
+    <meta property="og:article:tag" content="Blog"> <meta property="og:article:tag" content="Website"> <meta property="og:article:tag" content="General"> <meta property="og:article:tag" content="Octopress"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -178,13 +178,14 @@
         <script src="/js/queue.js"></script>
     
 
-    <!-- UC Browser Compatible -->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
     </script>
 
     
@@ -199,7 +200,6 @@
         ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
     </script>
     
-
 
     <!-- Bing Background -->
     
@@ -342,7 +342,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Blog/">Blog</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/General/">General</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Octopress/">Octopress</a>
+        <a class="post_tag-link" href="/tags/Blog/">Blog</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/General/">General</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Octopress/">Octopress</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Website/">Website</a>
     </ul>
     
 
@@ -410,14 +410,14 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p>Well, this is my first blog here (right now on github).</p>
-<p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
+<p>I’m using the <a href="http://octopress.org" target="_blank" rel="noopener">Octopress</a> as blog content management,
 and I will briefly describe the way to set it up.</p>
 <a id="more"></a>
-<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">setup page</a>.
+<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="noopener">setup page</a>.
 Follow the instruction,
 install the dependencies that Octopress will need.</p>
 <p>Then choose the platform that the blog will be hosted on,
-here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="external">deploying github pages</a>.
+here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="noopener">deploying github pages</a>.
 <strong>Note</strong>: an error occured while I followed the instruction to rake it.</p>
 <pre class=" language-bash"><code class="language-bash">rake aborted<span class="token operator">!</span>
 You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.
@@ -470,13 +470,14 @@ sharing: true
 </code></pre>
 <p><strong>Update</strong> (2014-Mar-12):
 <code>rake preview</code> has problem with Safari.
-Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> .
-Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="external">ref</a>]</p>
+Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> .
+Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="noopener">ref</a>]</p>
 <p>Due to save typing, I have written some bash files (deploy.sh and preview.sh):</p>
 <pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
 bundle <span class="token function">exec</span> rake generate <span class="token operator">&amp;&amp;</span>
 bundle <span class="token function">exec</span> rake deploy
+
 </code></pre>
 <pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
@@ -501,6 +502,7 @@ preview_pid<span class="token operator">=</span>`/bin/ps -fu <span class="token 
 <span class="token function">kill</span> -2 <span class="token variable">$preview_pid</span>
 <span class="token comment" spellcheck="true">#echo "$preview_pid"</span>
 <span class="token keyword">echo</span> <span class="token string">"Preview DONE!"</span>
+
 </code></pre>
 <p>Please ignore the text below, the latest code fixes all of them. :P</p>
 <p><del><strong>Warnning</strong>:
@@ -728,7 +730,7 @@ if you don’t really care about the traces.</del></p>
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -746,7 +748,7 @@ if you don’t really care about the traces.</del></p>
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/CI/">CI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

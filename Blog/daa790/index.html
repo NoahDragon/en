@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Abner Chou">
     <meta name="description" content="A Developer in Limbo">
-    <meta name="keywords" content="developer, blog, abner, code,Github,HTTPS,Cloudflare">
+    <meta name="keywords" content="developer, blog, abner, code,Github,HTTPS,Cloudflare,Website">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/favicon.png">
@@ -62,7 +62,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Set up HTTPS Free | Hard Code">
     <meta property="og:description" content="A Developer in Limbo">
-    <meta property="og:article:tag" content="Github"> <meta property="og:article:tag" content="HTTPS"> <meta property="og:article:tag" content="Cloudflare"> 
+    <meta property="og:article:tag" content="Github"> <meta property="og:article:tag" content="HTTPS"> <meta property="og:article:tag" content="Cloudflare"> <meta property="og:article:tag" content="Website"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -178,13 +178,14 @@
         <script src="/js/queue.js"></script>
     
 
-    <!-- UC Browser Compatible -->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
     </script>
 
     
@@ -199,7 +200,6 @@
         ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
     </script>
     
-
 
     <!-- Bing Background -->
     
@@ -342,7 +342,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Cloudflare/">Cloudflare</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Github/">Github</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/HTTPS/">HTTPS</a>
+        <a class="post_tag-link" href="/tags/Cloudflare/">Cloudflare</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Github/">Github</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/HTTPS/">HTTPS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Website/">Website</a>
     </ul>
     
 
@@ -410,31 +410,31 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p><img src="\img\https_5.png" alt=""></p>
-<p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
+<p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
 <a id="more"></a>
-<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="external">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
-<p><a href="https://www.cloudflare.com/" target="_blank" rel="external">Cloudflare</a> is a DNS and CDN provider. All the basic services are free of charge, and they are already good enough for a static website.</p>
-<p><a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="external">HTTPS</a> is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (<strong>not cheap</strong>), and set up it for your domain (<strong>not easy</strong>). One important reason to use HTTPS other than security is speed, that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see <a href="https://www.httpvshttps.com/" target="_blank" rel="external">http vs https</a>).</p>
-<p><a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank" rel="external">HSTS</a> helps your website more secure. It strictly forbids the HTTP connection on your website, if your website displays a content from a HTTP link, the browser will refuse to load. So before set your site up and run with HTTPS and eliminate mix contents, do not turn it on.</p>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><h3 id="Settings-on-Github"><a href="#Settings-on-Github" class="headerlink" title="Settings on Github"></a>Settings on Github</h3><p>Set up an Github Pages, add CNAME to the root folder. Here is the <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="external">guide</a> for using custom domain with Github pages.</p>
+<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="noopener">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
+<p><a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> is a DNS and CDN provider. All the basic services are free of charge, and they are already good enough for a static website.</p>
+<p><a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener">HTTPS</a> is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (<strong>not cheap</strong>), and set up it for your domain (<strong>not easy</strong>). One important reason to use HTTPS other than security is speed, that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see <a href="https://www.httpvshttps.com/" target="_blank" rel="noopener">http vs https</a>).</p>
+<p><a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank" rel="noopener">HSTS</a> helps your website more secure. It strictly forbids the HTTP connection on your website, if your website displays a content from a HTTP link, the browser will refuse to load. So before set your site up and run with HTTPS and eliminate mix contents, do not turn it on.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><h3 id="Settings-on-Github"><a href="#Settings-on-Github" class="headerlink" title="Settings on Github"></a>Settings on Github</h3><p>Set up an Github Pages, add CNAME to the root folder. Here is the <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="noopener">guide</a> for using custom domain with Github pages.</p>
 <h3 id="Settings-on-Cloudflare"><a href="#Settings-on-Cloudflare" class="headerlink" title="Settings on Cloudflare"></a>Settings on Cloudflare</h3><p>First, you have to set up the Cloudflare as your DNS manager. It basically tells the domain provider that DNS is handled by Cloudflare. You can google to find a tutorial about it.</p>
 <p>Then, connect to Github page. Just setting the A and CNAME records on DNS.</p>
 <h3 id="Test-if-Cloudflare-is-working"><a href="#Test-if-Cloudflare-is-working" class="headerlink" title="Test if Cloudflare is working"></a>Test if Cloudflare is working</h3><p>Type the following code in your console (replace theurloftheresource to the actual url)</p>
 <pre class=" language-bash"><code class="language-bash">curl -svo /dev/null http://theurloftheresource
 </code></pre>
-<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
+<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="noopener">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
 <p><img src="/img/https_1.png" alt=""></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
 <p>There are three basic checks (at least) to turn on the HSTS:</p>
 <ul>
 <li>Always connected via HTTPS</li>
-<li><a href="http://domain.com" target="_blank" rel="external">http://domain.com</a> need to redirect to <a href="https://domain.com" target="_blank" rel="external">https://domain.com</a></li>
-<li><a href="http://domain.com" target="_blank" rel="external">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="external">https://www.domain.com</a></li>
+<li><a href="http://domain.com" target="_blank" rel="noopener">http://domain.com</a> need to redirect to <a href="https://domain.com" target="_blank" rel="noopener">https://domain.com</a></li>
+<li><a href="http://domain.com" target="_blank" rel="noopener">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="noopener">https://www.domain.com</a></li>
 </ul>
 <p>To pass those checks, we only need two page rules (Cloudflare free plan can set maximum three page rules). The first it always using HTTPS, and the second is forwarding URL. Note, the order matters.</p>
 <p><img src="/img/https_2.png" alt=""></p>
-<p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="external">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
+<p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="noopener">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
 <p><img src="/img/https_3.png" alt=""></p>
 <p>Everything is set and your website will always be connected through the secure protocol.</p>
 <h2 id="Extra-Page-Rule-Usage"><a href="#Extra-Page-Rule-Usage" class="headerlink" title="Extra Page Rule Usage"></a>Extra Page Rule Usage</h2><p>As we have one more page rule left, you could leave it as blank. But as stated above, the github pages set the Cache-Control: max-age=600, which is 10 mins. That means every 10 mins the user has to fetch data through github page, no matter it changed or not. This is really inefficiency. To overwrite this setting, we could set the browser cache TTL. I set it to one year, because my assets would rarely be modified.</p>
@@ -666,7 +666,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -684,7 +684,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/CI/">CI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

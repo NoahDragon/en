@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Abner Chou">
     <meta name="description" content="A Developer in Limbo">
-    <meta name="keywords" content="developer, blog, abner, code,SSL,Nginx,HTTPS">
+    <meta name="keywords" content="developer, blog, abner, code,HTTPS,SSL,Nginx,Docker">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/favicon.png">
@@ -62,7 +62,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Build SSL HTTPS Website Using Docker | Hard Code">
     <meta property="og:description" content="A Developer in Limbo">
-    <meta property="og:article:tag" content="SSL"> <meta property="og:article:tag" content="Nginx"> <meta property="og:article:tag" content="HTTPS"> 
+    <meta property="og:article:tag" content="HTTPS"> <meta property="og:article:tag" content="SSL"> <meta property="og:article:tag" content="Nginx"> <meta property="og:article:tag" content="Docker"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -178,13 +178,14 @@
         <script src="/js/queue.js"></script>
     
 
-    <!-- UC Browser Compatible -->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
     </script>
 
     
@@ -199,7 +200,6 @@
         ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
     </script>
     
-
 
     <!-- Bing Background -->
     
@@ -342,7 +342,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/HTTPS/">HTTPS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Nginx/">Nginx</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/SSL/">SSL</a>
+        <a class="post_tag-link" href="/tags/Docker/">Docker</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/HTTPS/">HTTPS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Nginx/">Nginx</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/SSL/">SSL</a>
     </ul>
     
 
@@ -415,16 +415,16 @@
 <a id="more"></a>
 <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</li>
-<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</li>
-<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
-<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
+<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="noopener">Docker</a> must be installed and properly functioning.</li>
+<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
+<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="noopener">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="noopener">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="noopener">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
 <li>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</li>
 <li>Git is also an option, unless you would like to build the image on your own.</li>
 </ul>
 <h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><p>Only two docker images are used:</p>
 <ul>
-<li><a href="https://github.com/bringnow/docker-letsencrypt-manager" target="_blank" rel="external">Docker-letsencrypt-manager</a></li>
-<li><a href="https://github.com/bringnow/docker-nginx-letsencrypt" target="_blank" rel="external">Docker-nginx-letsencrypt</a></li>
+<li><a href="https://github.com/bringnow/docker-letsencrypt-manager" target="_blank" rel="noopener">Docker-letsencrypt-manager</a></li>
+<li><a href="https://github.com/bringnow/docker-nginx-letsencrypt" target="_blank" rel="noopener">Docker-nginx-letsencrypt</a></li>
 </ul>
 <p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
 <h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
@@ -735,7 +735,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -753,7 +753,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/CI/">CI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

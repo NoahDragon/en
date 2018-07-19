@@ -178,13 +178,14 @@
         <script src="/js/queue.js"></script>
     
 
-    <!-- UC Browser Compatible -->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
     </script>
 
     
@@ -199,7 +200,6 @@
         ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
     </script>
     
-
 
     <!-- Bing Background -->
     
@@ -410,25 +410,27 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p><img src="/img/play_learn_head.jpg" alt=""></p>
-<p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
+<p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="noopener">Quora</a>, I spent some time to organize the list.</p>
 <a id="more"></a>
 <p>Here are several sites that allow you to using coding to play.</p>
 <p><img src="/img/play_learn_code_combat.jpeg" alt=""></p>
-<p><a href="https://codecombat.com/" target="_blank" rel="external">CodeCombat</a> is an RPG game which you could use Javascript, Coffeescript, Lua, Python, Clojure, and Io.</p>
+<p><a href="https://codecombat.com/" target="_blank" rel="noopener">CodeCombat</a> is an RPG game which you could use Javascript, Coffeescript, Lua, Python, Clojure, and Io.</p>
 <p><img src="/img/play_learn_code_hunt.png" alt=""></p>
-<p><a href="https://www.codehunt.com/" target="_blank" rel="external">Code Hunt</a> is developed by Microsoft Research. In which, you are a code hunter to find the bug in C#/Java code.</p>
+<p><a href="https://www.codehunt.com/" target="_blank" rel="noopener">Code Hunt</a> is developed by Microsoft Research. In which, you are a code hunter to find the bug in C#/Java code.</p>
 <p><img src="/img/play_learn_codingame.jpg" alt=""></p>
-<p><a href="https://www.codingame.com/start" target="_blank" rel="external">CodinGame</a> I haven’t played it yet, but it looks fun.</p>
+<p><a href="https://www.codingame.com/start" target="_blank" rel="noopener">CodinGame</a> I haven’t played it yet, but it looks fun.</p>
 <p><img src="/img/play_learn_creeps.jpg" alt=""></p>
-<p><a href="https://screeps.com/" target="_blank" rel="external">Screeps</a> is an online RTS. You have to build up your territory, and defend it from AI and other player’s attach. For now, it only support the Javascript, and you have to pay2play.</p>
-<p><a href="http://fightcodegame.com/" target="_blank" rel="external">FightCode</a> Build your smart tank and beat others. It’s really similar to <a href="http://robocode.sourceforge.net/" target="_blank" rel="external">Robocode</a>.</p>
-<p><a href="http://play.elevatorsaga.com/" target="_blank" rel="external">Elevator Saga</a> You become an elevator operator. You have to deliver certain number of people within a time frame to pass to next level.</p>
-<p><a href="https://www.battlecode.org/" target="_blank" rel="external">Battle Code</a> Not know much about it, but it holds contest for students.</p>
-<p><a href="https://www.bloc.io/ruby-warrior/#/warriors" target="_blank" rel="external">Ruby Warrior</a> Learn Ruby and beat dungeon.</p>
-<p><a href="https://scratch.mit.edu/" target="_blank" rel="external">Scratch</a> Visually coding.</p>
-<p><a href="https://lightbot.com/" target="_blank" rel="external">LightBot</a> Simple game which teachs the basic function and loop concepts.</p>
-<p><a href="http://flexboxfroggy.com/" target="_blank" rel="external">FlexBox Froggy</a> Learn CSS FlexBox through games.</p>
-<p><a href="https://halite.io/" target="_blank" rel="external">Halite</a> Artificial Intelligence chanllenge game. </p>
+<p><a href="https://screeps.com/" target="_blank" rel="noopener">Screeps</a> is an online RTS. You have to build up your territory, and defend it from AI and other player’s attach. For now, it only support the Javascript, and you have to pay2play.</p>
+<p><a href="http://fightcodegame.com/" target="_blank" rel="noopener">FightCode</a> Build your smart tank and beat others. It’s really similar to <a href="http://robocode.sourceforge.net/" target="_blank" rel="noopener">Robocode</a>.</p>
+<p><a href="http://play.elevatorsaga.com/" target="_blank" rel="noopener">Elevator Saga</a> You become an elevator operator. You have to deliver certain number of people within a time frame to pass to next level.</p>
+<p><a href="https://www.battlecode.org/" target="_blank" rel="noopener">Battle Code</a> Not know much about it, but it holds contest for students.</p>
+<p><a href="https://www.bloc.io/ruby-warrior/#/warriors" target="_blank" rel="noopener">Ruby Warrior</a> Learn Ruby and beat dungeon.</p>
+<p><a href="https://scratch.mit.edu/" target="_blank" rel="noopener">Scratch</a> Visually coding.</p>
+<p><a href="https://lightbot.com/" target="_blank" rel="noopener">LightBot</a> Simple game which teachs the basic function and loop concepts.</p>
+<p><a href="http://flexboxfroggy.com/" target="_blank" rel="noopener">FlexBox Froggy</a> Learn CSS FlexBox through games.</p>
+<p><a href="https://halite.io/" target="_blank" rel="noopener">Halite</a> Artificial Intelligence chanllenge game. </p>
+<p><img src="/img/cryptozombies.jpeg" alt="Crypto Zombies"></p>
+<p><a href="https://cryptozombies.io/" target="_blank" rel="noopener">CryptoZombies</a> is an interactive code school that teaches you to write smart contracts in Solidity through building your own crypto-collectables game.</p>
 <p>Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.</p>
 
     
@@ -653,7 +655,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -671,7 +673,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/CI/">CI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

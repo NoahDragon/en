@@ -4,12 +4,248 @@
   
     
     <entry>
+      <title><![CDATA[Leetcode VS EPI]]></title>
+      <url>https://en.abnerchou.me/Blog/1d6c1157/</url>
+      <content type="html"><![CDATA[<p><strong> This article is still work in progress. </strong></p>
+<p>Here is a list of problems which both on Leetcode and EPI<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. In my opinion, these common appeared questions are more important. Hope this could help job seekers to prepare for their final interviews.</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Leetcode<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></th>
+<th style="text-align:center">EPI<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></th>
+<th style="text-align:center">Difficulty<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></th>
+<th style="text-align:center">Problem<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></th>
+<th style="text-align:center">Company<sup id="fnref:6"><a href="#fn:6" rel="footnote">6</a></sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">7.1</td>
+<td style="text-align:center">Easy</td>
+<td style="text-align:center">Merge Two Sorted Lists</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">8.3</td>
+<td style="text-align:center">Easy</td>
+<td style="text-align:center">Valid Parentheses</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">6.1</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">String to Integer (atoi)</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">48</td>
+<td style="text-align:center">5.19</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Rotate Image</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">17.4</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">3-Sum</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">42</td>
+<td style="text-align:center">24.32</td>
+<td style="text-align:center">Hard</td>
+<td style="text-align:center">Trapping Rain Water</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">121</td>
+<td style="text-align:center">5.6</td>
+<td style="text-align:center">Easy</td>
+<td style="text-align:center">Best Time to Buy and Sell Stock</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">89</td>
+<td style="text-align:center">15.10</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Gray Code</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">235</td>
+<td style="text-align:center">9.3</td>
+<td style="text-align:center">Easy</td>
+<td style="text-align:center">Lowest Common Ancestor of a Binary Search Tree</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">98</td>
+<td style="text-align:center">14.1</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Validate Binary Search Tree</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">141</td>
+<td style="text-align:center">7.3</td>
+<td style="text-align:center">Easy</td>
+<td style="text-align:center">Linked List Cycle</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">240</td>
+<td style="text-align:center">11.6</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Search a 2D Matrix II</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">234</td>
+<td style="text-align:center">7.11</td>
+<td style="text-align:center">Easy</td>
+<td style="text-align:center">Palindrome Linked List</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">215</td>
+<td style="text-align:center">24.17</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Kth Largest Element in an Array</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+<tr>
+<td style="text-align:center">579</td>
+<td style="text-align:center">13.12</td>
+<td style="text-align:center">Hard</td>
+<td style="text-align:center">Find Cumulative Salary of an Employee</td>
+<td style="text-align:center">Amazon</td>
+</tr>
+</tbody>
+</table>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">The book &quot;Elements of Programming Interviews&quot;. <a href="https://elementsofprogramminginterviews.com/" target="_blank" rel="noopener">https://elementsofprogramminginterviews.com/</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Problem index on Leetcode. <a href="https://leetcode.com/" target="_blank" rel="noopener">https://leetcode.com/</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Problem index on EPI.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">The difficulty of the problem on Leetcode.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">The problem title on Leetcode.</span><a href="#fnref:5" rev="footnote"> ↩</a></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">6.</span><span style="display: inline-block; vertical-align: top;">The company tags on Leetcode indicate the problem has appeared in their interview.</span><a href="#fnref:6" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+      
+        <categories>
+            
+            <category> Exam </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> EPI </tag>
+            
+            <tag> Interview </tag>
+            
+            <tag> Job </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[A Real Scenario Machine Learning Question]]></title>
+      <url>https://en.abnerchou.me/Blog/54a83d07/</url>
+      <content type="html"><![CDATA[<p>Recently I got a real scenario machine learning question, which does not have existing models. I would like to record my thoughts here which may save my time later.</p>
+<p>Here is the question:</p>
+<blockquote>
+<p>A company receives thousands of documents everyday uploaded by our users. Generally these documents are invoices or bills. We would like to extract the vendor​ and amount​ from these documents automatically (i.e. using software rather than human inspection).</p>
+</blockquote>
+<blockquote>
+<p>They store the following pieces of information for each document:</p>
+<ol>
+<li>The pdf document uploaded by the user (please see example.pdf attached)</li>
+<li>The text extracted from that pdf (please see example.txt attached - Note: often the extracted text would not be in an order that seems natural to a human reader)</li>
+<li>Labels of what the vendor and amount should be for each document (in the attached
+example, vendor would be “Marketing Fuel Biz.”, and amount would be “747.50”).</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Question: Describe a machine learning solution to this problem.</p>
+</blockquote>
+<blockquote>
+<p>Additon: Some percentage of the stored labels may be incorrect. What would you change to mitigate this problem.</p>
+</blockquote>
+<p>The sample pdf and OCR output txt is <a href="/asserts/ml-example.zip">downloadable</a>. </p>
+<a id="more"></a>
+<h2 id="Intuitive-Thoughts"><a href="#Intuitive-Thoughts" class="headerlink" title="Intuitive Thoughts"></a>Intuitive Thoughts</h2><p>As the OCR result loses the invoice position information (sample txt file), the traditional NLP methods, which expect sequential structure, would not work on such text corpus [<a href="https://www.diva-portal.org/smash/get/diva2:934351/FULLTEXT01.pdf" target="_blank" rel="noopener">1</a>]. So my proposed solution would focus on rebuilding the invoice structure information.</p>
+<p>Based on my understanding, the invoice structure follows a certain pattern, such as the left top area is vendor logo/name and the total amount is in the bottom right. There are definitely some special cases, but the prior statement is an assumption of my solution.</p>
+<p>In order to track the position in a PDF file (could be easily convert to an image file), the convolutional neural networks (CNN) [<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network" target="_blank" rel="noopener">2</a>] could fit this task, it has been proved successfully on many image processing tasks [<a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">3</a>, <a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>, <a href="https://arxiv.org/abs/1703.06870" target="_blank" rel="noopener">5</a>]. Although a paper [<a href="https://arxiv.org/pdf/1708.07403.pdf" target="_blank" rel="noopener">6</a>] states to extract invoice info from the recurrent neural network (RNN), their input is words and positions (in our case, we do not have positions).  So I propose to use Faster R-CNN [<a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>] or YOLO [<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">7</a>] to solve the problem, they both are mature models of object detection and applied in many products.</p>
+<p>The CNN model input should be images, and outputs are labels and region coordinate (the format would be like {vendor, 5, 15, 20, 40}).</p>
+<p>Therefore, we need a dataset to train the CNN model. Since we already have the original PDF files and labels of vendor/amount, we could generate an image dataset for training the model. For each training entry, it contains an image converted from PDF and a region info of vendor/amount. The region info is the coordinate of two points which consist of a rectangle (e.g. (x1, y1) and (x2, y2) in figure 1). The dataset generation process could be done via a method of ORC and image process combination. The method is cropping the image into multiple rectangles (moving windows), then apply ORC on each rectangle. Based on the text outputs of rectangles, the area contains only vendor name is labeled as vendor, and the areas contain the amount are labeled as amount.</p>
+<p><img src="/img/ml-questions-1.png" alt=""></p>
+<p>After we have the dataset, we split it into training and testing datasets. The split ratio could be 80/20 [<a href="https://developers.google.com/machine-learning/crash-course/training-and-test-sets/splitting-data" target="_blank" rel="noopener">8</a>].</p>
+<p>The evaluation metric is mean precision average (mPA) at the different intersection over union (IoU) thresholds. The IoU of a proposed set of object pixels and a set of true object pixels is calculated as IoU(A,B)=A∩B/A∪B (image below [<a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" target="_blank" rel="noopener">9</a>]). The metric sweeps over a range of IoU thresholds, at each point calculating an average precision value. The threshold values range from 0.5 to 0.95 with a step size of 0.05: (0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95). In other words, at a threshold of 0.5, a predicted object is considered a “hit” if its intersection over union with a ground truth object is greater than 0.5. At each threshold t, we can check if it “hit” on the ground truth. Then the mPA is 1/thresholds∑hit(t).</p>
+<p><img src="/img/ml-questions-2.png" alt=""></p>
+<p>When the model training finished (let’s assume it meets our expectation), we could apply a post process to convert the result to our label. We will get the region coordinate from the model output, and based on the coordinate, we can crop the rectangle and feed it to OCR. It is the final result. Then we can compare the predicated labels with our ground truth in the database to evaluate the model performance (the evaluation metric could be precision on both labels).</p>
+<p>Here is the overview of the proposed solution:</p>
+<pre><code>Convert PDF to Image -&gt; Dataset Preparation -&gt; CNN Model -&gt; OCR -&gt; Results
+</code></pre><p>To mitigate the impact of incorrect labels, we could add an extra step in dataset preparation. By calculating the frequency of each vendor label in the dataset, we could remove those entries with label frequency lower than a threshold. This is based on an assumption that incorrect labels cannot occur multiple times (the threshold) with the same value.</p>
+<h3 id="Failure-on-the-Intuitive-Thoughts"><a href="#Failure-on-the-Intuitive-Thoughts" class="headerlink" title="Failure on the Intuitive Thoughts"></a>Failure on the Intuitive Thoughts</h3><p>I set up an experiment for the solution, which trained YOLOv3 [<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">10</a>] (pre-trained on ImageNet [<a href="http://www.image-net.org/" target="_blank" rel="noopener">11</a>]) with 30 manually labeled invoices images (google searched images, each invoice contains vendor, logo, and amount labels). Although the predicated labels on validation dataset look promising, the mAP is almost zero on the test dataset. The reason for the low performance may be caused by the principle of CNN, the CNN only can learn the features that appear in the training set. The way to improve the model would be training on a larger dataset and assume it covers all test cases. Therefore, I would like to propose two new solutions for the ML question.</p>
+<ol>
+<li>Using the Recurrent Neural Network (RNN) with Long Short-Term Memory cells (LSTM) [<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="noopener">12</a>].</li>
+<li>Using the Reinforcement Learning (RL) [<a href="https://en.wikipedia.org/wiki/Reinforcement_learning" target="_blank" rel="noopener">13</a>].</li>
+</ol>
+<h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p>I reviewed the example.txt file, it doesn’t fully unorganized. We could recognize some patterns from it, like it reads column by column, not row by row as human do. Although RNN is good at the sequential data, due to the gradient vanishing problem, it won’t work for long sentence. So the LSTM method came up, bring the ability to memory long distance relationship to RNN. For example, “A cat jumps on the table, it breaks a cup, so we chase it off the table” which “it” represents the “cat” in the previous phrase. It may be easy to identify the first “it” as the cat because they are close, but for the second “it”, it’s hard to tell which it represents (cat, table, or cup).</p>
+<p>As we are processing the text data, we need a preprocessing step to clean up. First, remove punctuation marks, like semi-colon, colon, exclamation mark, and etc. But keep the period and comma, because they may use in numbers. Second, tokenize the words, we could build up a vocabulary dictionary and convert each word into it represented the index in the dictionary. For unknown word and numbers, we use [UNK] and [NUM] instead. Finally, clear up the common words which do not help for our task, like the word “invoice”, it appears in every invoice.</p>
+<p>Then we could feed the data to the RNN model. The RNN model supports many to many. Input is word sequence, and the output is the all possible labels for vendor/amount.</p>
+<p>The evaluation metric would be the F1 measurement [<a href="https://en.wikipedia.org/wiki/F1_score" target="_blank" rel="noopener">14</a>], which combines the precision and recall.</p>
+<h2 id="RL"><a href="#RL" class="headerlink" title="RL"></a>RL</h2><p>When AlphaGo [<a href="https://deepmind.com/research/alphago/" target="_blank" rel="noopener">15</a>] defeats the world champion Lee Sedol, reinforcement learning becomes a hot topic in AI domain. The reinforcement learning is an algorithm to make AI compete with AI, the best set of policies is searched out during the competition. It has successfully applied to robotics, game playing, fintech, and ect. [<a href="https://www.oreilly.com/ideas/practical-applications-of-reinforcement-learning-in-industry" target="_blank" rel="noopener">16</a>]</p>
+<p>The reason I pick up the RL is the intuitive thought in my previous email. For a human, it is easy to identify vendor and amount by a glance, so the images contain all the info we need. Therefore, I think it is not necessary to take an extra step to convert the images to text, which lose information and create an extra layer to process. </p>
+<p>So the idea is to find out the areas in invoice images which represent vendor and amount, then apply OCR against those areas to get final text formatted outputs.</p>
+<p>Preprocess input documents to convert them into greyscale images.</p>
+<p>Before we feed images into RL model, we need to set up rules for the agents, like identify the correct item plus points, identify the logo get some point, output wrong result get minus points. Then the RL model could brute force to find the best policies, like font size, bold style, and etc.</p>
+<p>The RL model output should be the rectangle area of the vendor/amount. Then apply OCR to convert them to text.</p>
+<p>The evaluation metric should be same as above, using the F1 score.</p>
+<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>In addition to the above methods, I also thought about the generative adversarial networks (GANs) [<a href="https://en.wikipedia.org/wiki/Generative_adversarial_network" target="_blank" rel="noopener">17</a>], but the tuning process is more like mystery comparing other models. Moreover, I found a paper [<a href="https://arxiv.org/abs/1801.09321" target="_blank" rel="noopener">18</a>] that using the deep CNN model to classify document images based their structure. In our case, I think we could use the similar approach to identify vendors, but we still need more info to retrieve the amounts.</p>
+<p>BTW, besides the machine learning models, I wonder we also could improve the OCR to include the structure information in the output, like the PDF to HTML [<a href="https://arxiv.org/abs/1801.09321" target="_blank" rel="noopener">18</a>] and Zonal OCR [<a href="https://docparser.com/blog/zonal-ocr/" target="_blank" rel="noopener">19</a>]. If the company mainly deal with PDF files. As the PDF format specification [<a href="https://www.adobe.com/content/dam/acom/en/devnet/pdf/pdfs/PDF32000_2008.pdf" target="_blank" rel="noopener">20</a>] is open to the public, we could analysis PDF files directly, this would be another story.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> AI </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> OCR </tag>
+            
+            <tag> RNN </tag>
+            
+            <tag> CNN </tag>
+            
+            <tag> NLP </tag>
+            
+            <tag> natural language processing </tag>
+            
+            <tag> convolutional neural network </tag>
+            
+            <tag> recurrent neural network </tag>
+            
+            <tag> optical character recognition </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[DIY SLI Liquid Cooling GPU Computer]]></title>
       <url>https://en.abnerchou.me/Blog/31404856/</url>
       <content type="html"><![CDATA[<p>It’s kind of shame to say, as a computer science major professional, I have never build my own desktop computer ever, until recent. All because the old desktop dead (purchased 2012), I finally made the decision to DIY a powerful amateur deep learning machine.</p>
 <p>Here I will record all the pitfalls, caveats, and tricks during the building processes. Hope could provide some help or hint for people would like to build their dream game (or amateur machine learning) machine.</p>
 <a id="more"></a>
-<p>Here is the <a href="https://ca.pcpartpicker.com/user/AbnerChou/saved/6zvgsY" target="_blank" rel="external">components list</a> for my build on PCPartPicker. The currency is Canadian Dollar since I’m living in the cold North (but don’t have the wall of cause). </p>
+<p>Here is the <a href="https://ca.pcpartpicker.com/user/AbnerChou/saved/6zvgsY" target="_blank" rel="noopener">components list</a> for my build on PCPartPicker. The currency is Canadian Dollar since I’m living in the cold North (but don’t have the wall of cause). </p>
 <table>
 <thead>
 <tr>
@@ -78,12 +314,12 @@
 </table>
 <h2 id="Purchase-items"><a href="#Purchase-items" class="headerlink" title="Purchase items"></a>Purchase items</h2><p>I have spent about a month to collect all parts. The reason why it took so long is I would lik to get the price as cheaper as possible. To ensure that, I have developed several “techniques”.</p>
 <blockquote>
-<p>The tricks use here are suitable for Canada or best North America, because these online services/stores are only shipping within North America or Canada only. However, you could definitely find alternatives within your regions/countries (check out <a href="https://pcpartpicker.com/" target="_blank" rel="external">PCPartPicker</a> support countries).</p>
+<p>The tricks use here are suitable for Canada or best North America, because these online services/stores are only shipping within North America or Canada only. However, you could definitely find alternatives within your regions/countries (check out <a href="https://pcpartpicker.com/" target="_blank" rel="noopener">PCPartPicker</a> support countries).</p>
 </blockquote>
 <p><img src="/img/diy_pc_1.jpg" alt="Before Open Box"></p>
-<p>First of all, don’t forget using <a href="https://www.ebates.ca" target="_blank" rel="external">ebates</a>. It’s a online rebate website, user could get instant rebate if purchase through the ebates supported vendors online. The rebate rate is from 1% to 5%. Although not much, better than nothing.</p>
-<p>Second, use price matching. Many online store support price matching, some even give 10% more off (I only found one). The <a href="https://www.memoryexpress.com/" target="_blank" rel="external">Memory Express</a> is one of my favorite computer component online shop. It provides the lowest prices most of the time, moreover, its price match is better – match the price plus 10% off on the difference. E.g, a CPU costs $500 on ME, another store has lower price for the same CPU, let’s say it $400, then the price on ME after the price match is 400-(500-400)*10% = $390. The only con shopping on ME is they charge shipping fee and don’t have local store in east Canada.</p>
-<p>As mentioned above, the shipping fee may also cost a lot, especially the item weight increases. So if online store has physical store, use pick up wisely. I have purchased several parts on <a href="http://http://www.ncix.com/" target="_blank" rel="external">NCIX</a> and <a href="http://www.canadacomputers.com" target="_blank" rel="external">Canada Computer</a> just to save the shipping fee. Even more, both also provide price match, which make them more affordable.</p>
+<p>First of all, don’t forget using <a href="https://www.ebates.ca" target="_blank" rel="noopener">ebates</a>. It’s a online rebate website, user could get instant rebate if purchase through the ebates supported vendors online. The rebate rate is from 1% to 5%. Although not much, better than nothing.</p>
+<p>Second, use price matching. Many online store support price matching, some even give 10% more off (I only found one). The <a href="https://www.memoryexpress.com/" target="_blank" rel="noopener">Memory Express</a> is one of my favorite computer component online shop. It provides the lowest prices most of the time, moreover, its price match is better – match the price plus 10% off on the difference. E.g, a CPU costs $500 on ME, another store has lower price for the same CPU, let’s say it $400, then the price on ME after the price match is 400-(500-400)*10% = $390. The only con shopping on ME is they charge shipping fee and don’t have local store in east Canada.</p>
+<p>As mentioned above, the shipping fee may also cost a lot, especially the item weight increases. So if online store has physical store, use pick up wisely. I have purchased several parts on <a href="http://http://www.ncix.com/" target="_blank" rel="noopener">NCIX</a> and <a href="http://www.canadacomputers.com" target="_blank" rel="noopener">Canada Computer</a> just to save the shipping fee. Even more, both also provide price match, which make them more affordable.</p>
 <p>Amazon also has great deals eventually, but due to the currency exchange rate Amazon Canada alway have match higher price regardless of the physical distant is so close. Therefore, using Amazon US is also a good option if living near the boarder. Sometime, even including the import fee purchasing from Amazon US, the price is still cheaper than in Canada. What a life Canadian is!</p>
 <p>Finally, wait holiday or promotional events. Especially Boxing day, you could get the best price. However, normally the quantity are limit. One of my friends bought he loved GPU by lining up at 5am in front of the store.</p>
 <h2 id="Build-up"><a href="#Build-up" class="headerlink" title="Build up"></a>Build up</h2><p>It is usually easy to assembly the parts (just follow the manual), however, my build is a little bit special that have three radiators – one for CPU, two for GPU. Not many people using dual GPU with AIO liquid radiators, which makes there is no much info online to help me choose the right case.  </p>
@@ -100,7 +336,7 @@
 </ol>
 <p>Here is the complete shot:</p>
 <p><img src="/img/diy_pc_2.jpg" alt="Completed PC"> </p>
-<p><strong>Update(2017-Aug-14)</strong>: I also bought an M.2 SSD to install the Ubuntu OS, as the most machine learning algorithms are build upon Linux system. Moreover, the driver officially provided for the Asus USB-AC51 is not compatible for Ubuntu 16.04 LTS (I also tried several customized drivers, they may fit the 14.04 LTS but not the 16.04). So be careful when purchase the USB Wifi adapter, here is a <a href="http://willhaley.com/blog/linux-16-04-1-usb-wifi-adapters/" target="_blank" rel="external">list</a> that has some “work out of box” USB for Ubuntu 16.04 and above.</p>
+<p><strong>Update(2017-Aug-14)</strong>: I also bought an M.2 SSD to install the Ubuntu OS, as the most machine learning algorithms are build upon Linux system. Moreover, the driver officially provided for the Asus USB-AC51 is not compatible for Ubuntu 16.04 LTS (I also tried several customized drivers, they may fit the 14.04 LTS but not the 16.04). So be careful when purchase the USB Wifi adapter, here is a <a href="http://willhaley.com/blog/linux-16-04-1-usb-wifi-adapters/" target="_blank" rel="noopener">list</a> that has some “work out of box” USB for Ubuntu 16.04 and above.</p>
 ]]></content>
       
         <categories>
@@ -129,12 +365,12 @@
 <ol>
 <li>delete the forked repo and re-fork;</li>
 <li>manually merge to the latest commit;</li>
-<li>use the PR and switch the source and destination (<a href="https://stackoverflow.com/a/23853061" target="_blank" rel="external">ref</a>).</li>
+<li>use the PR and switch the source and destination (<a href="https://stackoverflow.com/a/23853061" target="_blank" rel="noopener">ref</a>).</li>
 </ol>
 <a id="more"></a>
 <p>Although those three options works like a “charm” in a small amount of repos, it’s more like chores when maintaining hundreds forked repos.</p>
 <h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p>Then I came up the idea to use Travis-CI to sync those repos automatically. The mechanism is simple and straightforward, which runs a script periodically to update forked repos with source repos. The script could be bash, javascript, python, or any language which could call git command in the Linux OS.</p>
-<h3 id="My-Approach"><a href="#My-Approach" class="headerlink" title="My Approach"></a>My Approach</h3><p>Based on the above idea, I wrote a <a href="https://github.com/NoahDragon/update-forked-repo" target="_blank" rel="external">js script</a> to do the job. But this script is only a solution my problems:</p>
+<h3 id="My-Approach"><a href="#My-Approach" class="headerlink" title="My Approach"></a>My Approach</h3><p>Based on the above idea, I wrote a <a href="https://github.com/NoahDragon/update-forked-repo" target="_blank" rel="noopener">js script</a> to do the job. But this script is only a solution my problems:</p>
 <ul>
 <li>Only works on forked repos in a Github Org.</li>
 <li>Forked repos should never be modified. </li>
@@ -146,7 +382,7 @@
       
         <categories>
             
-            <category> CI </category>
+            <category> DevOps </category>
             
         </categories>
         
@@ -172,16 +408,16 @@
 <a id="more"></a>
 <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>All my setup is on Ubuntu 16.04, and may not suitable for other version/OS.</li>
-<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">Docker</a> must be installed and properly functioning.</li>
-<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
-<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="external">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="external">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="external">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
+<li><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="noopener">Docker</a> must be installed and properly functioning.</li>
+<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker compose</a> is an option, but this article only showing the method that is using docker compose, which is simpler than using docker alone.</li>
+<li>Any machine/VPS/cloud server that you have root control, like <a href="https://m.do.co/c/eaf9c533bc55" target="_blank" rel="noopener">Digital Ocean</a>[Get $10 with coupon code <code>ACTIVATE10</code>], <a href="http://www.vultr.com/?ref=7025798" target="_blank" rel="noopener">Vultr</a>[Get $50 (expired after 6 months) with coupon code <code>DOMORE</code> ], <a href="https://www.linode.com/?r=31b7ad9bbcdac84ed780e48344212c99afcaa3d2" target="_blank" rel="noopener">Lindo</a>[Get $20 with coupon code <code>PodcastInIt20</code>], and etc.</li>
 <li>DNS already points to your machine, and all domains which would like to support Https also have CNAME or A record.</li>
 <li>Git is also an option, unless you would like to build the image on your own.</li>
 </ul>
 <h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><p>Only two docker images are used:</p>
 <ul>
-<li><a href="https://github.com/bringnow/docker-letsencrypt-manager" target="_blank" rel="external">Docker-letsencrypt-manager</a></li>
-<li><a href="https://github.com/bringnow/docker-nginx-letsencrypt" target="_blank" rel="external">Docker-nginx-letsencrypt</a></li>
+<li><a href="https://github.com/bringnow/docker-letsencrypt-manager" target="_blank" rel="noopener">Docker-letsencrypt-manager</a></li>
+<li><a href="https://github.com/bringnow/docker-nginx-letsencrypt" target="_blank" rel="noopener">Docker-nginx-letsencrypt</a></li>
 </ul>
 <p>The niginx server has to start up before running the letsencrypt, because the letsencrypt needs to access the server to finish the generating certificate process.</p>
 <h4 id="docker-compose-yml-for-nignx"><a href="#docker-compose-yml-for-nignx" class="headerlink" title="docker-compose.yml for nignx"></a>docker-compose.yml for nignx</h4><p>Create <code>docker-compose.yml</code> and paste the following into it.</p>
@@ -273,18 +509,20 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       
         <categories>
             
-            <category> Docker </category>
+            <category> DevOps </category>
             
         </categories>
         
         
         <tags>
             
+            <tag> HTTPS </tag>
+            
             <tag> SSL </tag>
             
             <tag> Nginx </tag>
             
-            <tag> HTTPS </tag>
+            <tag> Docker </tag>
             
         </tags>
         
@@ -294,8 +532,8 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       <title><![CDATA[Hexo Top 10 Popular Themes]]></title>
       <url>https://en.abnerchou.me/Blog/5c00ca67/</url>
       <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
-<p><a href="https://hexo.io/" target="_blank" rel="external">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="external">ref</a>].</p>
-<p>There are around 75 themes list on the <a href="https://hexo.io/themes/" target="_blank" rel="external">website</a>, here is the top 10 popular ones. </p>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="noopener">ref</a>].</p>
+<p>There are around 75 themes list on the <a href="https://hexo.io/themes/" target="_blank" rel="noopener">website</a>, here is the top 10 popular ones. </p>
 <a id="more"></a>
 <h2 id="NexT"><a href="#NexT" class="headerlink" title=" NexT"></a><img class="nofancybox" src="/img/top1.png" style="display: inline; border-style: none;"> NexT</h2><div style="text-align:center">
   <div class="github-card" data-user="iissnan" data-repo="hexo-theme-next" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
@@ -359,17 +597,17 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 <p>#responsive #simple #elegant</p>
 <p>~ EOF ~</p>
 <p>Updated: 2016-Dec-06</p>
-<p>For real time rank please visit the following link: <a href="https://github.com/search?o=desc&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank" rel="external">Github Search</a></p>
+<p>For real time rank please visit the following link: <a href="https://github.com/search?o=desc&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank" rel="noopener">Github Search</a></p>
 <p>Updated: 2017-Apr-17</p>
 <p>The material theme is really a black sheep. It jumps from #9 to #3 since last update, and it even didn’t exist when this post created.</p>
 <p>Here is a performance compare among top three Hexo themes (this may explain why material is so popular):</p>
 <p><img src="/img/top-theme-compare.jpg" alt="Material NexT Yilia Performance"></p>
-<p>Image from <a href="http://weibo.com/645030234?refer_flag=1005055010_&amp;is_hot=1" target="_blank" rel="external">Weibo</a>.</p>
+<p>Image from <a href="http://weibo.com/645030234?refer_flag=1005055010_&amp;is_hot=1" target="_blank" rel="noopener">Weibo</a>.</p>
 ]]></content>
       
         <categories>
             
-            <category> Hexo </category>
+            <category> Blog </category>
             
         </categories>
         
@@ -390,7 +628,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       <title><![CDATA[Goodby Microsoft TechReward]]></title>
       <url>https://en.abnerchou.me/Blog/8aae6eef/</url>
       <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
-<p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="external">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
+<p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="noopener">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
 <p>Really don’t have any hard feeling about this. The only reward attracted me was the AppToCerts, which rewarded you the MS certificate if passed two challenges. Other than it, to achieve a $2 reward, you have to complete at least 3 challenges, and the rewards are all donations.</p>
 <p>So here I will list the reasons why I think it is going to fail:</p>
 <a id="more"></a>
@@ -407,7 +645,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       
         <categories>
             
-            <category> Exam </category>
+            <category> News </category>
             
         </categories>
         
@@ -418,6 +656,8 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             
             <tag> TechReward </tag>
             
+            <tag> Exam </tag>
+            
         </tags>
         
     </entry>
@@ -426,31 +666,31 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       <title><![CDATA[Set up HTTPS Free]]></title>
       <url>https://en.abnerchou.me/Blog/daa790/</url>
       <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
-<p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="external">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
+<p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
 <a id="more"></a>
-<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="external">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
-<p><a href="https://www.cloudflare.com/" target="_blank" rel="external">Cloudflare</a> is a DNS and CDN provider. All the basic services are free of charge, and they are already good enough for a static website.</p>
-<p><a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="external">HTTPS</a> is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (<strong>not cheap</strong>), and set up it for your domain (<strong>not easy</strong>). One important reason to use HTTPS other than security is speed, that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see <a href="https://www.httpvshttps.com/" target="_blank" rel="external">http vs https</a>).</p>
-<p><a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank" rel="external">HSTS</a> helps your website more secure. It strictly forbids the HTTP connection on your website, if your website displays a content from a HTTP link, the browser will refuse to load. So before set your site up and run with HTTPS and eliminate mix contents, do not turn it on.</p>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><h3 id="Settings-on-Github"><a href="#Settings-on-Github" class="headerlink" title="Settings on Github"></a>Settings on Github</h3><p>Set up an Github Pages, add CNAME to the root folder. Here is the <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="external">guide</a> for using custom domain with Github pages.</p>
+<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="noopener">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
+<p><a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> is a DNS and CDN provider. All the basic services are free of charge, and they are already good enough for a static website.</p>
+<p><a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener">HTTPS</a> is a web portal, which also called HTTP over TLS. It provides secure connect between server and client. To enable this on your server, you have to purchase a certificate from a TLS provider (<strong>not cheap</strong>), and set up it for your domain (<strong>not easy</strong>). One important reason to use HTTPS other than security is speed, that firewalls would skip checking the contents send via HTTPS, hence HTTPS normally faster than HTTP in most scenarios (see <a href="https://www.httpvshttps.com/" target="_blank" rel="noopener">http vs https</a>).</p>
+<p><a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank" rel="noopener">HSTS</a> helps your website more secure. It strictly forbids the HTTP connection on your website, if your website displays a content from a HTTP link, the browser will refuse to load. So before set your site up and run with HTTPS and eliminate mix contents, do not turn it on.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><h3 id="Settings-on-Github"><a href="#Settings-on-Github" class="headerlink" title="Settings on Github"></a>Settings on Github</h3><p>Set up an Github Pages, add CNAME to the root folder. Here is the <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="noopener">guide</a> for using custom domain with Github pages.</p>
 <h3 id="Settings-on-Cloudflare"><a href="#Settings-on-Cloudflare" class="headerlink" title="Settings on Cloudflare"></a>Settings on Cloudflare</h3><p>First, you have to set up the Cloudflare as your DNS manager. It basically tells the domain provider that DNS is handled by Cloudflare. You can google to find a tutorial about it.</p>
 <p>Then, connect to Github page. Just setting the A and CNAME records on DNS.</p>
 <h3 id="Test-if-Cloudflare-is-working"><a href="#Test-if-Cloudflare-is-working" class="headerlink" title="Test if Cloudflare is working"></a>Test if Cloudflare is working</h3><p>Type the following code in your console (replace theurloftheresource to the actual url)</p>
 <pre class=" language-bash"><code class="language-bash">curl -svo /dev/null http://theurloftheresource
 </code></pre>
-<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="external">Ref</a>).</p>
+<p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="noopener">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
 <p><img src="/img/https_1.png" alt=""></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
 <p>There are three basic checks (at least) to turn on the HSTS:</p>
 <ul>
 <li>Always connected via HTTPS</li>
-<li><a href="http://domain.com" target="_blank" rel="external">http://domain.com</a> need to redirect to <a href="https://domain.com" target="_blank" rel="external">https://domain.com</a></li>
-<li><a href="http://domain.com" target="_blank" rel="external">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="external">https://www.domain.com</a></li>
+<li><a href="http://domain.com" target="_blank" rel="noopener">http://domain.com</a> need to redirect to <a href="https://domain.com" target="_blank" rel="noopener">https://domain.com</a></li>
+<li><a href="http://domain.com" target="_blank" rel="noopener">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="noopener">https://www.domain.com</a></li>
 </ul>
 <p>To pass those checks, we only need two page rules (Cloudflare free plan can set maximum three page rules). The first it always using HTTPS, and the second is forwarding URL. Note, the order matters.</p>
 <p><img src="/img/https_2.png" alt=""></p>
-<p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="external">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
+<p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="noopener">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
 <p><img src="/img/https_3.png" alt=""></p>
 <p>Everything is set and your website will always be connected through the secure protocol.</p>
 <h2 id="Extra-Page-Rule-Usage"><a href="#Extra-Page-Rule-Usage" class="headerlink" title="Extra Page Rule Usage"></a>Extra Page Rule Usage</h2><p>As we have one more page rule left, you could leave it as blank. But as stated above, the github pages set the Cache-Control: max-age=600, which is 10 mins. That means every 10 mins the user has to fetch data through github page, no matter it changed or not. This is really inefficiency. To overwrite this setting, we could set the browser cache TTL. I set it to one year, because my assets would rarely be modified.</p>
@@ -463,7 +703,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       
         <categories>
             
-            <category> Website </category>
+            <category> Server </category>
             
         </categories>
         
@@ -476,6 +716,8 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
             
             <tag> Cloudflare </tag>
             
+            <tag> Website </tag>
+            
         </tags>
         
     </entry>
@@ -484,25 +726,27 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
       <title><![CDATA[Coding Play and Learn]]></title>
       <url>https://en.abnerchou.me/Blog/2db6c020/</url>
       <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
-<p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="external">Quora</a>, I spent some time to organize the list.</p>
+<p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="noopener">Quora</a>, I spent some time to organize the list.</p>
 <a id="more"></a>
 <p>Here are several sites that allow you to using coding to play.</p>
 <p><img src="/img/play_learn_code_combat.jpeg" alt=""></p>
-<p><a href="https://codecombat.com/" target="_blank" rel="external">CodeCombat</a> is an RPG game which you could use Javascript, Coffeescript, Lua, Python, Clojure, and Io.</p>
+<p><a href="https://codecombat.com/" target="_blank" rel="noopener">CodeCombat</a> is an RPG game which you could use Javascript, Coffeescript, Lua, Python, Clojure, and Io.</p>
 <p><img src="/img/play_learn_code_hunt.png" alt=""></p>
-<p><a href="https://www.codehunt.com/" target="_blank" rel="external">Code Hunt</a> is developed by Microsoft Research. In which, you are a code hunter to find the bug in C#/Java code.</p>
+<p><a href="https://www.codehunt.com/" target="_blank" rel="noopener">Code Hunt</a> is developed by Microsoft Research. In which, you are a code hunter to find the bug in C#/Java code.</p>
 <p><img src="/img/play_learn_codingame.jpg" alt=""></p>
-<p><a href="https://www.codingame.com/start" target="_blank" rel="external">CodinGame</a> I haven’t played it yet, but it looks fun.</p>
+<p><a href="https://www.codingame.com/start" target="_blank" rel="noopener">CodinGame</a> I haven’t played it yet, but it looks fun.</p>
 <p><img src="/img/play_learn_creeps.jpg" alt=""></p>
-<p><a href="https://screeps.com/" target="_blank" rel="external">Screeps</a> is an online RTS. You have to build up your territory, and defend it from AI and other player’s attach. For now, it only support the Javascript, and you have to pay2play.</p>
-<p><a href="http://fightcodegame.com/" target="_blank" rel="external">FightCode</a> Build your smart tank and beat others. It’s really similar to <a href="http://robocode.sourceforge.net/" target="_blank" rel="external">Robocode</a>.</p>
-<p><a href="http://play.elevatorsaga.com/" target="_blank" rel="external">Elevator Saga</a> You become an elevator operator. You have to deliver certain number of people within a time frame to pass to next level.</p>
-<p><a href="https://www.battlecode.org/" target="_blank" rel="external">Battle Code</a> Not know much about it, but it holds contest for students.</p>
-<p><a href="https://www.bloc.io/ruby-warrior/#/warriors" target="_blank" rel="external">Ruby Warrior</a> Learn Ruby and beat dungeon.</p>
-<p><a href="https://scratch.mit.edu/" target="_blank" rel="external">Scratch</a> Visually coding.</p>
-<p><a href="https://lightbot.com/" target="_blank" rel="external">LightBot</a> Simple game which teachs the basic function and loop concepts.</p>
-<p><a href="http://flexboxfroggy.com/" target="_blank" rel="external">FlexBox Froggy</a> Learn CSS FlexBox through games.</p>
-<p><a href="https://halite.io/" target="_blank" rel="external">Halite</a> Artificial Intelligence chanllenge game. </p>
+<p><a href="https://screeps.com/" target="_blank" rel="noopener">Screeps</a> is an online RTS. You have to build up your territory, and defend it from AI and other player’s attach. For now, it only support the Javascript, and you have to pay2play.</p>
+<p><a href="http://fightcodegame.com/" target="_blank" rel="noopener">FightCode</a> Build your smart tank and beat others. It’s really similar to <a href="http://robocode.sourceforge.net/" target="_blank" rel="noopener">Robocode</a>.</p>
+<p><a href="http://play.elevatorsaga.com/" target="_blank" rel="noopener">Elevator Saga</a> You become an elevator operator. You have to deliver certain number of people within a time frame to pass to next level.</p>
+<p><a href="https://www.battlecode.org/" target="_blank" rel="noopener">Battle Code</a> Not know much about it, but it holds contest for students.</p>
+<p><a href="https://www.bloc.io/ruby-warrior/#/warriors" target="_blank" rel="noopener">Ruby Warrior</a> Learn Ruby and beat dungeon.</p>
+<p><a href="https://scratch.mit.edu/" target="_blank" rel="noopener">Scratch</a> Visually coding.</p>
+<p><a href="https://lightbot.com/" target="_blank" rel="noopener">LightBot</a> Simple game which teachs the basic function and loop concepts.</p>
+<p><a href="http://flexboxfroggy.com/" target="_blank" rel="noopener">FlexBox Froggy</a> Learn CSS FlexBox through games.</p>
+<p><a href="https://halite.io/" target="_blank" rel="noopener">Halite</a> Artificial Intelligence chanllenge game. </p>
+<p><img src="/img/cryptozombies.jpeg" alt="Crypto Zombies"></p>
+<p><a href="https://cryptozombies.io/" target="_blank" rel="noopener">CryptoZombies</a> is an interactive code school that teaches you to write smart contracts in Solidity through building your own crypto-collectables game.</p>
 <p>Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.</p>
 ]]></content>
       
@@ -528,9 +772,9 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <entry>
       <title><![CDATA[An Online Hacker Game]]></title>
       <url>https://en.abnerchou.me/Blog/e4c9ee8f/</url>
-      <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="external">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="external">coolshell.cn</a>.</p>
+      <content type="html"><![CDATA[<p>You could start the game from <a href="http://fun.coolshell.cn" target="_blank" rel="noopener">here</a>, hosted by <a href="http://coolshell.cn" target="_blank" rel="noopener">coolshell.cn</a>.</p>
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
-<p>I have posted hints and solutions on <a href="https://github.com/NoahDragon/fun.coolshell.cn" target="_blank" rel="external">my github</a>, use them wisely when you get difficulties.</p>
+<p>I have posted hints and solutions on <a href="https://github.com/NoahDragon/fun.coolshell.cn" target="_blank" rel="noopener">my github</a>, use them wisely when you get difficulties.</p>
 <p>Enjoy :)</p>
 <p><img src="/img/online_hacker_game.PNG" alt=""></p>
 <p>A little bit show off and keep a record.</p>
@@ -556,7 +800,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <entry>
       <title><![CDATA[Set up VPN with transparent proxy on DigitalOcean]]></title>
       <url>https://en.abnerchou.me/Blog/2b608f65/</url>
-      <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a>,
+      <content type="html"><![CDATA[<p>Recently I just rent a VPS on <a href="https://www.digitalocean.com" target="_blank" rel="noopener">Digital Ocean</a>,
 which is cheap for a student and who is price sensitive.
 As it gives you all the controls of an OS, it likes a remote compute machine.
 Meanwhile, you could do anything as you have your own server.</p>
@@ -612,8 +856,8 @@ Here, I should introduce the transparent proxy, which usually sets on the gatewa
 It calls transparent because client side does not need any configuration.
 Hence, every WWW requests through VPN need go to transparent proxy.</p>
 <p>This installation guide is tested on Ubuntu 14.04 64bit.
-VPN is set up by <a href="http://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol" target="_blank" rel="external">pptp</a>.
-Transparent proxy is on <a href="http://www.squid-cache.org" target="_blank" rel="external">Squid3</a>.</p>
+VPN is set up by <a href="http://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol" target="_blank" rel="noopener">pptp</a>.
+Transparent proxy is on <a href="http://www.squid-cache.org" target="_blank" rel="noopener">Squid3</a>.</p>
 <ul>
 <li><strong>pptp installation</strong></li>
 </ul>
@@ -717,7 +961,7 @@ This doesn’t conflict with motion relative law.
 But why we are not saying the Sun is orbiting Earth?
 <a id="more"></a>
 So let’s see how the planets move during heliocentric system and geocentric system.
-Here is the link: <a href="http://noahdragon.github.io/SolarSystem.js/" target="_blank" rel="external">SolarSystem.js</a>.
+Here is the link: <a href="http://noahdragon.github.io/SolarSystem.js/" target="_blank" rel="noopener">SolarSystem.js</a>.
 You could click to switch the systems, and draw the orbit path for better viewing.</p>
 <p>The heliocentric system shows perfect concentric circles of planets path, in contrast, the geocentric system looks like random motion.
 Untile we draw their path, only the Sun’s orbit is circle, the other planet tracks are like spiral.
@@ -757,14 +1001,14 @@ Otherwise, I couldn’t image how hard the job is for a mathematician to compute
       <title><![CDATA[My First Blog Here]]></title>
       <url>https://en.abnerchou.me/Blog/90d363bc/</url>
       <content type="html"><![CDATA[<p>Well, this is my first blog here (right now on github).</p>
-<p>I’m using the <a href="http://octopress.org" target="_blank" rel="external">Octopress</a> as blog content management,
+<p>I’m using the <a href="http://octopress.org" target="_blank" rel="noopener">Octopress</a> as blog content management,
 and I will briefly describe the way to set it up.</p>
 <a id="more"></a>
-<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="external">setup page</a>.
+<p>First, go to Octopress <a href="http://octopress.org/docs/setup/" target="_blank" rel="noopener">setup page</a>.
 Follow the instruction,
 install the dependencies that Octopress will need.</p>
 <p>Then choose the platform that the blog will be hosted on,
-here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="external">deploying github pages</a>.
+here is a link for <a href="http://octopress.org/docs/deploying/github/" target="_blank" rel="noopener">deploying github pages</a>.
 <strong>Note</strong>: an error occured while I followed the instruction to rake it.</p>
 <pre class=" language-bash"><code class="language-bash">rake aborted<span class="token operator">!</span>
 You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6.
@@ -817,13 +1061,14 @@ sharing: true
 </code></pre>
 <p><strong>Update</strong> (2014-Mar-12):
 <code>rake preview</code> has problem with Safari.
-Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> .
-Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="external">ref</a>]</p>
+Don’t know why but only show blank page while open <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> .
+Using Chrome or Firefox will solve this.[<a href="https://github.com/imathis/octopress/issues/1395" target="_blank" rel="noopener">ref</a>]</p>
 <p>Due to save typing, I have written some bash files (deploy.sh and preview.sh):</p>
 <pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
 bundle <span class="token function">exec</span> rake generate <span class="token operator">&amp;&amp;</span>
 bundle <span class="token function">exec</span> rake deploy
+
 </code></pre>
 <pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
@@ -848,6 +1093,7 @@ preview_pid<span class="token operator">=</span>`/bin/ps -fu <span class="token 
 <span class="token function">kill</span> -2 <span class="token variable">$preview_pid</span>
 <span class="token comment" spellcheck="true">#echo "$preview_pid"</span>
 <span class="token keyword">echo</span> <span class="token string">"Preview DONE!"</span>
+
 </code></pre>
 <p>Please ignore the text below, the latest code fixes all of them. :P</p>
 <p><del><strong>Warnning</strong>:
@@ -864,7 +1110,7 @@ if you don’t really care about the traces.</del></p>
       
         <categories>
             
-            <category> Website </category>
+            <category> Blog </category>
             
         </categories>
         
@@ -872,6 +1118,8 @@ if you don’t really care about the traces.</del></p>
         <tags>
             
             <tag> Blog </tag>
+            
+            <tag> Website </tag>
             
             <tag> General </tag>
             

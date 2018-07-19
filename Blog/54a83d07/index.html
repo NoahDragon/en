@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.4 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            A Real Scenario Machine Learning Question | 
+        
+        Hard Code
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+        <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Abner Chou">
+    <meta name="description" content="A Developer in Limbo">
+    <meta name="keywords" content="developer, blog, abner, code,Machine Learning,OCR,RNN,CNN,NLP,natural language processing,convolutional neural network,recurrent neural network,optical character recognition">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/favicon.png">
+    <link rel="icon" sizes="192x192" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Hard Code">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://en.abnerchou.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="A Real Scenario Machine Learning Question | Hard Code">
+    <meta property="og:description" content="A Developer in Limbo">
+    <meta property="og:article:tag" content="Machine Learning"> <meta property="og:article:tag" content="OCR"> <meta property="og:article:tag" content="RNN"> <meta property="og:article:tag" content="CNN"> <meta property="og:article:tag" content="NLP"> <meta property="og:article:tag" content="natural language processing"> <meta property="og:article:tag" content="convolutional neural network"> <meta property="og:article:tag" content="recurrent neural network"> <meta property="og:article:tag" content="optical character recognition"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.png);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
+    </script>
+
+    
+
+    
+    <!-- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
+    </script>
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Intuitive-Thoughts"><span class="post-toc-number">1.</span> <span class="post-toc-text">Intuitive Thoughts</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Failure-on-the-Intuitive-Thoughts"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Failure on the Intuitive Thoughts</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RNN"><span class="post-toc-number">2.</span> <span class="post-toc-text">RNN</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RL"><span class="post-toc-number">3.</span> <span class="post-toc-text">RL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#More"><span class="post-toc-number">4.</span> <span class="post-toc-text">More</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                A Real Scenario Machine Learning Question
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/avatar.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Abner Chou</strong>
+        <span>Jun 18, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">Read this article on other device</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACaElEQVR42u3aQY7CMAwFUO5/aeYAiPJtJyWDXleVKCGvi9jYfjx/+nrg4eHh4eHh4eEdxnvE1+vz1yskv/L6zGRveHh4eHfyPhy1L5jrDe34brI3PDw8vPt518GgupV8hSRUFPaGh4eHdxhvcn+dlCf3eHh4eP+R9y6pzZ+fvEo8PDy803j5H/780K8Wc79ca8HDw8OLedUG2J33X+jv4eHh4V3yyiNN8bHeS7vzNd/+Fh4eHt5mXnWgKk+gkzR6PojQrLXg4eHhDXjV5n3OroaHvFVWTqnx8PDwtvGqAaP3aTVNr75KPDw8vBN4eQjpbTRvg0XlDDw8PLzbefmxXm38J+v0CiJ4eHh43+LliXJO7TXMtgQGPDw8vEW8VQNSk3GB6goffhcPDw/vRt4qWLL+dWGimljj4eHh3cnLm1h52SIvYeTjXHh4eHjn8OajqL1kujpQ1Szj4uHh4W3g5Y2uyXBqdYwgoY7iHh4eHt6AN2nSL2v2J22tOHTh4eHh7ebNt54c5UkZIk/iP4QxPDw8vM28yUGclBvyUkK1YFGoteDh4eEt5eWwvJRQBVRDTjmlxsPDw9vAqy6Xl1l3hIcPIQ0PDw9vMy//898bIHgGV+8llhtgeHh4eIt41Ss/9FeFjfxF4+Hh4d3Dm5QAJily3mwrhxk8PDy8W3i9lHfy5ATfHFfFw8PD28DrtbV6R3zSVMuDEx4eHt7JvHxz+eE+f5V4eHh45/N6gSRPx5NXuSWlxsPDw9tQjKgie/h8dKAQGPDw8PCW8nqjqNWwUf3usjIuHh4e3lLe7114eHh4eHh4eHgHXH9HgbqW2466BAAAAABJRU5ErkJggg==">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CNN/">CNN</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/NLP/">NLP</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/OCR/">OCR</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/RNN/">RNN</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/convolutional-neural-network/">convolutional neural network</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/natural-language-processing/">natural language processing</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/optical-character-recognition/">optical character recognition</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/recurrent-neural-network/">recurrent neural network</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=A Real Scenario Machine Learning Question&url=https://en.abnerchou.me//Blog/54a83d07/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=A Real Scenario Machine Learning Question&url=https://en.abnerchou.me//Blog/54a83d07/index.html&via=Abner Chou" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://en.abnerchou.me//Blog/54a83d07/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://en.abnerchou.me//Blog/54a83d07/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Recently I got a real scenario machine learning question, which does not have existing models. I would like to record my thoughts here which may save my time later.</p>
+<p>Here is the question:</p>
+<blockquote>
+<p>A company receives thousands of documents everyday uploaded by our users. Generally these documents are invoices or bills. We would like to extract the vendor​ and amount​ from these documents automatically (i.e. using software rather than human inspection).</p>
+</blockquote>
+<blockquote>
+<p>They store the following pieces of information for each document:</p>
+<ol>
+<li>The pdf document uploaded by the user (please see example.pdf attached)</li>
+<li>The text extracted from that pdf (please see example.txt attached - Note: often the extracted text would not be in an order that seems natural to a human reader)</li>
+<li>Labels of what the vendor and amount should be for each document (in the attached
+example, vendor would be “Marketing Fuel Biz.”, and amount would be “747.50”).</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Question: Describe a machine learning solution to this problem.</p>
+</blockquote>
+<blockquote>
+<p>Additon: Some percentage of the stored labels may be incorrect. What would you change to mitigate this problem.</p>
+</blockquote>
+<p>The sample pdf and OCR output txt is <a href="/asserts/ml-example.zip">downloadable</a>. </p>
+<a id="more"></a>
+<h2 id="Intuitive-Thoughts"><a href="#Intuitive-Thoughts" class="headerlink" title="Intuitive Thoughts"></a>Intuitive Thoughts</h2><p>As the OCR result loses the invoice position information (sample txt file), the traditional NLP methods, which expect sequential structure, would not work on such text corpus [<a href="https://www.diva-portal.org/smash/get/diva2:934351/FULLTEXT01.pdf" target="_blank" rel="noopener">1</a>]. So my proposed solution would focus on rebuilding the invoice structure information.</p>
+<p>Based on my understanding, the invoice structure follows a certain pattern, such as the left top area is vendor logo/name and the total amount is in the bottom right. There are definitely some special cases, but the prior statement is an assumption of my solution.</p>
+<p>In order to track the position in a PDF file (could be easily convert to an image file), the convolutional neural networks (CNN) [<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network" target="_blank" rel="noopener">2</a>] could fit this task, it has been proved successfully on many image processing tasks [<a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">3</a>, <a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>, <a href="https://arxiv.org/abs/1703.06870" target="_blank" rel="noopener">5</a>]. Although a paper [<a href="https://arxiv.org/pdf/1708.07403.pdf" target="_blank" rel="noopener">6</a>] states to extract invoice info from the recurrent neural network (RNN), their input is words and positions (in our case, we do not have positions).  So I propose to use Faster R-CNN [<a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>] or YOLO [<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">7</a>] to solve the problem, they both are mature models of object detection and applied in many products.</p>
+<p>The CNN model input should be images, and outputs are labels and region coordinate (the format would be like {vendor, 5, 15, 20, 40}).</p>
+<p>Therefore, we need a dataset to train the CNN model. Since we already have the original PDF files and labels of vendor/amount, we could generate an image dataset for training the model. For each training entry, it contains an image converted from PDF and a region info of vendor/amount. The region info is the coordinate of two points which consist of a rectangle (e.g. (x1, y1) and (x2, y2) in figure 1). The dataset generation process could be done via a method of ORC and image process combination. The method is cropping the image into multiple rectangles (moving windows), then apply ORC on each rectangle. Based on the text outputs of rectangles, the area contains only vendor name is labeled as vendor, and the areas contain the amount are labeled as amount.</p>
+<p><img src="/img/ml-questions-1.png" alt=""></p>
+<p>After we have the dataset, we split it into training and testing datasets. The split ratio could be 80/20 [<a href="https://developers.google.com/machine-learning/crash-course/training-and-test-sets/splitting-data" target="_blank" rel="noopener">8</a>].</p>
+<p>The evaluation metric is mean precision average (mPA) at the different intersection over union (IoU) thresholds. The IoU of a proposed set of object pixels and a set of true object pixels is calculated as IoU(A,B)=A∩B/A∪B (image below [<a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" target="_blank" rel="noopener">9</a>]). The metric sweeps over a range of IoU thresholds, at each point calculating an average precision value. The threshold values range from 0.5 to 0.95 with a step size of 0.05: (0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95). In other words, at a threshold of 0.5, a predicted object is considered a “hit” if its intersection over union with a ground truth object is greater than 0.5. At each threshold t, we can check if it “hit” on the ground truth. Then the mPA is 1/thresholds∑hit(t).</p>
+<p><img src="/img/ml-questions-2.png" alt=""></p>
+<p>When the model training finished (let’s assume it meets our expectation), we could apply a post process to convert the result to our label. We will get the region coordinate from the model output, and based on the coordinate, we can crop the rectangle and feed it to OCR. It is the final result. Then we can compare the predicated labels with our ground truth in the database to evaluate the model performance (the evaluation metric could be precision on both labels).</p>
+<p>Here is the overview of the proposed solution:</p>
+<pre><code>Convert PDF to Image -&gt; Dataset Preparation -&gt; CNN Model -&gt; OCR -&gt; Results
+</code></pre><p>To mitigate the impact of incorrect labels, we could add an extra step in dataset preparation. By calculating the frequency of each vendor label in the dataset, we could remove those entries with label frequency lower than a threshold. This is based on an assumption that incorrect labels cannot occur multiple times (the threshold) with the same value.</p>
+<h3 id="Failure-on-the-Intuitive-Thoughts"><a href="#Failure-on-the-Intuitive-Thoughts" class="headerlink" title="Failure on the Intuitive Thoughts"></a>Failure on the Intuitive Thoughts</h3><p>I set up an experiment for the solution, which trained YOLOv3 [<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">10</a>] (pre-trained on ImageNet [<a href="http://www.image-net.org/" target="_blank" rel="noopener">11</a>]) with 30 manually labeled invoices images (google searched images, each invoice contains vendor, logo, and amount labels). Although the predicated labels on validation dataset look promising, the mAP is almost zero on the test dataset. The reason for the low performance may be caused by the principle of CNN, the CNN only can learn the features that appear in the training set. The way to improve the model would be training on a larger dataset and assume it covers all test cases. Therefore, I would like to propose two new solutions for the ML question.</p>
+<ol>
+<li>Using the Recurrent Neural Network (RNN) with Long Short-Term Memory cells (LSTM) [<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="noopener">12</a>].</li>
+<li>Using the Reinforcement Learning (RL) [<a href="https://en.wikipedia.org/wiki/Reinforcement_learning" target="_blank" rel="noopener">13</a>].</li>
+</ol>
+<h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p>I reviewed the example.txt file, it doesn’t fully unorganized. We could recognize some patterns from it, like it reads column by column, not row by row as human do. Although RNN is good at the sequential data, due to the gradient vanishing problem, it won’t work for long sentence. So the LSTM method came up, bring the ability to memory long distance relationship to RNN. For example, “A cat jumps on the table, it breaks a cup, so we chase it off the table” which “it” represents the “cat” in the previous phrase. It may be easy to identify the first “it” as the cat because they are close, but for the second “it”, it’s hard to tell which it represents (cat, table, or cup).</p>
+<p>As we are processing the text data, we need a preprocessing step to clean up. First, remove punctuation marks, like semi-colon, colon, exclamation mark, and etc. But keep the period and comma, because they may use in numbers. Second, tokenize the words, we could build up a vocabulary dictionary and convert each word into it represented the index in the dictionary. For unknown word and numbers, we use [UNK] and [NUM] instead. Finally, clear up the common words which do not help for our task, like the word “invoice”, it appears in every invoice.</p>
+<p>Then we could feed the data to the RNN model. The RNN model supports many to many. Input is word sequence, and the output is the all possible labels for vendor/amount.</p>
+<p>The evaluation metric would be the F1 measurement [<a href="https://en.wikipedia.org/wiki/F1_score" target="_blank" rel="noopener">14</a>], which combines the precision and recall.</p>
+<h2 id="RL"><a href="#RL" class="headerlink" title="RL"></a>RL</h2><p>When AlphaGo [<a href="https://deepmind.com/research/alphago/" target="_blank" rel="noopener">15</a>] defeats the world champion Lee Sedol, reinforcement learning becomes a hot topic in AI domain. The reinforcement learning is an algorithm to make AI compete with AI, the best set of policies is searched out during the competition. It has successfully applied to robotics, game playing, fintech, and ect. [<a href="https://www.oreilly.com/ideas/practical-applications-of-reinforcement-learning-in-industry" target="_blank" rel="noopener">16</a>]</p>
+<p>The reason I pick up the RL is the intuitive thought in my previous email. For a human, it is easy to identify vendor and amount by a glance, so the images contain all the info we need. Therefore, I think it is not necessary to take an extra step to convert the images to text, which lose information and create an extra layer to process. </p>
+<p>So the idea is to find out the areas in invoice images which represent vendor and amount, then apply OCR against those areas to get final text formatted outputs.</p>
+<p>Preprocess input documents to convert them into greyscale images.</p>
+<p>Before we feed images into RL model, we need to set up rules for the agents, like identify the correct item plus points, identify the logo get some point, output wrong result get minus points. Then the RL model could brute force to find the best policies, like font size, bold style, and etc.</p>
+<p>The RL model output should be the rectangle area of the vendor/amount. Then apply OCR to convert them to text.</p>
+<p>The evaluation metric should be same as above, using the F1 score.</p>
+<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>In addition to the above methods, I also thought about the generative adversarial networks (GANs) [<a href="https://en.wikipedia.org/wiki/Generative_adversarial_network" target="_blank" rel="noopener">17</a>], but the tuning process is more like mystery comparing other models. Moreover, I found a paper [<a href="https://arxiv.org/abs/1801.09321" target="_blank" rel="noopener">18</a>] that using the deep CNN model to classify document images based their structure. In our case, I think we could use the similar approach to identify vendors, but we still need more info to retrieve the amounts.</p>
+<p>BTW, besides the machine learning models, I wonder we also could improve the OCR to include the structure information in the output, like the PDF to HTML [<a href="https://arxiv.org/abs/1801.09321" target="_blank" rel="noopener">18</a>] and Zonal OCR [<a href="https://docparser.com/blog/zonal-ocr/" target="_blank" rel="noopener">19</a>]. If the company mainly deal with PDF files. As the PDF format specification [<a href="https://www.adobe.com/content/dam/acom/en/devnet/pdf/pdfs/PDF32000_2008.pdf" target="_blank" rel="noopener">20</a>] is open to the public, we could analysis PDF files directly, this would be another story.</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+    <!-- 使用 DISQUS_CLICK -->
+    <div id="disqus-comment">
+        <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+        .ripple-container {
+        }
+        .ripple-container .ripple{
+            background-color: rgba(255,255,255,0.4);
+            animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #757575;
+            text-shadow: 0
+        }
+</style>
+	
+<!-- add data-ripple attribute -->
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn">Read Comments (Be sure disq.us, disquscdn.com and disqus.com can load properly)</button>
+</div>
+	
+<script>
+    // add effect to elements
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function(element){
+        // find all elements and attach effect
+        new RippleEffect(element); // element is instance of javascript element node
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://en.abnerchou.me/Blog/54a83d07/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '54a83d07'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//abnerchou.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+  	
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/Blog/1d6c1157/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/Blog/31404856/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/avatar.jpeg" alt="Abner Chou's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        hi@abnerchou.me
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://legofan.cc/projects/" title="Projects">
+                
+                    <i class="material-icons sidebar-material-icons">book</i>
+                
+                Projects
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="Tags Cloud">
+                
+                    <i class="material-icons sidebar-material-icons">cloud</i>
+                
+                Tags Cloud
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/atom.xml" title="RSS Feed">
+                
+                    <i class="material-icons sidebar-material-icons">wifi_tethering</i>
+                
+                RSS Feed
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            Theme - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/AbnerZHC?lang=en" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.svg);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/lm00n/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.svg);">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/NoahDragon" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.svg);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Hard Code
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

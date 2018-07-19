@@ -10,7 +10,7 @@
     
     <title>
         
-            Categories: Hexo | 
+            Tag: NLP | 
         
         Hard Code
     </title>
@@ -60,7 +60,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://en.abnerchou.me">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Categories: Hexo | Hard Code">
+    <meta property="og:title" content="Tag: NLP | Hard Code">
     <meta property="og:description" content="A Developer in Limbo">
     
 
@@ -178,13 +178,14 @@
         <script src="/js/queue.js"></script>
     
 
-    <!-- UC Browser Compatible -->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
     </script>
 
     
@@ -199,7 +200,6 @@
         ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
     </script>
     
-
 
     <!-- Bing Background -->
     
@@ -250,19 +250,37 @@
     
 
         <!-- Post Title -->
-        <p class="article-headline-p"><a href="/Blog/5c00ca67/">Hexo Top 10 Popular Themes</a></p>
+        <p class="article-headline-p"><a href="/Blog/54a83d07/">A Real Scenario Machine Learning Question</a></p>
     </div>
 
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-            
-Hexojs is one of the most popular static site generator based on nodejs [ref].
-There are around 75 themes list on the website, here is the top 10 popular ones. 
+            Recently I got a real scenario machine learning question, which does not have existing models. I would like to record my thoughts here which may save my time later.
+Here is the question:
+
+A company receives thousands of documents everyday uploaded by our users. Generally these documents are invoices or bills. We would like to extract the vendor​ and amount​ from these documents automatically (i.e. using software rather than human inspection).
+
+
+They store the following pieces of information for each document:
+
+The pdf document uploaded by the user (please see example.pdf attached)
+The text extracted from that pdf (please see example.txt attached - Note: often the extracted text would not be in an order that seems natural to a human reader)
+Labels of what the vendor and amount should be for each document (in the attached
+example, vendor would be “Marketing Fuel Biz.”, and amount would be “747.50”).
+
+
+
+Question: Describe a machine learning solution to this problem.
+
+
+Additon: Some percentage of the stored labels may be incorrect. What would you change to mitigate this problem.
+
+The sample pdf and OCR output txt is downloadable. 
         
         &nbsp;&nbsp;&nbsp;
         <span>
-            <a href="/Blog/5c00ca67/" target="_self">Continue Reading</a>
+            <a href="/Blog/54a83d07/" target="_self">Continue Reading</a>
         </span>
     </div>
     <!-- Post_entry Info-->
@@ -274,13 +292,13 @@ There are around 75 themes list on the website, here is the top 10 popular ones.
             </div>
             <div>
                 <strong>Abner Chou</strong>
-                <span>Oct 16, 2016</span>
+                <span>Jun 18, 2018</span>
             </div>
         </div>
         <div id="post_entry-right-info">
             <!-- Category -->
             <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/Hexo/">Hexo</a>
+                <a class="post_category-link" href="/categories/AI/">AI</a>
             </span>
 
             
@@ -398,7 +416,7 @@ There are around 75 themes list on the website, here is the top 10 popular ones.
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -416,7 +434,7 @@ There are around 75 themes list on the website, here is the top 10 popular ones.
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/CI/">CI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Website/">Website<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -519,14 +537,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
-
-                    
-                        <!-- Footer Top Button -->
-                        <div class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
 
                     
 

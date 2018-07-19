@@ -7,64 +7,64 @@
     </url>
 
     <url>
-        <loc>https://en.abnerchou.me/categories/CI/</loc>
-        <lastmod>2017-08-14T14:59:27.538Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://en.abnerchou.me/categories/DIY/</loc>
-        <lastmod>2017-08-14T14:59:27.538Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://en.abnerchou.me/categories/Exam/</loc>
-        <lastmod>2017-08-14T14:59:27.538Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://en.abnerchou.me/categories/Hexo/</loc>
-        <lastmod>2017-08-14T14:59:27.538Z</lastmod>
+        <loc>https://en.abnerchou.me/categories/DevOps/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://en.abnerchou.me/categories/Game/</loc>
-        <lastmod>2017-08-14T14:59:27.542Z</lastmod>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://en.abnerchou.me/categories/Website/</loc>
-        <lastmod>2017-08-14T14:59:27.542Z</lastmod>
+        <loc>https://en.abnerchou.me/categories/DIY/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://en.abnerchou.me/categories/Docker/</loc>
-        <lastmod>2017-08-14T14:59:27.542Z</lastmod>
+        <loc>https://en.abnerchou.me/categories/News/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://en.abnerchou.me/categories/Science/</loc>
-        <lastmod>2017-08-14T14:59:27.542Z</lastmod>
+        <loc>https://en.abnerchou.me/categories/Blog/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://en.abnerchou.me/categories/Server/</loc>
-        <lastmod>2017-08-14T14:59:27.542Z</lastmod>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://en.abnerchou.me/categories/AI/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://en.abnerchou.me/categories/Exam/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://en.abnerchou.me/categories/Science/</loc>
+        <lastmod>2018-07-19T20:08:05.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
