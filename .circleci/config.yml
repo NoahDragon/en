@@ -29,10 +29,10 @@ jobs:
       # install dependency
       - run: sudo apt update
       - run: sudo apt install -y rsync --fix-missing
-      - run: yarn install
+      - run: npm install
       - run: echo -e 'Host 118.193.213.247\n\tStrictHostKeyChecking no\n' >> ~/.ssh/config
       - run: ssh-keyscan -H -t rsa,dsa -p 21521 118.193.213.247 >> ~/.ssh/known_hosts
-      - run: yarn run build
+      - run: npm run build
 
       - save_cache:
           paths:
