@@ -74,10 +74,10 @@ theme: material
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-#deploy:
-#  type: git
-#  repo: git@github.com:NoahDragon/en.git
-#  branch: gh-pages
+deploy:
+  type: git
+  repo: git@github.com:NoahDragon/en.git
+  branch: gh-pages
 
 # Disqus
 # disqus_shortname: abnerchou
