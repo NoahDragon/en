@@ -27,6 +27,7 @@ jobs:
           - v1-dependencies-
       
       # install dependency
+      - run: sudo apt update
       - run: sudo apt install -y rsync --fix-missing
       - run: yarn install
       - run: echo -e 'Host 118.193.213.247\n\tStrictHostKeyChecking no\n' >> ~/.ssh/config
