@@ -4,6 +4,94 @@
   
     
     <entry>
+      <title><![CDATA[OpenAI Gym Board Games Env for 0.9.6 Above]]></title>
+      <url>https://en.abnerchou.me/Blog/c2dbdabe/</url>
+      <content type="html"><![CDATA[<p>Since Gym 0.9.6, the board games environment has been removed from the default package as they are not maintained by OpenAI [<a href="https://github.com/openai/gym/releases/tag/v0.9.6" target="_blank" rel="noopener">ref</a>].
+This article helps who would like to run their AI on Go or Hex in OpenAI Gym.</p>
+<a id="more"></a>
+<ol>
+<li><p>Locate the python Gym package folder. In my case, it is under <code>~/anaconda3/envs/openai-gym/lib/python3.5/site-packages/gym</code>.</p>
+</li>
+<li><p>Download the Gym <a href="https://github.com/openai/gym/archive/v0.9.5.zip" target="_blank" rel="noopener">0.9.5</a> source code which contains the board games environment.</p>
+</li>
+<li><p>Copy the board_game folder from 0.9.5 source code (under <code>/gym-0.9.5/gym/envs/</code>) to your local Gym package envrionment folder (my case is <code>~/anaconda3/envs/openai-gym/lib/python3.5/site-packages/gym/envs</code>).</p>
+</li>
+<li><p>Add the following code into <strong>init</strong>.py (<code>~/anaconda3/envs/openai-gym/lib/python3.5/site-packages/gym/envs/__init__.py</code>). It will register those envs.</p>
+</li>
+</ol>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Board games</span>
+<span class="token comment" spellcheck="true"># ----------------------------------------</span>
+
+register<span class="token punctuation">(</span>
+    id<span class="token operator">=</span><span class="token string">'Go9x9-v0'</span><span class="token punctuation">,</span>
+    entry_point<span class="token operator">=</span><span class="token string">'gym.envs.board_game:GoEnv'</span><span class="token punctuation">,</span>
+    kwargs<span class="token operator">=</span><span class="token punctuation">{</span>
+        <span class="token string">'player_color'</span><span class="token punctuation">:</span> <span class="token string">'black'</span><span class="token punctuation">,</span>
+        <span class="token string">'opponent'</span><span class="token punctuation">:</span> <span class="token string">'pachi:uct:_2400'</span><span class="token punctuation">,</span>
+        <span class="token string">'observation_type'</span><span class="token punctuation">:</span> <span class="token string">'image3c'</span><span class="token punctuation">,</span>
+        <span class="token string">'illegal_move_mode'</span><span class="token punctuation">:</span> <span class="token string">'lose'</span><span class="token punctuation">,</span>
+        <span class="token string">'board_size'</span><span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true"># The pachi player seems not to be determistic given a fixed seed.</span>
+    <span class="token comment" spellcheck="true"># (Reproduce by running 'import gym; h = gym.make('Go9x9-v0'); h.seed(1); h.reset(); h.step(15); h.step(16); h.step(17)' a few times.)</span>
+    <span class="token comment" spellcheck="true">#</span>
+    <span class="token comment" spellcheck="true"># This is probably due to a computation time limit.</span>
+    nondeterministic<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+register<span class="token punctuation">(</span>
+    id<span class="token operator">=</span><span class="token string">'Go19x19-v0'</span><span class="token punctuation">,</span>
+    entry_point<span class="token operator">=</span><span class="token string">'gym.envs.board_game:GoEnv'</span><span class="token punctuation">,</span>
+    kwargs<span class="token operator">=</span><span class="token punctuation">{</span>
+        <span class="token string">'player_color'</span><span class="token punctuation">:</span> <span class="token string">'black'</span><span class="token punctuation">,</span>
+        <span class="token string">'opponent'</span><span class="token punctuation">:</span> <span class="token string">'pachi:uct:_2400'</span><span class="token punctuation">,</span>
+        <span class="token string">'observation_type'</span><span class="token punctuation">:</span> <span class="token string">'image3c'</span><span class="token punctuation">,</span>
+        <span class="token string">'illegal_move_mode'</span><span class="token punctuation">:</span> <span class="token string">'lose'</span><span class="token punctuation">,</span>
+        <span class="token string">'board_size'</span><span class="token punctuation">:</span> <span class="token number">19</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    nondeterministic<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+register<span class="token punctuation">(</span>
+    id<span class="token operator">=</span><span class="token string">'Hex9x9-v0'</span><span class="token punctuation">,</span>
+    entry_point<span class="token operator">=</span><span class="token string">'gym.envs.board_game:HexEnv'</span><span class="token punctuation">,</span>
+    kwargs<span class="token operator">=</span><span class="token punctuation">{</span>
+        <span class="token string">'player_color'</span><span class="token punctuation">:</span> <span class="token string">'black'</span><span class="token punctuation">,</span>
+        <span class="token string">'opponent'</span><span class="token punctuation">:</span> <span class="token string">'random'</span><span class="token punctuation">,</span>
+        <span class="token string">'observation_type'</span><span class="token punctuation">:</span> <span class="token string">'numpy3c'</span><span class="token punctuation">,</span>
+        <span class="token string">'illegal_move_mode'</span><span class="token punctuation">:</span> <span class="token string">'lose'</span><span class="token punctuation">,</span>
+        <span class="token string">'board_size'</span><span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</code></pre>
+<p>All in all, Gym is built for testing reinforcement learning, and the reinforcement learning gains fames from the DeepMind AlphaGo. 
+Personally, removing Go env from Gym is not a smart move for marketing.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> AI </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> OpenAI </tag>
+            
+            <tag> Gym </tag>
+            
+            <tag> Board Games </tag>
+            
+            <tag> Go </tag>
+            
+            <tag> Hex </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Leetcode VS EPI]]></title>
       <url>https://en.abnerchou.me/Blog/1d6c1157/</url>
       <content type="html"><![CDATA[<p><strong> This article is still work in progress. </strong></p>
