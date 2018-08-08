@@ -3,6 +3,7 @@ title: OpenAI Gym Board Games Env for 0.9.6 Above
 comments: true
 categories:
   - AI
+abbrlink: c2dbdabe
 date: 2018-08-06 22:32:53
 tags:
   - OpenAI
@@ -71,6 +72,10 @@ register(
     },
 )
 ```
+
+5. Install [pachi-py](https://github.com/openai/pachi-py) via `pip install pachi-py` for go env.
+
+Then it's all set to use the board game environment.
 
 All in all, Gym is built for testing reinforcement learning, and the reinforcement learning gains fames from the DeepMind AlphaGo. 
 Personally, removing Go env from Gym is not a smart move for marketing.
