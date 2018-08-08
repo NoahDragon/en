@@ -8,35 +8,35 @@
     
     <url>
         <loc>https://en.abnerchou.me/tags/</loc>
-        <lastmod>2018-08-07T02:37:13.883Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://en.abnerchou.me/about/</loc>
-        <lastmod>2018-08-07T02:37:13.863Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://en.abnerchou.me/categories/</loc>
-        <lastmod>2018-08-07T02:37:13.863Z</lastmod>
+        <lastmod>2018-08-08T20:45:58.112Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://en.abnerchou.me/403.html</loc>
-        <lastmod>2018-08-07T02:37:13.859Z</lastmod>
+        <lastmod>2018-08-08T20:45:58.084Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://en.abnerchou.me/404.html</loc>
-        <lastmod>2018-08-07T02:37:13.859Z</lastmod>
+        <lastmod>2018-08-08T20:45:58.084Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://en.abnerchou.me/about/</loc>
+        <lastmod>2018-08-08T20:45:58.084Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://en.abnerchou.me/categories/</loc>
+        <lastmod>2018-08-08T20:45:58.084Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
