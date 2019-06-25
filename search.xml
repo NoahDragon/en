@@ -272,10 +272,10 @@ example, vendor would be “Marketing Fuel Biz.”, and amount would be “747.5
 <p>In order to track the position in a PDF file (could be easily convert to an image file), the convolutional neural networks (CNN) [<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network" target="_blank" rel="noopener">2</a>] could fit this task, it has been proved successfully on many image processing tasks [<a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">3</a>, <a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>, <a href="https://arxiv.org/abs/1703.06870" target="_blank" rel="noopener">5</a>]. Although a paper [<a href="https://arxiv.org/pdf/1708.07403.pdf" target="_blank" rel="noopener">6</a>] states to extract invoice info from the recurrent neural network (RNN), their input is words and positions (in our case, we do not have positions).  So I propose to use Faster R-CNN [<a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>] or YOLO [<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">7</a>] to solve the problem, they both are mature models of object detection and applied in many products.</p>
 <p>The CNN model input should be images, and outputs are labels and region coordinate (the format would be like {vendor, 5, 15, 20, 40}).</p>
 <p>Therefore, we need a dataset to train the CNN model. Since we already have the original PDF files and labels of vendor/amount, we could generate an image dataset for training the model. For each training entry, it contains an image converted from PDF and a region info of vendor/amount. The region info is the coordinate of two points which consist of a rectangle (e.g. (x1, y1) and (x2, y2) in figure 1). The dataset generation process could be done via a method of ORC and image process combination. The method is cropping the image into multiple rectangles (moving windows), then apply ORC on each rectangle. Based on the text outputs of rectangles, the area contains only vendor name is labeled as vendor, and the areas contain the amount are labeled as amount.</p>
-<p><img src="/img/ml-questions-1.png" alt=""></p>
+<p><img src="/img/ml-questions-1.png" alt></p>
 <p>After we have the dataset, we split it into training and testing datasets. The split ratio could be 80/20 [<a href="https://developers.google.com/machine-learning/crash-course/training-and-test-sets/splitting-data" target="_blank" rel="noopener">8</a>].</p>
 <p>The evaluation metric is mean precision average (mPA) at the different intersection over union (IoU) thresholds. The IoU of a proposed set of object pixels and a set of true object pixels is calculated as IoU(A,B)=A∩B/A∪B (image below [<a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" target="_blank" rel="noopener">9</a>]). The metric sweeps over a range of IoU thresholds, at each point calculating an average precision value. The threshold values range from 0.5 to 0.95 with a step size of 0.05: (0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95). In other words, at a threshold of 0.5, a predicted object is considered a “hit” if its intersection over union with a ground truth object is greater than 0.5. At each threshold t, we can check if it “hit” on the ground truth. Then the mPA is 1/thresholds∑hit(t).</p>
-<p><img src="/img/ml-questions-2.png" alt=""></p>
+<p><img src="/img/ml-questions-2.png" alt></p>
 <p>When the model training finished (let’s assume it meets our expectation), we could apply a post process to convert the result to our label. We will get the region coordinate from the model output, and based on the coordinate, we can crop the rectangle and feed it to OCR. It is the final result. Then we can compare the predicated labels with our ground truth in the database to evaluate the model performance (the evaluation metric could be precision on both labels).</p>
 <p>Here is the overview of the proposed solution:</p>
 <pre><code>Convert PDF to Image -&gt; Dataset Preparation -&gt; CNN Model -&gt; OCR -&gt; Results
@@ -429,6 +429,7 @@ example, vendor would be “Marketing Fuel Biz.”, and amount would be “747.5
 <p>Here is the complete shot:</p>
 <p><img src="/img/diy_pc_2.jpg" alt="Completed PC"> </p>
 <p><strong>Update(2017-Aug-14)</strong>: I also bought an M.2 SSD to install the Ubuntu OS, as the most machine learning algorithms are build upon Linux system. Moreover, the driver officially provided for the Asus USB-AC51 is not compatible for Ubuntu 16.04 LTS (I also tried several customized drivers, they may fit the 14.04 LTS but not the 16.04). So be careful when purchase the USB Wifi adapter, here is a <a href="http://willhaley.com/blog/linux-16-04-1-usb-wifi-adapters/" target="_blank" rel="noopener">list</a> that has some “work out of box” USB for Ubuntu 16.04 and above.</p>
+<p><strong>Update(2019-Jun-24)</strong>: Recently bought another M.2 SSD for share disk between Ubuntu and Windows. Due to recently SSD price drop, the 960G SSD only cost $150 (included tax). Even cheaper and faster than 500G SATA SSD I bought 2 years ago. How technology changes so fast! To mount the new SSD in Ubuntu, I followed the top answer in the StackOverflow <a href="https://askubuntu.com/a/125277" target="_blank" rel="noopener">post</a>.</p>
 ]]></content>
       
         <categories>
@@ -623,66 +624,66 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <entry>
       <title><![CDATA[Hexo Top 10 Popular Themes]]></title>
       <url>https://en.abnerchou.me/Blog/5c00ca67/</url>
-      <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt=""></p>
+      <content type="html"><![CDATA[<p><img src="\img\hexo-logo.png" alt></p>
 <p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexojs</a> is one of the most popular static site generator based on <a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs</a> [<a href="https://www.staticgen.com/" target="_blank" rel="noopener">ref</a>].</p>
 <p>There are around 75 themes list on the <a href="https://hexo.io/themes/" target="_blank" rel="noopener">website</a>, here is the top 10 popular ones. </p>
 <a id="more"></a>
 <h2 id="NexT"><a href="#NexT" class="headerlink" title=" NexT"></a><img class="nofancybox" src="/img/top1.png" style="display: inline; border-style: none;"> NexT</h2><div style="text-align:center">
-  <div class="github-card" data-user="iissnan" data-repo="hexo-theme-next" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="iissnan" data-repo="hexo-theme-next" data-width="400" data-theme="medium" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #one_column  #clean  #white</p>
 <h2 id="Yilia"><a href="#Yilia" class="headerlink" title=" Yilia"></a><img class="nofancybox" src="/img/top2.png" style="display: inline; border-style: none;"> Yilia</h2><div style="text-align:center">
-  <div class="github-card" data-user="litten" data-repo="hexo-theme-yilia" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="litten" data-repo="hexo-theme-yilia" data-width="400" data-theme="medium" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #elegant  #sidebar  #two_column  #one_column</p>
 <h2 id="Material"><a href="#Material" class="headerlink" title=" Material"></a><img class="nofancybox" src="/img/top3.png" style="display: inline; border-style: none;"> Material</h2><div style="text-align:center">
-  <div class="github-card" data-user="viosey" data-repo="hexo-theme-material" data-width="400" data-theme="medium" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="viosey" data-repo="hexo-theme-material" data-width="400" data-theme="medium" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #simple  #material_design  #blog  #multi_styles  #minimalism  #i18n  #elegant  #material  #one_column</p>
 <h2 id="Tranquilpeek"><a href="#Tranquilpeek" class="headerlink" title="Tranquilpeek"></a>Tranquilpeek</h2><div style="text-align:center">
-  <div class="github-card" data-user="LouisBarranqueiro" data-repo="tranquilpeak-hexo-theme" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="LouisBarranqueiro" data-repo="tranquilpeak-hexo-theme" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #gorgeous  #sidebar  #two_column  #one_column  #tag_plugins</p>
 <h2 id="Maupassant"><a href="#Maupassant" class="headerlink" title="Maupassant"></a>Maupassant</h2><div style="text-align:center">
-  <div class="github-card" data-user="tufu9441" data-repo="maupassant-hexo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="tufu9441" data-repo="maupassant-hexo" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#simple  #responsive  #two_column  #white  #jade  #scss</p>
 <h2 id="Yelee"><a href="#Yelee" class="headerlink" title="Yelee"></a>Yelee</h2><div style="text-align:center">
-  <div class="github-card" data-user="MOxFIVE" data-repo="hexo-theme-yelee" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="MOxFIVE" data-repo="hexo-theme-yelee" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #two_column  #toc  #elegant  #simple  #background_image</p>
 <h2 id="Apollo"><a href="#Apollo" class="headerlink" title="Apollo"></a>Apollo</h2><div style="text-align:center">
-  <div class="github-card" data-user="pinggod" data-repo="hexo-theme-apollo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="pinggod" data-repo="hexo-theme-apollo" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#chinese  #light</p>
 <h2 id="Icarus"><a href="#Icarus" class="headerlink" title="Icarus"></a>Icarus</h2><div style="text-align:center">
-  <div class="github-card" data-user="ppoffice" data-repo="hexo-theme-icarus" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="ppoffice" data-repo="hexo-theme-icarus" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
 <p>#responsive  #three_column  #clean  #flat  #light</p>
 <h2 id="Jacman"><a href="#Jacman" class="headerlink" title="Jacman"></a>Jacman</h2><div style="text-align:center">
-  <div class="github-card" data-user="wuchong" data-repo="jacman" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="wuchong" data-repo="jacman" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
  
 <p>#responsive  #two_column  #blue  #elegant</p>
 <h2 id="Fexo"><a href="#Fexo" class="headerlink" title="Fexo"></a>Fexo</h2><div style="text-align:center">
-  <div class="github-card" data-user="forsigner" data-repo="fexo" data-width="400" data-theme="default" data-target="" data-client-id="" data-client-secret=""></div>
+  <div class="github-card" data-user="forsigner" data-repo="fexo" data-width="400" data-theme="default" data-target data-client-id data-client-secret></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
@@ -719,7 +720,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <entry>
       <title><![CDATA[Goodby Microsoft TechReward]]></title>
       <url>https://en.abnerchou.me/Blog/8aae6eef/</url>
-      <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt=""></p>
+      <content type="html"><![CDATA[<p><img src="\img\ms_tech_reward.jpg" alt></p>
 <p>The Microsoft TechRewards Program will close on January 6, 2017. (<a href="https://rewards.msdn.microsoft.com/en-us/signin" target="_blank" rel="noopener">ref</a>) All challenges have cleaned up now (Oct-06-2016).</p>
 <p>Really don’t have any hard feeling about this. The only reward attracted me was the AppToCerts, which rewarded you the MS certificate if passed two challenges. Other than it, to achieve a $2 reward, you have to complete at least 3 challenges, and the rewards are all donations.</p>
 <p>So here I will list the reasons why I think it is going to fail:</p>
@@ -757,7 +758,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <entry>
       <title><![CDATA[Set up HTTPS Free]]></title>
       <url>https://en.abnerchou.me/Blog/daa790/</url>
-      <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt=""></p>
+      <content type="html"><![CDATA[<p><img src="\img\https_5.png" alt></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
 <a id="more"></a>
 <h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="noopener">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
@@ -772,7 +773,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 </code></pre>
 <p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="noopener">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
-<p><img src="/img/https_1.png" alt=""></p>
+<p><img src="/img/https_1.png" alt></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
 <p>There are three basic checks (at least) to turn on the HSTS:</p>
 <ul>
@@ -781,12 +782,12 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 <li><a href="http://domain.com" target="_blank" rel="noopener">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="noopener">https://www.domain.com</a></li>
 </ul>
 <p>To pass those checks, we only need two page rules (Cloudflare free plan can set maximum three page rules). The first it always using HTTPS, and the second is forwarding URL. Note, the order matters.</p>
-<p><img src="/img/https_2.png" alt=""></p>
+<p><img src="/img/https_2.png" alt></p>
 <p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="noopener">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
-<p><img src="/img/https_3.png" alt=""></p>
+<p><img src="/img/https_3.png" alt></p>
 <p>Everything is set and your website will always be connected through the secure protocol.</p>
 <h2 id="Extra-Page-Rule-Usage"><a href="#Extra-Page-Rule-Usage" class="headerlink" title="Extra Page Rule Usage"></a>Extra Page Rule Usage</h2><p>As we have one more page rule left, you could leave it as blank. But as stated above, the github pages set the Cache-Control: max-age=600, which is 10 mins. That means every 10 mins the user has to fetch data through github page, no matter it changed or not. This is really inefficiency. To overwrite this setting, we could set the browser cache TTL. I set it to one year, because my assets would rarely be modified.</p>
-<p><img src="/img/https_4.png" alt=""></p>
+<p><img src="/img/https_4.png" alt></p>
 <p>Moreover, there is another setting that could power up the static website. It is the edge cache TTL, which set the time length that Cloudflare will hold your content caches. For example, if we set it to 2 hours, which means every 2 hours Cloudflare has to fetch data from origin server. Since our static websites do not change a lot, we could set to one month.</p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The settings for Cloudflare is generic, that means you can use it to set up HTTPS on any kind of server free.</p>
 <p>Cloudflare has plenty powerful services, if using them wisely, can save your life for managing a website.</p>
@@ -817,17 +818,17 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
     <entry>
       <title><![CDATA[Coding Play and Learn]]></title>
       <url>https://en.abnerchou.me/Blog/2db6c020/</url>
-      <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt=""></p>
+      <content type="html"><![CDATA[<p><img src="/img/play_learn_head.jpg" alt></p>
 <p>I have been planing to come up a list of games that teach people to program. Luckily with the chance got requested to answer on <a href="https://www.quora.com/Whats-a-good-way-to-learn-how-to-code-very-easily" target="_blank" rel="noopener">Quora</a>, I spent some time to organize the list.</p>
 <a id="more"></a>
 <p>Here are several sites that allow you to using coding to play.</p>
-<p><img src="/img/play_learn_code_combat.jpeg" alt=""></p>
+<p><img src="/img/play_learn_code_combat.jpeg" alt></p>
 <p><a href="https://codecombat.com/" target="_blank" rel="noopener">CodeCombat</a> is an RPG game which you could use Javascript, Coffeescript, Lua, Python, Clojure, and Io.</p>
-<p><img src="/img/play_learn_code_hunt.png" alt=""></p>
+<p><img src="/img/play_learn_code_hunt.png" alt></p>
 <p><a href="https://www.codehunt.com/" target="_blank" rel="noopener">Code Hunt</a> is developed by Microsoft Research. In which, you are a code hunter to find the bug in C#/Java code.</p>
-<p><img src="/img/play_learn_codingame.jpg" alt=""></p>
+<p><img src="/img/play_learn_codingame.jpg" alt></p>
 <p><a href="https://www.codingame.com/start" target="_blank" rel="noopener">CodinGame</a> I haven’t played it yet, but it looks fun.</p>
-<p><img src="/img/play_learn_creeps.jpg" alt=""></p>
+<p><img src="/img/play_learn_creeps.jpg" alt></p>
 <p><a href="https://screeps.com/" target="_blank" rel="noopener">Screeps</a> is an online RTS. You have to build up your territory, and defend it from AI and other player’s attach. For now, it only support the Javascript, and you have to pay2play.</p>
 <p><a href="http://fightcodegame.com/" target="_blank" rel="noopener">FightCode</a> Build your smart tank and beat others. It’s really similar to <a href="http://robocode.sourceforge.net/" target="_blank" rel="noopener">Robocode</a>.</p>
 <p><a href="http://play.elevatorsaga.com/" target="_blank" rel="noopener">Elevator Saga</a> You become an elevator operator. You have to deliver certain number of people within a time frame to pass to next level.</p>
@@ -868,7 +869,7 @@ LE_RSA_KEY_SIZE<span class="token operator">=</span>4096
 <p>Don’t hesitate to use google and wikipedia to solve the puzzles.</p>
 <p>I have posted hints and solutions on <a href="https://github.com/NoahDragon/fun.coolshell.cn" target="_blank" rel="noopener">my github</a>, use them wisely when you get difficulties.</p>
 <p>Enjoy :)</p>
-<p><img src="/img/online_hacker_game.PNG" alt=""></p>
+<p><img src="/img/online_hacker_game.PNG" alt></p>
 <p>A little bit show off and keep a record.</p>
 ]]></content>
       
@@ -959,7 +960,7 @@ Transparent proxy is on <a href="http://www.squid-cache.org" target="_blank" rel
 <p>To restrict user access your VPN server, you also need to add users and passwords in <code>/etc/ppp/chap-secets</code>.
 In the client column is user’s name, the secret column is for passwords.
 I masked mine for privacy.</p>
-<p><img src="/img/user_password.jpg" alt=""></p>
+<p><img src="/img/user_password.jpg" alt></p>
 <p>Add the following DNS to <code>/etc/ppp/pptpd-options</code>:</p>
 <pre class=" language-bash"><code class="language-bash">ms-dns 8.8.8.8
 ms-dns 8.8.4.4
@@ -1058,7 +1059,7 @@ You could click to switch the systems, and draw the orbit path for better viewin
 <p>The heliocentric system shows perfect concentric circles of planets path, in contrast, the geocentric system looks like random motion.
 Untile we draw their path, only the Sun’s orbit is circle, the other planet tracks are like spiral.
 After long enough years, the orbit will look like below picture:</p>
-<p><img src="/img/geocentric.jpg" alt=""></p>
+<p><img src="/img/geocentric.jpg" alt></p>
 <p>It’s totally mess!</p>
 <p>This simulated program assumes the planets’ orbit is circle and in the same surface.
 In our real solar system, it is way more complicate.</p>
