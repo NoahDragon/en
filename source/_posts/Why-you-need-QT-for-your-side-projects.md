@@ -41,6 +41,7 @@ After trying both, I have conclude their pros and cons in the following:
 * New technology
 * Supported by major browsers
 * Faster
+
 #### Cons
 * Performance is generally 30% better than JS (not really impresive)([ref](https://medium.com/@torch2424/webassembly-is-fast-a-real-world-benchmark-of-webassembly-vs-es6-d85a23f8e193))
 * Not mature, many features underdevlopment and can cause wired issues
@@ -51,6 +52,7 @@ After trying both, I have conclude their pros and cons in the following:
 * Support Python (personal preference)
 * Cross-platform build binary
 * IDE support
+
 #### Cons
 * Need to pay attention to its license
 * Current project directory could not be recognized correctly on Windows
