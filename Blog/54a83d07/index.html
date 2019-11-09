@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta name="generator" content="Hexo 3.9.0">
+    <head>
     <!--
         © Material Theme
         https://github.com/viosey/hexo-theme-material
@@ -25,7 +25,7 @@
     
     
     
-        <link rel="dns-prefetch" href="https://www.google-analytics.com">
+        <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
     
     
 
@@ -436,10 +436,10 @@ example, vendor would be “Marketing Fuel Biz.”, and amount would be “747.5
 <p>In order to track the position in a PDF file (could be easily convert to an image file), the convolutional neural networks (CNN) [<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network" target="_blank" rel="noopener">2</a>] could fit this task, it has been proved successfully on many image processing tasks [<a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">3</a>, <a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>, <a href="https://arxiv.org/abs/1703.06870" target="_blank" rel="noopener">5</a>]. Although a paper [<a href="https://arxiv.org/pdf/1708.07403.pdf" target="_blank" rel="noopener">6</a>] states to extract invoice info from the recurrent neural network (RNN), their input is words and positions (in our case, we do not have positions).  So I propose to use Faster R-CNN [<a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">4</a>] or YOLO [<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">7</a>] to solve the problem, they both are mature models of object detection and applied in many products.</p>
 <p>The CNN model input should be images, and outputs are labels and region coordinate (the format would be like {vendor, 5, 15, 20, 40}).</p>
 <p>Therefore, we need a dataset to train the CNN model. Since we already have the original PDF files and labels of vendor/amount, we could generate an image dataset for training the model. For each training entry, it contains an image converted from PDF and a region info of vendor/amount. The region info is the coordinate of two points which consist of a rectangle (e.g. (x1, y1) and (x2, y2) in figure 1). The dataset generation process could be done via a method of ORC and image process combination. The method is cropping the image into multiple rectangles (moving windows), then apply ORC on each rectangle. Based on the text outputs of rectangles, the area contains only vendor name is labeled as vendor, and the areas contain the amount are labeled as amount.</p>
-<p><img src="/img/ml-questions-1.png" alt></p>
+<p><img src="/img/ml-questions-1.png" alt=""></p>
 <p>After we have the dataset, we split it into training and testing datasets. The split ratio could be 80/20 [<a href="https://developers.google.com/machine-learning/crash-course/training-and-test-sets/splitting-data" target="_blank" rel="noopener">8</a>].</p>
 <p>The evaluation metric is mean precision average (mPA) at the different intersection over union (IoU) thresholds. The IoU of a proposed set of object pixels and a set of true object pixels is calculated as IoU(A,B)=A∩B/A∪B (image below [<a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" target="_blank" rel="noopener">9</a>]). The metric sweeps over a range of IoU thresholds, at each point calculating an average precision value. The threshold values range from 0.5 to 0.95 with a step size of 0.05: (0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95). In other words, at a threshold of 0.5, a predicted object is considered a “hit” if its intersection over union with a ground truth object is greater than 0.5. At each threshold t, we can check if it “hit” on the ground truth. Then the mPA is 1/thresholds∑hit(t).</p>
-<p><img src="/img/ml-questions-2.png" alt></p>
+<p><img src="/img/ml-questions-2.png" alt=""></p>
 <p>When the model training finished (let’s assume it meets our expectation), we could apply a post process to convert the result to our label. We will get the region coordinate from the model output, and based on the coordinate, we can crop the rectangle and feed it to OCR. It is the final result. Then we can compare the predicated labels with our ground truth in the database to evaluate the model performance (the evaluation metric could be precision on both labels).</p>
 <p>Here is the overview of the proposed solution:</p>
 <pre><code>Convert PDF to Image -&gt; Dataset Preparation -&gt; CNN Model -&gt; OCR -&gt; Results

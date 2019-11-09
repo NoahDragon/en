@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta name="generator" content="Hexo 3.9.0">
+    <head>
     <!--
         © Material Theme
         https://github.com/viosey/hexo-theme-material
@@ -25,7 +25,7 @@
     
     
     
-        <link rel="dns-prefetch" href="https://www.google-analytics.com">
+        <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
     
     
 
@@ -409,7 +409,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><img src="\img\https_5.png" alt></p>
+        <p><img src="\img\https_5.png" alt=""></p>
 <p>Nowadays, it is easy to get an TLS certificate to create HTTPS website (<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Ref</a>), but it requires the full control of server and configuration to maintain. However, for the casual user, like me this blog, I host my content on a third party server (Github Pages), which strictly forbids to customize server settings. To bypass those limits on server side, we need a middle layer to control all traffics, the Cloudflare is the best tool.</p>
 <a id="more"></a>
 <h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><p><a href="https://github.com/" target="_blank" rel="noopener">Github</a> provides a service called Github Pages, which allows user to create static content on Github server and access via username.github.io. However, it does not support https for custom domains, and the cache age is only 10 mins and can not be adjusted.</p>
@@ -424,7 +424,7 @@
 </code></pre>
 <p>If the return shows something like CF-Cache-Status: HIT, that means your pages have cached on Cloudflare (<a href="https://support.cloudflare.com/hc/en-us/articles/200169556-How-can-I-tell-if-CloudFlare-is-caching-my-site-or-a-specific-file-" target="_blank" rel="noopener">Ref</a>).</p>
 <h2 id="Set-up-HTTPS-and-Page-Rules"><a href="#Set-up-HTTPS-and-Page-Rules" class="headerlink" title="Set up HTTPS and Page Rules"></a>Set up HTTPS and Page Rules</h2><p>To enable the HTTPS is simple, just need to turn on the Crypto. Here we choose flexible. The full and full(strict) will also connect server (github pages) via HTTPS, which is not possible.</p>
-<p><img src="/img/https_1.png" alt></p>
+<p><img src="/img/https_1.png" alt=""></p>
 <p>To turn on the HSTS is as easy as the HTTPS, just click the icon. But you have to click accept to indicate that you acknowledge this setting may break your site if not be set properly. To avoid the risk, we’d better set up the page rules before turn it on.</p>
 <p>There are three basic checks (at least) to turn on the HSTS:</p>
 <ul>
@@ -433,12 +433,12 @@
 <li><a href="http://domain.com" target="_blank" rel="noopener">http://domain.com</a> can’t redirect to <a href="https://www.domain.com" target="_blank" rel="noopener">https://www.domain.com</a></li>
 </ul>
 <p>To pass those checks, we only need two page rules (Cloudflare free plan can set maximum three page rules). The first it always using HTTPS, and the second is forwarding URL. Note, the order matters.</p>
-<p><img src="/img/https_2.png" alt></p>
+<p><img src="/img/https_2.png" alt=""></p>
 <p>Now enable the HSTS, and then open the <a href="https://hstspreload.appspot.com/" target="_blank" rel="noopener">Chrome preload list</a>, and submit your domain. It should succeed, and shows the following message.</p>
-<p><img src="/img/https_3.png" alt></p>
+<p><img src="/img/https_3.png" alt=""></p>
 <p>Everything is set and your website will always be connected through the secure protocol.</p>
 <h2 id="Extra-Page-Rule-Usage"><a href="#Extra-Page-Rule-Usage" class="headerlink" title="Extra Page Rule Usage"></a>Extra Page Rule Usage</h2><p>As we have one more page rule left, you could leave it as blank. But as stated above, the github pages set the Cache-Control: max-age=600, which is 10 mins. That means every 10 mins the user has to fetch data through github page, no matter it changed or not. This is really inefficiency. To overwrite this setting, we could set the browser cache TTL. I set it to one year, because my assets would rarely be modified.</p>
-<p><img src="/img/https_4.png" alt></p>
+<p><img src="/img/https_4.png" alt=""></p>
 <p>Moreover, there is another setting that could power up the static website. It is the edge cache TTL, which set the time length that Cloudflare will hold your content caches. For example, if we set it to 2 hours, which means every 2 hours Cloudflare has to fetch data from origin server. Since our static websites do not change a lot, we could set to one month.</p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The settings for Cloudflare is generic, that means you can use it to set up HTTPS on any kind of server free.</p>
 <p>Cloudflare has plenty powerful services, if using them wisely, can save your life for managing a website.</p>
