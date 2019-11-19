@@ -55,5 +55,9 @@ Here are several sites that allow you to using coding to play.
 
 [CryptoZombies](https://cryptozombies.io/) is an interactive code school that teaches you to write smart contracts in Solidity through building your own crypto-collectables game.
 
-Although these games could not lead you to create applications, they are good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.
+![Bot Land](https://bot.land/dist/logo.png)
+
+[Bot Land](https://bot.land/) is a strategy game by buiding your own robot to fight with other players.
+
+Although these games could not lead you to create applications, they are just good start up. If you found you really enjoy the game, you could pick a programming language to learn it deeper.
 
