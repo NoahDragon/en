@@ -29,7 +29,7 @@ But why not keep it simple?
 
 ## Use cases
 
-During the local environment testing, we normally use `gcloud auth application-default print-access-token` [2] to get the authentication in order to call the Google API endpoint.
+During the local environment testing, we normally use `gcloud auth application-default print-access-token` [2] to get the authentication to call the Google API endpoint.
 It could be integrated into a `curl` command within a script or subprocess in your code.
 You may see the following command in may GCP API tutorials:
 ```bash
@@ -128,7 +128,55 @@ To avoid the security breach, I will not post the output here.
 You will see the `token` field has the value we are seeking for.
 Well, we have to pay for the usage of the document AI API calls.
 
-Mission complete!?
+### Need simpler
+
+We could use the Cloud Logging SDK, which does not need many details for the request body.
+Comparing to the previous method, the cost is even lower, almost free [5].
+
+```
+import google.auth
+import google.cloud.logging as cloud_logging
+
+def get_token(request):
+    cred, _ = google.auth.default()
+    cloud_client = cloud_logging.Client(credentials=credentials)
+    log_name = 'cloudfunctions.googleapis.com%2Fcloud-functions'
+    cloud_logger = cloud_client.logger(log_name)
+    all_entries = cloud_logger.list_entries(page_size=1)
+    entries = next(all_entries.pages)
+
+    return f"{cred.__dict__}"
+```
+
+### More simpler
+
+If we could use different Cloud Python SDKs, is there an SDK can have a minimal number of line of code?
+Yes, here is what I found -- Cloud Translate, which charges based on the translated characters [6].
+So we only need to process one char to obtain the token.
+The free tier quota (500,000 chars) is big enough for testing purposes.
+
+```
+from google.cloud import translate_v3
+import google.auth
+
+def get_token(request):
+    credentials, project_id = google.auth.default()
+    client = translate_v3.TranslationServiceClient(credentials=credentials)
+    parent = client.location_path('project-id', 'us-central1')
+
+    response = client.translate_text('a', target_language_code='en', parent=parent)
+
+    return f"{credentials.__dict__}"
+```
+
+The pattern is:
+1. Get credential object from google.auth.default()
+2. Initialize a Cloud Service SDK and pass in the credential object as a parameter
+3. Call the service API with minimal cost data, the token will be populated into the credential object
+
+You can come up with your solution by using different Python SDKs [7].
+
+### Mission complete!?
 
 ## Ultimate solution
 
@@ -145,3 +193,9 @@ Anyway, this is a great example of rebuilding the wheel process, hope can provid
 [3] https://google-auth.readthedocs.io/en/latest/
 
 [4] https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/document/cloud-client/parse_form_beta.py
+
+[5] https://cloud.google.com/stackdriver/pricing
+
+[6] https://cloud.google.com/translate/pricing
+
+[7] https://github.com/googleapis/google-cloud-python
