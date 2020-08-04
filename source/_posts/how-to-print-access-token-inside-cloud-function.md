@@ -133,7 +133,7 @@ Well, we have to pay for the usage of the document AI API calls.
 We could use the Cloud Logging SDK, which does not need many details for the request body.
 Comparing to the previous method, the cost is even lower, almost free [5].
 
-```
+```python
 import google.auth
 import google.cloud.logging as cloud_logging
 
@@ -155,7 +155,7 @@ Yes, here is what I found -- Cloud Translate, which charges based on the transla
 So we only need to process one char to obtain the token.
 The free tier quota (500,000 chars) is big enough for testing purposes.
 
-```
+```python
 from google.cloud import translate_v3
 import google.auth
 
