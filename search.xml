@@ -4,6 +4,112 @@
   
     
     <entry>
+      <title><![CDATA[Cloud Functions VS Lambda]]></title>
+      <url>https://en.abnerchou.me/Blog/7fd519e5/</url>
+      <content type="html"><![CDATA[<p>Many articles are talking about the differences between GCP and AWS.
+Is that true one is superior to another?
+Or they are just apples and oranges?
+For me, I never treat them seriously, as my daily job is heavily on GCP.
+However, recently I got a project which needs to integrate these two cloud providers’ services.
+Now the headache is coming.</p>
+<p><img src="https://miro.medium.com/max/1033/1*AaYOwm0dahyNhZ0K-5il8Q.png" alt="Cloud Function vs Lambda"></p>
+<p>This comparison is based on a developer perspective, who is fresh to AWS and expert (self-claimed) in GCP.</p>
+<h2 id="Development-Speed"><a href="#Development-Speed" class="headerlink" title="Development Speed"></a>Development Speed</h2><p>Both can start coding without documents when using the first time.
+I feel this is a great advantage to move product to cloud, saving tons of development time.</p>
+<p>However, I feel Cloud Function is simpler, agile, and more intuitive compared to Lambda based on the following:</p>
+<ol>
+<li>Lambda needs to set API gateway in order to trigger it by URL</li>
+<li>Lambda does not support install Python packages, to do so, you have to upload your code with packages in a zip or build a customized runtime environment.</li>
+<li>Lambda HTTP trigger passes in the request within a wrapper, not raw request with body and header info. So need to understand its parameter structures.</li>
+<li>Lambda has to enable the <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-payload-encodings-configure-with-console.html" target="_blank" rel="noopener">binary support</a> for certain content types.</li>
+<li>Lambda built-in editor does not support uploaded zip with too many files.</li>
+</ol>
+<p>So the winner is obvious, Cloud Function is the better choice if you don’t want to deal with package installation or HTTP trigger settings.</p>
+<h2 id="Deploy-Speed"><a href="#Deploy-Speed" class="headerlink" title="Deploy Speed"></a>Deploy Speed</h2><p>This one I have to say that AWS has impressed me.
+Every time if I clicked the save, the code has already deployed, although this comes with a drawback that less customizability.
+I enjoy this fast and non-interrupted deployment process.
+Almost every service could be instantly provisioned, modified, and deleted.
+(So far our codebase is relatively small like ~500 lines of code for each service)</p>
+<p>So what does the GCP lack?</p>
+<ol>
+<li>Most services under GCP need several minutes to provision.</li>
+<li>Cloud Functions take a couple of minutes to deploy a new version, even just change a line of comment.</li>
+<li>Searching for other services feels slower than AWS.</li>
+</ol>
+<p>All in all, GCP feels slower in many aspects, so AWS has a smoother user experience.</p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p>Lambda auto wins this track, due to an on-going <a href="https://issuetracker.google.com/issues/155215191" target="_blank" rel="noopener">log issue</a> in Cloud Functions, which causes no logging when function crashes.
+Besides the issue, both provide detailed trace logs.
+Moreover, Lambda provides a configurable test event to run the function on the fly, which really neat.</p>
+<h2 id="Docs"><a href="#Docs" class="headerlink" title="Docs"></a>Docs</h2><p>This won’t affect the user experience for experts, but definitely a plus for newcomers.
+Maybe just because I’m newbie to AWS, I always find it difficult to read the official documents.</p>
+<ol>
+<li>There is no programming language switcher in the code section, you always need to find a dedicated page for a specific programming language.</li>
+<li>Most operations have to use CLI, which creates a barrier for people like me who just would like to try and do not want to mess up our dev machine.</li>
+<li>No Cloud Shell. A similar reason to the previous one. Although this is not a doc, it is nice to try the tutorials in a setup environment, so less weird errors due to package versioning.</li>
+</ol>
+<p>Actually, cloud techniques are pretty alike among providers.
+Although the under table infrastructures may differ, the user-level implementations do not vary too much.
+With better doc would attract more people who are new to the cloud.
+From this perspective, GCP did a very good job of providing tutorials and tools.</p>
+<h2 id="Pricing"><a href="#Pricing" class="headerlink" title="Pricing"></a>Pricing</h2><p>This influences the least to developers.
+It is no good or bad, it is all depending on the traffic volume and the boss’s preferences.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Provider</th>
+<th style="text-align:center">Lambda</th>
+<th style="text-align:center">Cloud Functions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Pricing</td>
+<td style="text-align:center">1M/month requests and 400K GB-sec/month compute time for <strong>free</strong>, then $0.20/1M requests and $0.00001667/GB-sec</td>
+<td style="text-align:center">2M/month requests and (400K GB-sec/month, 200K GHz-sec/month) compute time for <strong>free</strong>, then $0.40/1M invocations, plus $0.0000025/GB-sec and $0.00001/GHz-sec</td>
+</tr>
+</tbody>
+</table>
+<p>Cloud Functions have a more complex formula to calculate the compute time pricing.
+Basically, it adds the CPU usage (GHz-sec) into the calculation.
+So Lambda is cheaper if not using the provisioned concurrency, which charges <a href="https://aws.amazon.com/lambda/pricing/#Provisioned_Concurrency_Pricing" target="_blank" rel="noopener">extra cost</a>.</p>
+<p>Here comes the question, does Cloud Function have a similar provisioned concurrency feature?</p>
+<h2 id="Integration"><a href="#Integration" class="headerlink" title="Integration"></a>Integration</h2><p>This is a general talk about how to integrate services on different cloud platforms, not specified to cloud functions or lambda.</p>
+<p>Both products are integrated well with other cloud products within the same cloud provider.
+Unless there is a unique cloud service, most development could be done within a single cloud provider.
+If you feel the developers do not have enough work, distribute your services into two or three cloud providers.
+They will spend most of their time on how to integrate those services, instead of actual development.</p>
+<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><p>This comparison is based on my personal experience.
+Both have advantages and disadvantages, please choose based on your use cases.
+But keep in mind, don’t try to integrate them!
+This is the only advice I learned from using both.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> GCP </tag>
+            
+            <tag> Google Cloud </tag>
+            
+            <tag> Cloud Function </tag>
+            
+            <tag> AWS </tag>
+            
+            <tag> Lambda </tag>
+            
+            <tag> API Gateway </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Why you need QT for your side projects]]></title>
       <url>https://en.abnerchou.me/Blog/7d17e074/</url>
       <content type="html"><![CDATA[<p>I’m working on an side project which need a fancy GUI interface, so I was choosing between Webassemble and QT.
