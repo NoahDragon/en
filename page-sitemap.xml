@@ -8,35 +8,35 @@
     
     <url>
         <loc>https://en.abnerchou.me/tags/</loc>
-        <lastmod>2020-08-06T13:07:53.983Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://en.abnerchou.me/about/</loc>
-        <lastmod>2020-08-06T13:07:53.963Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://en.abnerchou.me/categories/</loc>
-        <lastmod>2020-08-06T13:07:53.963Z</lastmod>
+        <lastmod>2020-09-09T03:09:29.421Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://en.abnerchou.me/403.html</loc>
-        <lastmod>2020-08-06T13:07:53.959Z</lastmod>
+        <lastmod>2020-09-09T03:09:29.405Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://en.abnerchou.me/404.html</loc>
-        <lastmod>2020-08-06T13:07:53.959Z</lastmod>
+        <lastmod>2020-09-09T03:09:29.405Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://en.abnerchou.me/about/</loc>
+        <lastmod>2020-09-09T03:09:29.405Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://en.abnerchou.me/categories/</loc>
+        <lastmod>2020-09-09T03:09:29.405Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>

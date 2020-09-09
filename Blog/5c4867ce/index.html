@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.4 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            How to print access token inside Cloud Function | 
+        
+        Hard Code
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+        <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Abner Chou">
+    <meta name="description" content="A Developer in Limbo">
+    <meta name="keywords" content="developer, blog, abner, code,GCP,Google Cloud,Cloud Function,Token,Credential,Auth">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/favicon.png">
+    <link rel="icon" sizes="192x192" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Hard Code">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://en.abnerchou.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="How to print access token inside Cloud Function | Hard Code">
+    <meta property="og:description" content="A Developer in Limbo">
+    <meta property="og:article:tag" content="GCP"> <meta property="og:article:tag" content="Google Cloud"> <meta property="og:article:tag" content="Cloud Function"> <meta property="og:article:tag" content="Token"> <meta property="og:article:tag" content="Credential"> <meta property="og:article:tag" content="Auth"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.png);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- Smartlook -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', 'ae3414607baf5955828355f216e36d048b7a4905');
+    </script>
+
+    
+
+    
+    <!-- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-48498357-2', 'auto');ga('send', 'pageview');
+    </script>
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Use-cases"><span class="post-toc-number">1.</span> <span class="post-toc-text">Use cases</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Solutions"><span class="post-toc-number">2.</span> <span class="post-toc-text">Solutions</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Need-simpler"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Need simpler</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#More-simpler"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">More simpler</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mission-complete"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Mission complete!?</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Ultimate-solution"><span class="post-toc-number">3.</span> <span class="post-toc-text">Ultimate solution</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                How to print access token inside Cloud Function
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/avatar.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Abner Chou</strong>
+        <span>Jul 22, 2020</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">Read this article on other device</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACcUlEQVR42u3ay04DMRAEwPz/T8MVCSXpHnudh8onFJDXxWFn0p7bz1evGx4eHh4eHh4e3pvxbvH6+/f/d/i/W/KUe/vMzoaHh4d3kvfkVRvwkkPn/6bZ2fDw8PDO8/JikBxiVzlpz4aHh4f3brxZk32vkOTFAw8PD+9zeSulImnE8fDw8D6LV3zhf/iwx0324/DixVkLHh4eXsybXYCd+fll93t4eHh4d3j1SFMc7+YBRFsMnjwLDw8P72JeEtG27W/ycl8fJqiHrvDw8PA28WZBbRI9tOUhvyqrW2o8PDy8y3j11/4yUGgvw/Lf4uHh4Z3n5Y1yG7O24wJts76UteDh4eEt89px1fbiP4lu20CkKAx4eHh4m3jrI6rtoNXKlVv0OR4eHt7FvPzo6zFry8uLAR4eHt5JXnLo9uj5tVbeQBfhBR4eHt7FvDxIbYdNZ9HDbMgADw8P7ySvHQ7Ih0r3DlRtjnHx8PDwFnht6JA/fmWMYCXUwMPDwzvDSy692kC2LSTD6652MgIPDw9vmde20XlsMdu5jUWGKTUeHh7eMq8tAPmgVV4k2sCizlrw8PDwNvFmh8vHT/MR2CSGiMoPHh4e3hHejLR3UCApD9ET8fDw8C7mtU1tG+P+BGtWHuqsBQ8PD28Tr12zACIpJ7OAAw8PD+887xav/AKs/WTWsuPh4eG9lrcriq2v+Ue7FTEuHh4e3sW8vBjMhv6TgKMtTnh4eHjvz0tI+ct9pfDg4eHhfSKvbcoT/Cy6xcPDw3sVr40M2rW+21JhwMPDw9vKW78AS5rsfFC1HWnFw8PDO8n7voWHh4eHh4eHh/cG6xcYV9mFE84S7gAAAABJRU5ErkJggg==">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Auth/">Auth</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Cloud-Function/">Cloud Function</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Credential/">Credential</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/GCP/">GCP</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Google-Cloud/">Google Cloud</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Token/">Token</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=How to print access token inside Cloud Function&url=https://en.abnerchou.me//Blog/5c4867ce/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=How to print access token inside Cloud Function&url=https://en.abnerchou.me//Blog/5c4867ce/index.html&via=Abner Chou" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://en.abnerchou.me//Blog/5c4867ce/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://en.abnerchou.me//Blog/5c4867ce/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7DP27M&placement=abnerchoume" id="_carbonads_js"></script>
+        <p><strong>As Cloud Function supports many programming languages, this article will use Python for the demonstration</strong></p>
+<p><img src="https://miro.medium.com/proxy/1*MeXs5Ot8X49Fn1vE_13ukA.png" alt="Cloud Function Logo"></p>
+<p>If anyone has used the Google Cloud Function, they probably stuck at the limited system packages [1]. 
+There is no <code>curl</code> or <code>wget</code>, and could not customize the runtime system.
+Like the document stated, it is a fully managed environment.
+Someone may jump out and yell out the name Cloud Run.
+Yes, Cloud Run will be the successor of Cloud Function in many aspects.
+However, it does not support the trigger from the Cloud Storage bucket.
+Yes, yes, yes, you can use Pub/Sub in Cloud Run to implement the bucket trigger.
+But why not keep it simple?</p>
+<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><p>During the local environment testing, we normally use <code>gcloud auth application-default print-access-token</code> [2] to get the authentication to call the Google API endpoint.
+It could be integrated into a <code>curl</code> command within a script or subprocess in your code.
+You may see the following command in may GCP API tutorials:</p>
+<pre class=" language-bash"><code class="language-bash">curl -H <span class="token string">"Content-Type: application/x-www-form-urlencoded"</span> -d <span class="token string">"access_token=<span class="token variable"><span class="token variable">$(</span>gcloud auth application-default print-access-token<span class="token variable">)</span></span>"</span> https://www.googleapis.com/oauth2/v1/tokeninfo
+</code></pre>
+<p>After tested everything working fine on our local machine, it is time to move to the cloud.
+We assume the Google Cloud will handle the credentials for us, because we are accessing resources withing the GCP, and using the same service account.
+Our assumption will be busted by the brutal reality.
+We still need to explicitly create credentials when calling other GCP services.</p>
+<p>This becomes a barrier when moving to the Cloud Function.
+The initial thought would be using the Python subprocess to call <code>curl</code> command.
+As stated above, the <code>curl</code> does not exist and could not be installed in the Cloud Function system.
+Luckily, the <code>curl</code> command can easily be replaced by the Python request package.
+But, how about the <code>gcloud auth</code>? It is also not included in the system packages. 
+So here is the solution.</p>
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>We know there is a google-auth Python package [3] to handle GCP related authentications.
+The <code>google.auth.default()</code> could return a credential object which has a token field.
+Looks promising, isn’t it?
+How about getting the token from google-auth?
+So I wrote the following code:
+(The following code could be directly run in Cloud Function)</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  cred<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> f<span class="token string">'{cred.__dict__}'</span>
+</code></pre>
+<p>Well, the output shows nothing:</p>
+<pre><code>{&#39;token&#39;: None, &#39;expiry&#39;: None, &#39;_scopes&#39;: None, &#39;_service_account_email&#39;: &#39;default&#39;}
+</code></pre><p>The google-auth package is not open source, so I could find the logic when the token field is populated.
+Therefore, I came up with an assumption that the token field would be populated during usage.
+I will use Document AI as an example, you could use other GCP services, I think the logic behind should be the same.
+I rewrite the sample code [4] to fit the Cloud Function:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>documentai <span class="token keyword">as</span> gcd
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  cred<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  gcd_client <span class="token operator">=</span> gcd<span class="token punctuation">.</span>DocumentUnderstandingServiceClient<span class="token punctuation">(</span>credentials<span class="token operator">=</span>cred<span class="token punctuation">)</span>
+
+  req <span class="token operator">=</span> gcd<span class="token punctuation">.</span>ProcessDocumentRequest<span class="token punctuation">(</span>
+      parent<span class="token operator">=</span>f<span class="token string">"projects/{project_id}"</span><span class="token punctuation">,</span>
+      input_config<span class="token operator">=</span><span class="token punctuation">{</span>
+              <span class="token string">'gcs_source'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+                  <span class="token string">'uri'</span><span class="token punctuation">:</span> <span class="token string">'gs://cloud-samples-data/documentai/form.pdf'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+              <span class="token string">'mime_type'</span><span class="token punctuation">:</span><span class="token string">"application/pdf"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+      document_type<span class="token operator">=</span><span class="token string">"general"</span><span class="token punctuation">,</span> 
+      form_extraction_params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'enabled'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> f<span class="token string">'{cred.__dict__}'</span>
+</code></pre>
+<p>Still, the <code>token</code> is None.
+Okay, seems it has not been updated at all.
+I only used the document AI package initialization to avoid the extra charge on invoking the actual process.
+However, if we actual process the document by adding <code>response = gcd_client.process_document(request=req)</code> before the return statement.
+The magic happens.</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>documentai <span class="token keyword">as</span> gcd
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  cred<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  gcd_client <span class="token operator">=</span> gcd<span class="token punctuation">.</span>DocumentUnderstandingServiceClient<span class="token punctuation">(</span>credentials<span class="token operator">=</span>cred<span class="token punctuation">)</span>
+
+  req <span class="token operator">=</span> gcd<span class="token punctuation">.</span>ProcessDocumentRequest<span class="token punctuation">(</span>
+      parent<span class="token operator">=</span>f<span class="token string">"projects/{project_id}"</span><span class="token punctuation">,</span>
+      input_config<span class="token operator">=</span><span class="token punctuation">{</span>
+              <span class="token string">'gcs_source'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+                  <span class="token string">'uri'</span><span class="token punctuation">:</span> <span class="token string">'gs://cloud-samples-data/documentai/form.pdf'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+              <span class="token string">'mime_type'</span><span class="token punctuation">:</span><span class="token string">"application/pdf"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+      document_type<span class="token operator">=</span><span class="token string">"general"</span><span class="token punctuation">,</span> 
+      form_extraction_params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'enabled'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  response <span class="token operator">=</span> gcd_client<span class="token punctuation">.</span>process_document<span class="token punctuation">(</span>request<span class="token operator">=</span>req<span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> f<span class="token string">'{cred.__dict__}'</span>
+</code></pre>
+<p>To avoid the security breach, I will not post the output here.
+You will see the <code>token</code> field has the value we are seeking for.
+Well, we have to pay for the usage of the document AI API calls.</p>
+<h3 id="Need-simpler"><a href="#Need-simpler" class="headerlink" title="Need simpler"></a>Need simpler</h3><p>We could use the Cloud Logging SDK, which does not need many details for the request body.
+Comparing to the previous method, the cost is even lower, almost free [5].</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>logging <span class="token keyword">as</span> cloud_logging
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cred<span class="token punctuation">,</span> _ <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    cloud_client <span class="token operator">=</span> cloud_logging<span class="token punctuation">.</span>Client<span class="token punctuation">(</span>credentials<span class="token operator">=</span>credentials<span class="token punctuation">)</span>
+    log_name <span class="token operator">=</span> <span class="token string">'cloudfunctions.googleapis.com%2Fcloud-functions'</span>
+    cloud_logger <span class="token operator">=</span> cloud_client<span class="token punctuation">.</span>logger<span class="token punctuation">(</span>log_name<span class="token punctuation">)</span>
+    all_entries <span class="token operator">=</span> cloud_logger<span class="token punctuation">.</span>list_entries<span class="token punctuation">(</span>page_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+    entries <span class="token operator">=</span> next<span class="token punctuation">(</span>all_entries<span class="token punctuation">.</span>pages<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> f<span class="token string">"{cred.__dict__}"</span>
+</code></pre>
+<h3 id="More-simpler"><a href="#More-simpler" class="headerlink" title="More simpler"></a>More simpler</h3><p>If we could use different Cloud Python SDKs, is there an SDK can have a minimal number of line of code?
+Yes, here is what I found – Cloud Translate, which charges based on the translated characters [6].
+So we only need to process one char to obtain the token.
+The free tier quota (500,000 chars) is big enough for testing purposes.</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> google<span class="token punctuation">.</span>cloud <span class="token keyword">import</span> translate_v3
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    credentials<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    client <span class="token operator">=</span> translate_v3<span class="token punctuation">.</span>TranslationServiceClient<span class="token punctuation">(</span>credentials<span class="token operator">=</span>credentials<span class="token punctuation">)</span>
+    parent <span class="token operator">=</span> client<span class="token punctuation">.</span>location_path<span class="token punctuation">(</span><span class="token string">'project-id'</span><span class="token punctuation">,</span> <span class="token string">'us-central1'</span><span class="token punctuation">)</span>
+
+    response <span class="token operator">=</span> client<span class="token punctuation">.</span>translate_text<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> target_language_code<span class="token operator">=</span><span class="token string">'en'</span><span class="token punctuation">,</span> parent<span class="token operator">=</span>parent<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> f<span class="token string">"{credentials.__dict__}"</span>
+</code></pre>
+<p>The pattern is:</p>
+<ol>
+<li>Get credential object from google.auth.default()</li>
+<li>Initialize a Cloud Service SDK and pass in the credential object as a parameter</li>
+<li>Call the service API with minimal cost data, the token will be populated into the credential object</li>
+</ol>
+<p>You can come up with your solution by using different Python SDKs [7].</p>
+<h3 id="Mission-complete"><a href="#Mission-complete" class="headerlink" title="Mission complete!?"></a>Mission complete!?</h3><h2 id="Ultimate-solution"><a href="#Ultimate-solution" class="headerlink" title="Ultimate solution"></a>Ultimate solution</h2><p>If there are Python SDKs for GCP services, why bother to get the access token, call them directly in your code.</p>
+<iframe src="https://giphy.com/embed/uHox9Jm5TyTPa" width="480" height="253" frameborder="0" class="giphy-embed" allowfullscreen></iframe>
+
+<p>Anyway, this is a great example of rebuilding the wheel process, hope can provide some insights!</p>
+<p>[1] <a href="https://cloud.google.com/functions/docs/reference/python-system-packages" target="_blank" rel="noopener">https://cloud.google.com/functions/docs/reference/python-system-packages</a></p>
+<p>[2] <a href="https://cloud.google.com/sdk/gcloud/reference/auth/application-default/print-access-token" target="_blank" rel="noopener">https://cloud.google.com/sdk/gcloud/reference/auth/application-default/print-access-token</a></p>
+<p>[3] <a href="https://google-auth.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://google-auth.readthedocs.io/en/latest/</a></p>
+<p>[4] <a href="https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/document/cloud-client/parse_form_beta.py" target="_blank" rel="noopener">https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/document/cloud-client/parse_form_beta.py</a></p>
+<p>[5] <a href="https://cloud.google.com/stackdriver/pricing" target="_blank" rel="noopener">https://cloud.google.com/stackdriver/pricing</a></p>
+<p>[6] <a href="https://cloud.google.com/translate/pricing" target="_blank" rel="noopener">https://cloud.google.com/translate/pricing</a></p>
+<p>[7] <a href="https://github.com/googleapis/google-cloud-python" target="_blank" rel="noopener">https://github.com/googleapis/google-cloud-python</a></p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+    <!-- 使用 DISQUS_CLICK -->
+    <div id="disqus-comment">
+        <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+        .ripple-container {
+        }
+        .ripple-container .ripple{
+            background-color: rgba(255,255,255,0.4);
+            animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #757575;
+            text-shadow: 0
+        }
+</style>
+	
+<!-- add data-ripple attribute -->
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn">Read Comments (Be sure disq.us, disquscdn.com and disqus.com can load properly)</button>
+</div>
+	
+<script>
+    // add effect to elements
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function(element){
+        // find all elements and attach effect
+        new RippleEffect(element); // element is instance of javascript element node
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://en.abnerchou.me/Blog/5c4867ce/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '5c4867ce'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//abnerchou.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+  	
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/Blog/7fd519e5/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/Blog/7d17e074/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/avatar.jpeg" alt="Abner Chou's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        hi@abnerchou.me
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/08/">August 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/10/">October 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">August 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">July 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">June 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">August 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">July 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/03/">March 2014<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/AI/">AI<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Blog/">Blog<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Cloud/">Cloud<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/DIY/">DIY<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DevOps/">DevOps<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Exam/">Exam<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Game/">Game<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/News/">News<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Programming/">Programming<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Science/">Science<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Server/">Server<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://legofan.cc/projects/" title="Projects">
+                
+                    <i class="material-icons sidebar-material-icons">book</i>
+                
+                Projects
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="Tags Cloud">
+                
+                    <i class="material-icons sidebar-material-icons">cloud</i>
+                
+                Tags Cloud
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/atom.xml" title="RSS Feed">
+                
+                    <i class="material-icons sidebar-material-icons">wifi_tethering</i>
+                
+                RSS Feed
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            Theme - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/AbnerZHC?lang=en" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.svg);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/lm00n/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.svg);">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/NoahDragon" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.svg);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Hard Code
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

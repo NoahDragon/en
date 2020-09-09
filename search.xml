@@ -110,6 +110,174 @@ This is the only advice I learned from using both.</p>
     </entry>
     
     <entry>
+      <title><![CDATA[How to print access token inside Cloud Function]]></title>
+      <url>https://en.abnerchou.me/Blog/5c4867ce/</url>
+      <content type="html"><![CDATA[<p><strong>As Cloud Function supports many programming languages, this article will use Python for the demonstration</strong></p>
+<p><img src="https://miro.medium.com/proxy/1*MeXs5Ot8X49Fn1vE_13ukA.png" alt="Cloud Function Logo"></p>
+<p>If anyone has used the Google Cloud Function, they probably stuck at the limited system packages [1]. 
+There is no <code>curl</code> or <code>wget</code>, and could not customize the runtime system.
+Like the document stated, it is a fully managed environment.
+Someone may jump out and yell out the name Cloud Run.
+Yes, Cloud Run will be the successor of Cloud Function in many aspects.
+However, it does not support the trigger from the Cloud Storage bucket.
+Yes, yes, yes, you can use Pub/Sub in Cloud Run to implement the bucket trigger.
+But why not keep it simple?</p>
+<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><p>During the local environment testing, we normally use <code>gcloud auth application-default print-access-token</code> [2] to get the authentication to call the Google API endpoint.
+It could be integrated into a <code>curl</code> command within a script or subprocess in your code.
+You may see the following command in may GCP API tutorials:</p>
+<pre class=" language-bash"><code class="language-bash">curl -H <span class="token string">"Content-Type: application/x-www-form-urlencoded"</span> -d <span class="token string">"access_token=<span class="token variable"><span class="token variable">$(</span>gcloud auth application-default print-access-token<span class="token variable">)</span></span>"</span> https://www.googleapis.com/oauth2/v1/tokeninfo
+</code></pre>
+<p>After tested everything working fine on our local machine, it is time to move to the cloud.
+We assume the Google Cloud will handle the credentials for us, because we are accessing resources withing the GCP, and using the same service account.
+Our assumption will be busted by the brutal reality.
+We still need to explicitly create credentials when calling other GCP services.</p>
+<p>This becomes a barrier when moving to the Cloud Function.
+The initial thought would be using the Python subprocess to call <code>curl</code> command.
+As stated above, the <code>curl</code> does not exist and could not be installed in the Cloud Function system.
+Luckily, the <code>curl</code> command can easily be replaced by the Python request package.
+But, how about the <code>gcloud auth</code>? It is also not included in the system packages. 
+So here is the solution.</p>
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>We know there is a google-auth Python package [3] to handle GCP related authentications.
+The <code>google.auth.default()</code> could return a credential object which has a token field.
+Looks promising, isn’t it?
+How about getting the token from google-auth?
+So I wrote the following code:
+(The following code could be directly run in Cloud Function)</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  cred<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> f<span class="token string">'{cred.__dict__}'</span>
+</code></pre>
+<p>Well, the output shows nothing:</p>
+<pre><code>{&#39;token&#39;: None, &#39;expiry&#39;: None, &#39;_scopes&#39;: None, &#39;_service_account_email&#39;: &#39;default&#39;}
+</code></pre><p>The google-auth package is not open source, so I could find the logic when the token field is populated.
+Therefore, I came up with an assumption that the token field would be populated during usage.
+I will use Document AI as an example, you could use other GCP services, I think the logic behind should be the same.
+I rewrite the sample code [4] to fit the Cloud Function:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>documentai <span class="token keyword">as</span> gcd
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  cred<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  gcd_client <span class="token operator">=</span> gcd<span class="token punctuation">.</span>DocumentUnderstandingServiceClient<span class="token punctuation">(</span>credentials<span class="token operator">=</span>cred<span class="token punctuation">)</span>
+
+  req <span class="token operator">=</span> gcd<span class="token punctuation">.</span>ProcessDocumentRequest<span class="token punctuation">(</span>
+      parent<span class="token operator">=</span>f<span class="token string">"projects/{project_id}"</span><span class="token punctuation">,</span>
+      input_config<span class="token operator">=</span><span class="token punctuation">{</span>
+              <span class="token string">'gcs_source'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+                  <span class="token string">'uri'</span><span class="token punctuation">:</span> <span class="token string">'gs://cloud-samples-data/documentai/form.pdf'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+              <span class="token string">'mime_type'</span><span class="token punctuation">:</span><span class="token string">"application/pdf"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+      document_type<span class="token operator">=</span><span class="token string">"general"</span><span class="token punctuation">,</span> 
+      form_extraction_params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'enabled'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> f<span class="token string">'{cred.__dict__}'</span>
+</code></pre>
+<p>Still, the <code>token</code> is None.
+Okay, seems it has not been updated at all.
+I only used the document AI package initialization to avoid the extra charge on invoking the actual process.
+However, if we actual process the document by adding <code>response = gcd_client.process_document(request=req)</code> before the return statement.
+The magic happens.</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>documentai <span class="token keyword">as</span> gcd
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  cred<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  gcd_client <span class="token operator">=</span> gcd<span class="token punctuation">.</span>DocumentUnderstandingServiceClient<span class="token punctuation">(</span>credentials<span class="token operator">=</span>cred<span class="token punctuation">)</span>
+
+  req <span class="token operator">=</span> gcd<span class="token punctuation">.</span>ProcessDocumentRequest<span class="token punctuation">(</span>
+      parent<span class="token operator">=</span>f<span class="token string">"projects/{project_id}"</span><span class="token punctuation">,</span>
+      input_config<span class="token operator">=</span><span class="token punctuation">{</span>
+              <span class="token string">'gcs_source'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+                  <span class="token string">'uri'</span><span class="token punctuation">:</span> <span class="token string">'gs://cloud-samples-data/documentai/form.pdf'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+              <span class="token string">'mime_type'</span><span class="token punctuation">:</span><span class="token string">"application/pdf"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+      document_type<span class="token operator">=</span><span class="token string">"general"</span><span class="token punctuation">,</span> 
+      form_extraction_params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'enabled'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  response <span class="token operator">=</span> gcd_client<span class="token punctuation">.</span>process_document<span class="token punctuation">(</span>request<span class="token operator">=</span>req<span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> f<span class="token string">'{cred.__dict__}'</span>
+</code></pre>
+<p>To avoid the security breach, I will not post the output here.
+You will see the <code>token</code> field has the value we are seeking for.
+Well, we have to pay for the usage of the document AI API calls.</p>
+<h3 id="Need-simpler"><a href="#Need-simpler" class="headerlink" title="Need simpler"></a>Need simpler</h3><p>We could use the Cloud Logging SDK, which does not need many details for the request body.
+Comparing to the previous method, the cost is even lower, almost free [5].</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>logging <span class="token keyword">as</span> cloud_logging
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cred<span class="token punctuation">,</span> _ <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    cloud_client <span class="token operator">=</span> cloud_logging<span class="token punctuation">.</span>Client<span class="token punctuation">(</span>credentials<span class="token operator">=</span>credentials<span class="token punctuation">)</span>
+    log_name <span class="token operator">=</span> <span class="token string">'cloudfunctions.googleapis.com%2Fcloud-functions'</span>
+    cloud_logger <span class="token operator">=</span> cloud_client<span class="token punctuation">.</span>logger<span class="token punctuation">(</span>log_name<span class="token punctuation">)</span>
+    all_entries <span class="token operator">=</span> cloud_logger<span class="token punctuation">.</span>list_entries<span class="token punctuation">(</span>page_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+    entries <span class="token operator">=</span> next<span class="token punctuation">(</span>all_entries<span class="token punctuation">.</span>pages<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> f<span class="token string">"{cred.__dict__}"</span>
+</code></pre>
+<h3 id="More-simpler"><a href="#More-simpler" class="headerlink" title="More simpler"></a>More simpler</h3><p>If we could use different Cloud Python SDKs, is there an SDK can have a minimal number of line of code?
+Yes, here is what I found – Cloud Translate, which charges based on the translated characters [6].
+So we only need to process one char to obtain the token.
+The free tier quota (500,000 chars) is big enough for testing purposes.</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> google<span class="token punctuation">.</span>cloud <span class="token keyword">import</span> translate_v3
+<span class="token keyword">import</span> google<span class="token punctuation">.</span>auth
+
+<span class="token keyword">def</span> <span class="token function">get_token</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    credentials<span class="token punctuation">,</span> project_id <span class="token operator">=</span> google<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>default<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    client <span class="token operator">=</span> translate_v3<span class="token punctuation">.</span>TranslationServiceClient<span class="token punctuation">(</span>credentials<span class="token operator">=</span>credentials<span class="token punctuation">)</span>
+    parent <span class="token operator">=</span> client<span class="token punctuation">.</span>location_path<span class="token punctuation">(</span><span class="token string">'project-id'</span><span class="token punctuation">,</span> <span class="token string">'us-central1'</span><span class="token punctuation">)</span>
+
+    response <span class="token operator">=</span> client<span class="token punctuation">.</span>translate_text<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> target_language_code<span class="token operator">=</span><span class="token string">'en'</span><span class="token punctuation">,</span> parent<span class="token operator">=</span>parent<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> f<span class="token string">"{credentials.__dict__}"</span>
+</code></pre>
+<p>The pattern is:</p>
+<ol>
+<li>Get credential object from google.auth.default()</li>
+<li>Initialize a Cloud Service SDK and pass in the credential object as a parameter</li>
+<li>Call the service API with minimal cost data, the token will be populated into the credential object</li>
+</ol>
+<p>You can come up with your solution by using different Python SDKs [7].</p>
+<h3 id="Mission-complete"><a href="#Mission-complete" class="headerlink" title="Mission complete!?"></a>Mission complete!?</h3><h2 id="Ultimate-solution"><a href="#Ultimate-solution" class="headerlink" title="Ultimate solution"></a>Ultimate solution</h2><p>If there are Python SDKs for GCP services, why bother to get the access token, call them directly in your code.</p>
+<iframe src="https://giphy.com/embed/uHox9Jm5TyTPa" width="480" height="253" frameborder="0" class="giphy-embed" allowfullscreen></iframe>
+
+<p>Anyway, this is a great example of rebuilding the wheel process, hope can provide some insights!</p>
+<p>[1] <a href="https://cloud.google.com/functions/docs/reference/python-system-packages" target="_blank" rel="noopener">https://cloud.google.com/functions/docs/reference/python-system-packages</a></p>
+<p>[2] <a href="https://cloud.google.com/sdk/gcloud/reference/auth/application-default/print-access-token" target="_blank" rel="noopener">https://cloud.google.com/sdk/gcloud/reference/auth/application-default/print-access-token</a></p>
+<p>[3] <a href="https://google-auth.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://google-auth.readthedocs.io/en/latest/</a></p>
+<p>[4] <a href="https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/document/cloud-client/parse_form_beta.py" target="_blank" rel="noopener">https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/document/cloud-client/parse_form_beta.py</a></p>
+<p>[5] <a href="https://cloud.google.com/stackdriver/pricing" target="_blank" rel="noopener">https://cloud.google.com/stackdriver/pricing</a></p>
+<p>[6] <a href="https://cloud.google.com/translate/pricing" target="_blank" rel="noopener">https://cloud.google.com/translate/pricing</a></p>
+<p>[7] <a href="https://github.com/googleapis/google-cloud-python" target="_blank" rel="noopener">https://github.com/googleapis/google-cloud-python</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> GCP </tag>
+            
+            <tag> Google Cloud </tag>
+            
+            <tag> Cloud Function </tag>
+            
+            <tag> Token </tag>
+            
+            <tag> Credential </tag>
+            
+            <tag> Auth </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Why you need QT for your side projects]]></title>
       <url>https://en.abnerchou.me/Blog/7d17e074/</url>
       <content type="html"><![CDATA[<p>I’m working on an side project which need a fancy GUI interface, so I was choosing between Webassemble and QT.
