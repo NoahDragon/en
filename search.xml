@@ -4,6 +4,78 @@
   
     
     <entry>
+      <title><![CDATA[P2P Lending on GCE]]></title>
+      <url>https://en.abnerchou.me/Blog/7cfc7701/</url>
+      <content type="html"><![CDATA[<p>Recently, one of my friend reaching out to me regarding how to install the <a href="https://github.com/adorsys/p2p-lending" target="_blank" rel="noopener">P2P-Lending</a> on a GCE instance.
+Well, the repo is old and haven’t updated for more than 3 years.
+So I have overcome many difficulties to manage run it in a GCE instance.
+Here are the steps:</p>
+<ol>
+<li>Create GCE instances with allow HTTP traffic (using defaul Debian image if using other Linux distros the following preparation may not fit).</li>
+<li>Install NodeJs, followed steps in: <a href="https://cloud.google.com/nodejs/docs/setup" target="_blank" rel="noopener">https://cloud.google.com/nodejs/docs/setup</a><pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+export NVM_DIR=&quot;$([ -z &quot;${XDG_CONFIG_HOME-}&quot; ] &amp;&amp; printf %s &quot;${HOME}/.nvm&quot; || printf %s &quot;${XDG_CONFIG_HOME}/nvm&quot;)&quot;
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm
+nvm install --lts
+nvm use --lts
+</code></pre></li>
+<li>Install npm/git/python2 via command (for build-in python3 please ensure it &gt;= 3.6 or upgrade to the latest): <pre><code>sudo apt install git build-essential python
+npm install -g npm
+</code></pre></li>
+<li>To avoid permission denied issue when calling the npm installed global package, please follow this link to resolve it:<pre><code> mkdir ~/.npm-global
+ npm config set prefix &#39;~/.npm-global&#39;
+ export PATH=~/.npm-global/bin:$PATH
+ source ~/.profile
+</code></pre></li>
+<li>Install Ganache via command: <code>npm install ganache -g</code></li>
+<li>Install Truffle via command: <code>npm install truffle -g</code></li>
+<li>Clone the repo: <code>git clone https://github.com/adorsys/p2p-lending.git</code></li>
+<li>Start Ganache with port 8545: <code>ganache -p 8545 &amp;</code></li>
+<li>Go to p2p-lending folder, and delete the packge-lock.json file (force to pull the latest packages):<pre><code>cd p2p-lending
+rm package-lock.json
+npm install
+truffle compile
+npm run migrate:dev
+</code></pre></li>
+<li>[Optional] Set python executable, require python2 if not installed: <code>npm config set /usr/bin/python</code></li>
+<li>In frontend folder, modify package.json, change the package web version from “1.0.0-beta.37” to “^1.0.0”. Then follow commands to install:<pre><code>cd frontend
+npm uninstall node-sass
+npm i -D sass
+rm -rf node_modules package-lock.json &amp;&amp; npm install
+</code></pre></li>
+<li>Start the serve: <code>npm start</code></li>
+</ol>
+<p>That’s it. Hope it could provide some insights when you try to use the P2P-Lending, but strongly not recommended.
+Since I’m not familar with blockchain, so not sure if there is any alternative to the P2P-Lending.
+If anyone knows, please share in the comments. I will let my friend know.
+Thanks in advance.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> GCP </tag>
+            
+            <tag> Google Cloud </tag>
+            
+            <tag> GCE </tag>
+            
+            <tag> P2P </tag>
+            
+            <tag> Block Chain </tag>
+            
+            <tag> Computer Engine </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Cloud Functions VS Lambda]]></title>
       <url>https://en.abnerchou.me/Blog/7fd519e5/</url>
       <content type="html"><![CDATA[<p>Many articles are talking about the differences between GCP and AWS.
